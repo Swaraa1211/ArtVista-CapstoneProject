@@ -77,27 +77,27 @@ namespace ArtVistaAPI.Controllers
         // POST: api/Users
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<UsersModel>> PostUsersModel(UsersModel usersModel)
-        {
-            var temp = _context.Users
-                .Where(x => x.user_name == usersModel.user_name
-                && x.user_email == usersModel.user_email)
-                .FirstOrDefault();
+		public async Task<ActionResult<UsersModel>> PostUsersModel(UsersModel usersModel)
+		{
+			var temp = _context.Users
+				.FirstOrDefault(x => x.user_name == usersModel.user_name
+					&& x.user_email == usersModel.user_email);
 
-            if (temp != null)
-            {
-                string hashedPassword = BCrypt.Net.BCrypt.HashPassword(usersModel.user_password);
-                usersModel.user_password = hashedPassword;
-                _context.Users.Add(usersModel);
-                await _context.SaveChangesAsync();
-            }
-            else
-            {
-                usersModel = temp;
-            }
+			if (temp == null)
+			{
+				string hashedPassword = BCrypt.Net.BCrypt.HashPassword(usersModel.user_password);
+				usersModel.user_password = hashedPassword;
+				_context.Users.Add(usersModel);
+				await _context.SaveChangesAsync();
+			}
+			else
+			{
+				usersModel = temp;
+			}
 
-            return CreatedAtAction("GetUsersModel", new { id = usersModel.user_id }, usersModel);
+			return Ok(usersModel);
 		}
+
 		[HttpPost("Login")]
 		public async Task<ActionResult<UsersModel>> LoginUser(UsersModel data)
 		{
