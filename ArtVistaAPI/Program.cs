@@ -26,10 +26,7 @@ internal class Program
 			app.UseSwaggerUI();
 		}
 
-		app.UseCors(options =>
-		options.WithOrigins("*")
-		.AllowAnyMethod()
-		.AllowAnyHeader());
+		app.UseCors(options => options.WithOrigins("*").AllowAnyMethod().AllowAnyHeader());
 
 		app.UseHttpsRedirection();
 
