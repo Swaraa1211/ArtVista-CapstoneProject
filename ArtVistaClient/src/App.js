@@ -4,6 +4,7 @@ import './App.css';
 import Login from './pages/Auth/Login';
 import NavBar from './components/NavBar';
 import Signup from './pages/Auth/Signup';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Signup />} /> 
+        <Route path="/homePage" element={<HomePage />} /> 
           {/* <Route path="/test" element={<NavBar />}>
           
             <Route path="product" element={<h1>product</h1>}/>

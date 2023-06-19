@@ -14,7 +14,7 @@ export const Signup = async data => {
             return{status: false, data:response.data};
         }
     } catch(error){
-        console.error("Error occurred while signing up:", error);
+        console.error("Axios Error occurred while signing up:", error);
     return null; 
     }
 }
