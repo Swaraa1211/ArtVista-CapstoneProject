@@ -23,9 +23,9 @@ export default function SignupPage() {
     event.preventDefault();
   
     const formData = {
-      userName: event.target.elements.name.value,
-      email: event.target.elements.email.value,
-      password: event.target.elements.password.value,
+      user_name: event.target.elements.name.value,
+      user_email: event.target.elements.email.value,
+      user_password: event.target.elements.password.value,
     };
   
     const response = await Signup(formData);

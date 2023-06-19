@@ -2,11 +2,14 @@ import axios from 'axios';
 import {BASE_URL} from '../constant/endPoint';
 
 export const Signup = async data => {
+    console.log(data);
     try{
         const response = await axios.post(`${BASE_URL}/Users`, data);
         console.log(response);
+        
 
-        if(response.status === 201){
+        if(response.status === 201 || response.status===200){
+
             console.log('Successful SignUp', response.data);
             return {status:true, data: response.data};
         }
