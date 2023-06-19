@@ -1,9 +1,9 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import './App.css';
-import Login from './pages/Auth/Login';
+import LoginPage from './pages/Auth/Login';
 import NavBar from './components/NavBar';
-import Signup from './pages/Auth/Signup';
+import SignupPage from './pages/Auth/Signup';
 import HomePage from './pages/HomePage';
 
 function App() {
@@ -11,7 +11,8 @@ function App() {
     <>
     <Router>
       <Routes>
-        <Route path="/" element={<Signup />} /> 
+        <Route path="/" element={<SignupPage />} /> 
+        <Route path="/login" element={<LoginPage />} /> 
         <Route path="/homePage" element={<HomePage />} /> 
           {/* <Route path="/test" element={<NavBar />}>
           

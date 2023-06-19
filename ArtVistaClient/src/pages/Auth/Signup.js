@@ -11,7 +11,7 @@ import {
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { Signup } from '../../API/users';
 
 export default function SignupPage() {
@@ -21,28 +21,24 @@ export default function SignupPage() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     const formData = {
       user_name: event.target.elements.name.value,
       user_email: event.target.elements.email.value,
       user_password: event.target.elements.password.value,
     };
-  
+
     const response = await Signup(formData);
-  
+
     if (response && response.status) {
       console.log('Successful SignUp', response.data);
-      // Perform any additional actions after successful signup
-  
-      // Navigate to the home page
       navigate('/homePage');
     } else {
       console.log('Signup failed in handle submit', response);
-      // Handle signup failure, display error message, etc.
     }
   };
-  
-  
+
+
 
   return (
     <>
@@ -68,6 +64,11 @@ export default function SignupPage() {
               <Button type='submit'>Sign Up</Button>
             </form>
 
+            <p>Already have an account?</p>
+            <p>Login Here</p>
+            <Link to="/login">
+              <Button>Go to Login</Button>
+            </Link>
           </Box>
         </Box>
       </Flex>
