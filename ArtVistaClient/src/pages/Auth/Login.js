@@ -9,11 +9,13 @@ import {
     } from '@chakra-ui/react';
   
   import React from 'react';
-  import { useNavigate } from 'react-router-dom';
+  import { useNavigate, Link } from 'react-router-dom';
   import { Login } from '../../API/users';
-  import {Link } from 'react-router-dom';
+  import { useContext } from 'react';
+import { AuthContext } from './authProvider';
   
   export default function LoginPage(){
+    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) =>{
@@ -29,6 +31,7 @@ import {
           if (response && response.status) {
             console.log('Successful Login', response.data);
             navigate('/homePage');
+            setIsAuthenticated(true);
           } else {
             console.log('Login failed in handle submit', response);
           }

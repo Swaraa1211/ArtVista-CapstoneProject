@@ -4,6 +4,8 @@ import './App.css';
 import LoginPage from './pages/Auth/logIn';
 import SignupPage from './pages/Auth/signUp';
 import HomePage from './pages/homePage';
+import PrivateRoute from './routes/privateRoute';
+import ArtistPortfolio from './pages/artistPortfolio';
 
 function App() {
   return (
@@ -12,17 +14,16 @@ function App() {
       <Routes>
         <Route path="/" element={<SignupPage />} /> 
         <Route path="/login" element={<LoginPage />} /> 
-        <Route path="/homePage" element={<HomePage />} /> 
-          {/* <Route path="/test" element={<NavBar />}>
-          
-            <Route path="product" element={<h1>product</h1>}/>
-            <Route path="cart" element={<h1>cart</h1>}/>
-            <Route path="order" element={<h1>order</h1>}/>
-          </Route> */}
+        {/* <PrivateRoute path="/homePage" element={HomePage} />
+        <PrivateRoute path="/artistPortfolio" element={ArtistPortfolio} /> */}
+        <Route path="/" element={<PrivateRoute />}>
+          <Route path="/homePage" element={<HomePage />} />
+          <Route path="/artistPortfolio" element={<ArtistPortfolio />} />
+
+        </Route>
+         
       </Routes>
     </Router>
-    {/* <Auth /> */}
-    {/* <NavBar /> */}
 
     </>
   );
