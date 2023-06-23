@@ -1,10 +1,9 @@
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 
 import './App.css';
-import LoginPage from './pages/Auth/Login';
-import NavBar from './components/NavBar';
-import SignupPage from './pages/Auth/Signup';
-import HomePage from './pages/HomePage';
+import LoginPage from './pages/Auth/logIn';
+import SignupPage from './pages/Auth/signUp';
+import HomePage from './pages/homePage';
 
 function App() {
   return (
