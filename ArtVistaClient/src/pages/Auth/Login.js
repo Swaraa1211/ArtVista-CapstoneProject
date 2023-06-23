@@ -28,10 +28,14 @@ import { AuthContext } from './authProvider';
         
           const response = await Login(formData);
 
+          // setIsAuthenticated(true);
+
           if (response && response.status) {
             console.log('Successful Login', response.data);
-            navigate('/homePage');
+            localStorage.setItem('userToken', response.data.token);
+            
             setIsAuthenticated(true);
+            navigate('/homePage');
           } else {
             console.log('Login failed in handle submit', response);
           }
@@ -39,7 +43,7 @@ import { AuthContext } from './authProvider';
     }
       return (
           <>
-          <Flex width="full" align="center" justifyContent="center">
+          <Flex minHeight="100vh" width="full" align="center" justifyContent="center">
               <Box p={2}>
                   <Box textAlign="center">
                       <Heading>Login</Heading>
@@ -58,7 +62,7 @@ import { AuthContext } from './authProvider';
                     </form>
                     <p>Create new account?</p>
                     <p>Sign Up Here</p>
-                    <Link to='/'>
+                    <Link to='/signup'>
                         <Button>Sign Up</Button>
                     
                     </Link>

@@ -1,6 +1,7 @@
-import { Box, Flex, Spacer, Link, Button, Icon } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Button, Icon } from "@chakra-ui/react";
 import { SearchIcon } from '@chakra-ui/icons'
 import { BsCartFill } from 'react-icons/bs';
+import { Link } from "react-router-dom";
 
 
 const Navbar = () => {
@@ -26,7 +27,7 @@ const Navbar = () => {
           <Link href="#" color="white" mr={4}>
             Showcase Showdown
           </Link>
-          <Link href="#" color="white" mr={4}>
+          <Link to='/artistPortfolio' color="white" mr={4}>
             Artist Portfolio
           </Link>
           

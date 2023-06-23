@@ -5,9 +5,15 @@ const theme = extendTheme({
     
     heading: `'Open Sans', sans-serif`,
     body: `'Raleway', sans-serif`,
-  },
+  },// #f3bd6b
   styles: {
-    global: {},
+    global: () => ({
+      body: {
+        // bg: 'white',
+        // color: '#EDEDED',
+      },
+      
+    }),
   },
 })
 
