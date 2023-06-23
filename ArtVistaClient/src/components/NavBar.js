@@ -1,4 +1,7 @@
-import { Box, Flex, Spacer, Link, Button } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Link, Button, Icon } from "@chakra-ui/react";
+import { SearchIcon } from '@chakra-ui/icons'
+import { BsCartFill } from 'react-icons/bs';
+
 
 const Navbar = () => {
   return (
@@ -13,22 +16,28 @@ const Navbar = () => {
     >
       <Flex maxW="container.lg" mx="auto" align="center" >
         <Link href="#" color="white" fontWeight="bold" fontSize="xl">
-          Logo
+        ᗩᖇT ᐯIᔕTᗩ
         </Link>
         <Spacer />
         <Box>
           <Link href="#" color="white" mr={4}>
-            Home
+            Marktet Mingle
           </Link>
           <Link href="#" color="white" mr={4}>
-            About
+            Showcase Showdown
           </Link>
           <Link href="#" color="white" mr={4}>
-            Contact
+            Artist Portfolio
           </Link>
           
         </Box>
         <Spacer />
+        <Link href="#" color="white" mr={4}>
+              <SearchIcon />
+            </Link>
+            <Link href="#" color="white" mr={4}>
+              <BsCartFill />
+            </Link>
         <Box>
             <Button colorScheme="whiteAlpha">Log Out</Button>
         </Box>
