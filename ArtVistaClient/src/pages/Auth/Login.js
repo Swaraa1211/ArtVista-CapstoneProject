@@ -7,6 +7,7 @@ import {
   Input,
   Button,
   Text,
+  Image
 } from '@chakra-ui/react';
 
 import React from 'react';
@@ -64,8 +65,10 @@ export default function LoginPage() {
           // bg="url('https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGFydHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60')"
           // bgImage="url('src/assets/images/Untitled.jpeg')"
           // bgSize="cover"
+          bgColor="white"
           bgPosition="center"
           position="relative"
+          borderRadius="10px"
         // top={0}
         // left={0}
         // right={0}
@@ -107,8 +110,12 @@ export default function LoginPage() {
         justifyContent="center"
         >
           <Text fontSize="3xl" fontWeight="bold">ᗯEᒪᑕOᗰE TO ᗩᖇT ᐯIᔕTᗩ!!! </Text>
-          <TypewriterEffect text="
-Art Vista is a vibrant and immersive platform that celebrates art in all its forms, serving as a go-to destination for artists looking to showcase their portfolios and art enthusiasts seeking inspiration." />
+          {/* <Text fontSize="30px">​🇦​​🇷​​🇹​ ​🇻​​🇮​​🇸​​🇹​​🇦​ ​🇮​​🇸​ ​🇦​ ​🇻​​🇮​​🇧​​🇷​​🇦​​🇳​​🇹​ ​🇦​​🇳​​🇩​ ​🇮​​🇲​​🇲​​🇪​​🇷​​🇸​​🇮​​🇻​​🇪​ ​🇵​​🇱​​🇦​​🇹​​🇫​​🇴​​🇷​​🇲​ ​🇹​​🇭​​🇦​​🇹​ ​🇨​​🇪​​🇱​​🇪​​🇧​​🇷​​🇦​​🇹​​🇪​​🇸​ ​🇦​​🇷​​🇹​ ​🇮​​🇳​ ​🇦​​🇱​​🇱​ ​🇮​​🇹​​🇸​ ​🇫​​🇴​​🇷​​🇲​​🇸​</Text>
+           */}
+           <Image src='https://cdn-icons-png.flaticon.com/128/10835/10835987.png' alt='Dan Abramov' />
+
+          <TypewriterEffect text="⬅️ᒪOGIᑎ ᕼEᖇE `" />
+          <Text fontSize="30px">​🇹​​🇴​ ​🇻​​🇮​​🇸​​🇮​​🇹​ ​🇹​​🇭​​🇪​ ​🇬​​🇴​-​🇹​​🇴​ ​🇩​​🇪​​🇸​​🇹​​🇮​​🇳​​🇦​​🇹​​🇮​​🇴​​🇳​ ​🇫​​🇴​​🇷​ ​🇦​​🇷​​🇹​ ​🇪​​🇳​​🇹​​🇭​​🇺​​🇸​​🇮​​🇦​​🇸​​🇹​​🇸​ ​🇸​​🇪​​🇪​​🇰​​🇮​​🇳​​🇬​ <br></br>​🇮​​🇳​​🇸​​🇵​​🇮​​🇷​​🇦​​🇹​​🇮​​🇴​​🇳​</Text>
           {/* <Text textAlign="center">Some additional text or information here</Text> */}
         </Box>
       </Flex>
