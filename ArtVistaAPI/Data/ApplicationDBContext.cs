@@ -11,5 +11,6 @@ namespace ArtVistaAPI.Data
 		{
 		}
 		public DbSet<UsersModel> Users { get; set; }
+		public DbSet<ArtModel> Art { get; set; }
 	}
 }

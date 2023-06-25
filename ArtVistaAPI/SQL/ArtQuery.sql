@@ -5,17 +5,36 @@ create table Users(
 	user_password varchar(100)
 );
 
-select * from Users
+
 
 --drop table Users
 
 -- Create Users table
-CREATE TABLE Users (
-  id INT PRIMARY KEY,
-  username VARCHAR(255),
-  password VARCHAR(255),
-  email VARCHAR(255)
+--CREATE TABLE Users (
+--  id INT PRIMARY KEY,
+--  username VARCHAR(255),
+--  password VARCHAR(255),
+--  email VARCHAR(255)
+--);
+
+-- Create Art table
+CREATE TABLE Art (
+  art_id INT PRIMARY KEY identity(1,1),
+  art_description VARCHAR(255),
+  artist_name VARCHAR(255),
+  art_name VARCHAR(255),
+  price INT,
+  picture VARCHAR(255),
+  user_id INT,
+  user_name  varchar(100),
+  FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
+--drop table Art
+
+select * from Users
+select * from Art
+
 
 -- Create ArtistPortfolio table
 CREATE TABLE ArtistPortfolio (
@@ -38,17 +57,6 @@ CREATE TABLE Favorites (
   FOREIGN KEY (artid) REFERENCES Art(id)
 );
 
--- Create Art table
-CREATE TABLE Art (
-  id INT PRIMARY KEY,
-  artdescription TEXT,
-  artist VARCHAR(255),
-  artname VARCHAR(255),
-  price DECIMAL(10, 2),
-  picture VARCHAR(255),
-  userid INT,
-  FOREIGN KEY (userid) REFERENCES Users(id)
-);
 
 -- Create Price table
 CREATE TABLE Price (
