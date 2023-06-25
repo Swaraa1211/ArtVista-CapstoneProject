@@ -1,4 +1,4 @@
-import { Box, Flex, Spacer, Button, Icon } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Button, Text } from "@chakra-ui/react";
 import { SearchIcon } from '@chakra-ui/icons'
 import { BsCartFill } from 'react-icons/bs';
 import { Link } from "react-router-dom";
@@ -16,31 +16,43 @@ const Navbar = () => {
       boxShadow="md"
     >
       <Flex maxW="container.lg" mx="auto" align="center" >
-        <Link href="#" color="white" fontWeight="bold" fontSize="xl">
-        ᗩᖇT ᐯIᔕTᗩ
-        </Link>
+        <Text color="white" fontWeight="bold" fontSize="3xl">
+          <Link to="/homePage">
+            ᗩᖇT ᐯIᔕTᗩ
+          </Link>
+
+        </Text>
         <Spacer />
         <Box>
-          <Link href="#" color="white" mr={4}>
-            Marktet Mingle
-          </Link>
-          <Link href="#" color="white" mr={4}>
-            Showcase Showdown
-          </Link>
-          <Link to='/artistPortfolio' color="white" mr={4}>
-            Artist Portfolio
-          </Link>
-          
+          <Flex fontSize="2xl">
+            
+            <Text color="white" mr={4}>
+              <Link to="/showcaseShowdown" >
+                Showcase
+              </Link>
+            </Text>
+            <Text color="white" mr={4}>
+              <Link to="/artistPortfolio" >
+                Portfolio
+              </Link>
+            </Text>
+            <Text color="white" mr={4}>
+              <Link to="/marketMingle" >
+                Pursuit
+              </Link>
+            </Text>
+          </Flex>
+
         </Box>
         <Spacer />
-        <Link href="#" color="white" mr={4}>
-              <SearchIcon />
-            </Link>
-            <Link href="#" color="white" mr={4}>
-              <BsCartFill />
-            </Link>
+        <Link to="/search" >
+          <SearchIcon color="white" w={6} h={6} mr={4} />
+        </Link>
+        <Link to="/cart" >
+          <BsCartFill color="white" size={30} m={4} />
+        </Link>
         <Box>
-            <Button colorScheme="whiteAlpha">Log Out</Button>
+          <Button colorScheme="whiteAlpha" ml={5}>Log Out</Button>
         </Box>
       </Flex>
     </Box>
@@ -48,42 +60,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-
-// import React from 'react';
-// import {
-//     VStack,
-//     Text,
-//     Icon,
-//     Heading,
-//     Button,
-//     Modal,
-//     Flex,
-//     Box
-// } from '@chakra-ui/react';
-// import {Link} from 'react-router-dom';
-
-// const NavBar = () => {
-//     return (
-//         <>
-//         <h1>NavBar</h1>
-//         <Box>
-//             <Box>
-//                 <h5>Art Vista</h5>
-//             </Box>
-//             <Box>
-//                 <h5>ShowcaseShowdown</h5>
-//                 <h5>MarketMingle</h5>
-//                 <h5>FindFinesse</h5>
-//             </Box>
-//             <Box>
-//                 <h5>Cart</h5>
-//                 <h5>Orders</h5>
-//             </Box>                 
-//         </Box>
-//         </>
-//     )
-    
-// }
-
-// export default NavBar;

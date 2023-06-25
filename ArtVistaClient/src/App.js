@@ -7,6 +7,10 @@ import SignupPage from './pages/Auth/signUp';
 import HomePage from './pages/homePage';
 import PrivateRoute from './routes/privateRoute';
 import ArtistPortfolio from './pages/artistPortfolio';
+import MarketMingle from './pages/marketMingle';
+import ShowcaseShowdown from './pages/showcaseShowdown';
+import Cart from './pages/cart';
+import Search from './pages/search';
 
 function App() {
   return (
@@ -19,6 +23,11 @@ function App() {
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/homePage" element={<HomePage />} />
             <Route path="/artistPortfolio" element={<ArtistPortfolio />} />
+            <Route path="/marketMingle" element={<MarketMingle />} />
+            <Route path="/showcaseShowdown" element={<ShowcaseShowdown />} />
+            <Route path="/search" element={<Search />} />
+            <Route path="/cart" element={<Cart />} />
+
           </Route>
         </Routes>
       </Router>
