@@ -75,9 +75,62 @@ CREATE TABLE Review (
   art_id INT,
   rating INT,
   reviewcomment VARCHAR(255),
-  FOREIGN KEY (user_id) REFERENCES Users(user_id),
-  FOREIGN KEY (art_id) REFERENCES Art(art_id)
+  FOREIGN KEY (user_id) REFERENCES Users(user_id)  ON DELETE NO ACTION,
+  FOREIGN KEY (art_id) REFERENCES Art(art_id)  ON DELETE NO ACTION
 );
+
+--drop table Review
+
+-- Create Cart table
+CREATE TABLE Cart (
+  cart_id INT PRIMARY KEY identity(1,1),
+  art_id INT,
+  quantity INT,
+  art_name VARCHAR(255),
+  FOREIGN KEY (art_id) REFERENCES Art(art_id) ON DELETE NO ACTION
+);
+
+--drop table Cart
+
+-- Create Order table
+CREATE TABLE Orders (
+  order_id INT PRIMARY KEY identity(1,1),
+  user_id INT,
+  total_amount INT,
+  payment VARCHAR(255),
+  order_date DATETIME,
+  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE NO ACTION
+);
+
+drop table Orders
+
+
+-- Create OrderItem table
+CREATE TABLE OrderItem (
+  orderitem_id INT PRIMARY KEY identity(1,1),
+  order_id INT,
+  art_id INT,
+  art_name VARCHAR(255),
+  quantity INT,
+  price INT,
+  FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE NO ACTION,
+  FOREIGN KEY (art_id) REFERENCES Art(art_id) ON DELETE NO ACTION
+);
+
+drop table OrderItem
+
+
+-- Create Payment table
+CREATE TABLE Payment (
+  payment_id INT PRIMARY KEY identity(1,1),
+  total_amount INT,
+  order_date DATETIME,
+    order_id INT,
+   FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE NO ACTION,
+);
+
+drop table Payment
+
 
 select * from Users
 select * from Art
@@ -85,43 +138,9 @@ select * from Favorites
 select * from ArtistPortfolio
 select * from BidPrice
 select * from Review
+select * from Cart
+select * from Orders
+select * from OrderItem
+select * from Payment
 
 
-
--- Create Cart table
---CREATE TABLE Cart (
---  id INT PRIMARY KEY,
---  artid INT,
---  quantity INT,
---  artname VARCHAR(255),
---  FOREIGN KEY (artid) REFERENCES Art(id)
---);
-
--- Create Order table
---CREATE TABLE Order (
---  id INT PRIMARY KEY,
---  userid INT,
---  totalamount DECIMAL(10, 2),
---  payment VARCHAR(255),
---  orderdate DATE,
---  FOREIGN KEY (userid) REFERENCES Users(id)
---);
-
--- Create OrderItem table
---CREATE TABLE OrderItem (
---  id INT PRIMARY KEY,
---  orderid INT,
---  artid INT,
---  artname VARCHAR(255),
---  quantity INT,
---  price DECIMAL(10, 2),
---  FOREIGN KEY (orderid) REFERENCES Order(id),
---  FOREIGN KEY (artid) REFERENCES Art(id)
---);
-
--- Create Payment table
---CREATE TABLE Payment (
---  id INT PRIMARY KEY,
---  amount DECIMAL(10, 2),
---  date DATE
---);

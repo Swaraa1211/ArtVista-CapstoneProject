@@ -4,6 +4,7 @@ using ArtVistaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtVistaAPI.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230626170311_orderitem-controller")]
+    partial class orderitemcontroller
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -204,28 +207,6 @@ namespace ArtVistaAPI.Migrations
                     b.HasKey("order_id");
 
                     b.ToTable("Orders");
-                });
-
-            modelBuilder.Entity("ArtVistaAPI.Models.PaymentModel", b =>
-                {
-                    b.Property<int>("payment_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("payment_id"));
-
-                    b.Property<DateTime>("order_date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("order_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("total_amount")
-                        .HasColumnType("int");
-
-                    b.HasKey("payment_id");
-
-                    b.ToTable("Payment");
                 });
 
             modelBuilder.Entity("ArtVistaAPI.Models.ReviewModel", b =>
