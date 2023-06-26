@@ -3,6 +3,7 @@ using ArtVistaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ArtVistaAPI.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230626145342_favorites-controller")]
+    partial class favoritescontroller
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,28 +90,6 @@ namespace ArtVistaAPI.Migrations
                     b.HasKey("artist_id");
 
                     b.ToTable("ArtistPortfolio");
-                });
-
-            modelBuilder.Entity("ArtVistaAPI.Models.BidPriceModel", b =>
-                {
-                    b.Property<int>("bidprice_id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("bidprice_id"));
-
-                    b.Property<int>("art_id")
-                        .HasColumnType("int");
-
-                    b.Property<int>("bidprice")
-                        .HasColumnType("int");
-
-                    b.Property<int>("user_id")
-                        .HasColumnType("int");
-
-                    b.HasKey("bidprice_id");
-
-                    b.ToTable("BidPrice");
                 });
 
             modelBuilder.Entity("ArtVistaAPI.Models.FavoritesModel", b =>

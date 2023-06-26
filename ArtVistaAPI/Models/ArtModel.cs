@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using ArtVistaAPI.Migrations;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ArtVistaAPI.Models
 {
@@ -13,5 +15,7 @@ namespace ArtVistaAPI.Models
 		public string picture { get; set;}
 		public int user_id { get; set; }
 		public string user_name { get; set; }
+
+		//public UsersModel Users { get; set; }
 	}
 }
