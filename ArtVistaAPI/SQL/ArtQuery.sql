@@ -35,12 +35,14 @@ CREATE TABLE Art (
 
 -- Create Favorites table
 CREATE TABLE Favorites (
-  fav_id INT PRIMARY KEY,
+  fav_id INT PRIMARY KEY identity(1,1),
   user_id INT,
   art_id INT,
   FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE NO ACTION,
   FOREIGN KEY (art_id) REFERENCES Art(art_id) ON DELETE NO ACTION
 );
+
+--drop table Favorites
 
 	
 -- Create ArtistPortfolio table
