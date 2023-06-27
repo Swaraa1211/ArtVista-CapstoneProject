@@ -91,12 +91,6 @@ export default function SignupPage() {
 
               </Link>
               </Text>
-
-            {/* <p></p>
-            <p>Login Here</p>
-            <Link to="/login">
-              <Button>Go to Login</Button>
-            </Link> */}
           </Box>
         </Box>
         <Box
@@ -108,9 +102,9 @@ export default function SignupPage() {
         justifyContent="center"
         >
           <Text fontSize="3xl" fontWeight="bold">ᗯEᒪᑕOᗰE TO ᗩᖇT ᐯIᔕTᗩ!!! </Text>
-           <Image src='https://cdn-icons-png.flaticon.com/128/10835/10835987.png' alt='Dan Abramov' />
+           <Image src='https://cdn-icons-png.flaticon.com/128/10835/10835987.png' alt='Artist' />
 
-          <TypewriterEffect text="⬅️ᔕIGᑎᑌᑭ ᕼEᖇE `" />
+          <TypewriterEffect text="⬅️ᔕIGᑎᑌᑭ ᕼEᖇE" />
           <Text fontSize="30px">​🇹​​🇴​ ​🇻​​🇮​​🇸​​🇮​​🇹​ ​🇹​​🇭​​🇪​ ​🇬​​🇴​-​🇹​​🇴​ ​🇩​​🇪​​🇸​​🇹​​🇮​​🇳​​🇦​​🇹​​🇮​​🇴​​🇳​ ​🇫​​🇴​​🇷​ ​🇦​​🇷​​🇹​ ​🇪​​🇳​​🇹​​🇭​​🇺​​🇸​​🇮​​🇦​​🇸​​🇹​​🇸​ ​🇸​​🇪​​🇪​​🇰​​🇮​​🇳​​🇬​ <br></br>​🇮​​🇳​​🇸​​🇵​​🇮​​🇷​​🇦​​🇹​​🇮​​🇴​​🇳​</Text>
         </Box>
       </Flex>
