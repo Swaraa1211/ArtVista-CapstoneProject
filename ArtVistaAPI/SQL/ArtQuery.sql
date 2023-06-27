@@ -47,14 +47,18 @@ CREATE TABLE Favorites (
 CREATE TABLE ArtistPortfolio (
   artist_id INT PRIMARY KEY identity(1,1),
   artist_name VARCHAR(255),
+  artist_picture VARCHAR(255),
   about VARCHAR(255),
   masterpiece VARCHAR(255),
+  masterpiece_picture VARCHAR(255),
   contact VARCHAR(255),
   journey VARCHAR(255),
   user_id INT,
   user_name VARCHAR(255),
   FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE NO ACTION
 );
+
+--drop table ArtistPortfolio
 
 ---- Create BidPrice table
 CREATE TABLE BidPrice (
@@ -102,7 +106,7 @@ CREATE TABLE Orders (
   FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE NO ACTION
 );
 
-drop table Orders
+--drop table Orders
 
 
 -- Create OrderItem table
@@ -117,7 +121,7 @@ CREATE TABLE OrderItem (
   FOREIGN KEY (art_id) REFERENCES Art(art_id) ON DELETE NO ACTION
 );
 
-drop table OrderItem
+--drop table OrderItem
 
 
 -- Create Payment table
@@ -129,7 +133,7 @@ CREATE TABLE Payment (
    FOREIGN KEY (order_id) REFERENCES Orders(order_id) ON DELETE NO ACTION,
 );
 
-drop table Payment
+--drop table Payment
 
 
 select * from Users
