@@ -2,8 +2,13 @@ import { Box, Flex, FormControl, Heading } from '@chakra-ui/react'
 import React from 'react'
 import Navbar from '../components/navBar';
 import { postArt } from '../API/art';
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../constant/atomRecoil';
 
-const Profile = ({ userId, username }) => {
+const Profile = () => {
+    const { userId, username } = useRecoilValue(userAtom);
+
+    console.log(userId + " " + username + " from profile and userAtom")
     //console.log(userId + " " + username);
 
     const handleSubmit = async (event) => {
@@ -44,9 +49,6 @@ const Profile = ({ userId, username }) => {
                     </form>
                 </Box> */}
             </Flex>
-
-
-
         </>
 
     );

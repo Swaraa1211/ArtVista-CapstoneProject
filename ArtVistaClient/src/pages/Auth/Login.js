@@ -16,11 +16,11 @@ import { Login } from '../../API/users';
 import { useContext, useState } from 'react';
 import { AuthContext } from './authProvider';
 import TypewriterEffect from '../../utils/typeWritter';
-//import Profile from '../profile';
+import { useSetRecoilState } from 'recoil';
+import { userAtom } from '../../constant/atomRecoil';
 
 export default function LoginPage() {
-  const [userId, setUserId] = useState(null);
-  const [username, setUsername] = useState('');
+  const setUser = useSetRecoilState(userAtom);
 
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -39,8 +39,13 @@ export default function LoginPage() {
     // console.log('in login')
 
     console.log("userid" + response.data.userId)
-    setUserId(response.data.userId);
-    setUsername(response.data.username);
+
+    const userId = response.data.userId;
+    const username = response.data.username;
+
+    setUser({ userId, username });
+    // setUserId(response.data.userId);
+    // setUsername(response.data.username);
 
     if (response && response.status) {
       console.log('Successful Login', response.data);
@@ -55,8 +60,6 @@ export default function LoginPage() {
     
 
   }
-
-  //console.log(userId, username);
 
   return (
     <>
