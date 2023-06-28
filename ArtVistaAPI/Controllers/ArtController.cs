@@ -47,16 +47,18 @@ namespace ArtVistaAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutArtModel(int id, ArtModel artModel)
         {
+            Console.WriteLine(artModel.art_id);
             if (id != artModel.art_id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(artModel).State = EntityState.Modified;
+         
 
             try
             {
-                await _context.SaveChangesAsync();
+				_context.Entry(artModel).State = EntityState.Modified;
+				await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {

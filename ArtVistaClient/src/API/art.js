@@ -22,6 +22,19 @@ export const getArt = async data => {
         return null;
     }
 }
+export const getArtById = async id => {
+  try {
+    const response = await axios.get(`${BASE_URL}/Art/${id}`);
+    if (response.status === 201 || response.status === 200) {
+      return { status: true, data: response.data };
+    } else if (response.status === 401) {
+      return { status: false, data: response.data };
+    }
+  } catch (error) {
+    console.error('Error occurred ', error);
+    return null;
+  }
+};
 
 export const postArt = async data => {
     try{
@@ -41,18 +54,24 @@ export const postArt = async data => {
 }
 
 export const putArt = async (id, data) => {
-    try {
-      const response = await axios.put(`${BASE_URL}/Art/${id}`, data);
-      if (response.status === 204 || response.status === 200) {
-        return { status: true };
-      } else if (response.status === 401) {
-        return { status: false };
-      }
-    } catch (error) {
-      console.error('Error occurred in put ART', error);
-      return null;
+  console.log(data)
+  console.log(id)
+  try {
+    const response = await axios.put(`${BASE_URL}/Art/${data.art_id}`, data);
+
+    if (response.status === 204 || response.status === 200) {
+      return { success: true };
+    } else if (response.status === 401) {
+      return { success: false };
+    } else {
+      throw new Error('Failed to update art');
     }
-  };
+  } catch (error) {
+    console.error('Error occurred in putArt', error);
+    throw error;
+  }
+};
+
   export const deleteArt = async id => {
     try {
       const response = await axios.delete(`${BASE_URL}/Art/${id}`);
