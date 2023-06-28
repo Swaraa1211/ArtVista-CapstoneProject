@@ -2,10 +2,22 @@ import { Box, Flex, Spacer, Button, Text } from "@chakra-ui/react";
 //import { SearchIcon } from '@chakra-ui/icons'
 import { BsCartFill,  } from 'react-icons/bs';
 import {CgProfile} from 'react-icons/cg';
-import { Link } from "react-router-dom";
+import {useNavigate, Link } from "react-router-dom";
+import { useContext, useState } from 'react';
+import { AuthContext } from '../pages/Auth/authProvider';
 
 
 const Navbar = () => {
+  const { handleLogout } = useContext(AuthContext);
+
+  //const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const handleLogoutFunction = () => {
+    
+    handleLogout();
+    navigate('/login'); 
+  };
   return (
     <Box
       bg="#249EA0"
@@ -56,7 +68,7 @@ const Navbar = () => {
           <BsCartFill color="white" size={30} mr={4} />
         </Link>
         <Box>
-          <Button colorScheme="whiteAlpha" ml={5}>Log Out</Button>
+          <Button colorScheme="whiteAlpha" ml={5} onClick={handleLogoutFunction}>Log Out</Button>
         </Box>
       </Flex>
     </Box>

@@ -22,44 +22,36 @@ import { userAtom } from '../../constant/atomRecoil';
 export default function LoginPage() {
   const setUser = useSetRecoilState(userAtom);
 
-  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const { handleLogin } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     const formData = {
       user_email: event.target.elements.email.value,
       user_password: event.target.elements.password.value,
     };
-
+  
     const response = await Login(formData);
-
-    // setIsAuthenticated(true);
-    // console.log('in login')
-
-    console.log("userid" + response.data.userId)
-
+  
+    console.log("userid" + response.data.userId);
+  
     const userId = response.data.userId;
     const username = response.data.username;
-
+  
     setUser({ userId, username });
-    // setUserId(response.data.userId);
-    // setUsername(response.data.username);
-
+  
     if (response && response.status) {
       console.log('Successful Login', response.data);
-      localStorage.setItem('userToken', response.data.token);
-
-      setIsAuthenticated(true);
+      const userToken = await Login(formData);
+      handleLogin(userToken);
       navigate('/homePage');
     } else {
       console.log('Login failed in handle submit', response);
     }
-
-    
-
-  }
+  };
 
   return (
     <>
