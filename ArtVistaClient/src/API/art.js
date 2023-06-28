@@ -54,15 +54,15 @@ export const postArt = async data => {
 }
 
 export const putArt = async (id, data) => {
-  console.log(data)
-  console.log(id)
+  console.log(data);
+  console.log(id);
   try {
     const response = await axios.put(`${BASE_URL}/Art/${data.art_id}`, data);
 
     if (response.status === 204 || response.status === 200) {
-      return { success: true };
+      return { status: true };
     } else if (response.status === 401) {
-      return { success: false };
+      return { status: false };
     } else {
       throw new Error('Failed to update art');
     }
@@ -71,6 +71,7 @@ export const putArt = async (id, data) => {
     throw error;
   }
 };
+
 
   export const deleteArt = async id => {
     try {

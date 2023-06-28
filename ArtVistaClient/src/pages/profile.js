@@ -37,25 +37,40 @@ const Profile = () => {
         price: '',
         picture: '',
         user_id: '',
-    user_name: '',
+        user_name: '',
     });
 
 
     console.log(userId + " " + username + " from profile and userAtom")
     //console.log(userId + " " + username);
 
-    useEffect(() => {
-        const fetchArt = async () => {
-            try {
-                const response = await getArt();
-                const artData = Array.isArray(response.data) ? response.data : [];
-                setArt(artData);
-            } catch (error) {
-                console.error(error);
-            }
-        };
+    const fetchArt = async () => {
+        try {
+          const response = await getArt();
+          const artData = Array.isArray(response.data) ? response.data : [];
+          setArt(artData);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+      
+      useEffect(() => {
         fetchArt();
-    }, []);
+      }, []);
+      
+
+    // useEffect(() => {
+    //     const fetchArt = async () => {
+    //         try {
+    //             const response = await getArt();
+    //             const artData = Array.isArray(response.data) ? response.data : [];
+    //             setArt(artData);
+    //         } catch (error) {
+    //             console.error(error);
+    //         }
+    //     };
+    //     fetchArt();
+    // }, []);
 
     const handleArtSubmit = async (event) => {
         event.preventDefault();
@@ -110,14 +125,36 @@ const Profile = () => {
         setIsModalOpen(false);
     };
 
+    // const handleUpdate = async (artId) => {
+    //     try {
+    //         const response = await putArt(artId, updatedArtData);
+    //         if (response && response.status) {
+    //             console.log('Art updated successfully');
+    //             closeModal();
+    //             // fetchArt();
+    //             setArt((prevArt) => prevArt.filter((item) => item.art_id !== artId));
+    //         } else {
+    //             console.log('Failed to update art');
+    //         }
+    //     } catch (error) {
+    //         console.error('Error updating art', error);
+    //     }
+    // };
     const handleUpdate = async (artId) => {
         try {
             const response = await putArt(artId, updatedArtData);
-            if (response && response.status) {
+            
+            console.log('Response:', response);
+            if (response && response.status === true) {
+                
                 console.log('Art updated successfully');
+                setArt(prevArt =>
+                    prevArt.map(item => (item.art_id === artId ? updatedArtData : item))
+                  );
+                  
                 closeModal();
-                // fetchArt();
-                setArt((prevArt) => prevArt.filter((item) => item.art_id !== artId));
+                fetchArt();
+                
             } else {
                 console.log('Failed to update art');
             }
@@ -125,6 +162,7 @@ const Profile = () => {
             console.error('Error updating art', error);
         }
     };
+
 
 
     const handleDelete = async (artId) => {
