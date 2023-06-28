@@ -1,6 +1,7 @@
 import { Box, Flex, Spacer, Button, Text } from "@chakra-ui/react";
-import { SearchIcon } from '@chakra-ui/icons'
-import { BsCartFill } from 'react-icons/bs';
+//import { SearchIcon } from '@chakra-ui/icons'
+import { BsCartFill,  } from 'react-icons/bs';
+import {CgProfile} from 'react-icons/cg';
 import { Link } from "react-router-dom";
 
 
@@ -37,19 +38,22 @@ const Navbar = () => {
               </Link>
             </Text>
             <Text color="white" mr={4}>
-              <Link to="/marketMingle" >
-                Pursuit
+              <Link to="/artAnnouncement" >
+              ArtAnnouncement
               </Link>
             </Text>
           </Flex>
 
         </Box>
         <Spacer />
-        <Link to="/search" >
+        {/* <Link to="/search" >
           <SearchIcon color="white" w={6} h={6} mr={4} />
+        </Link> */}
+        <Link to="/profile" >
+          <CgProfile color="white" size={30} ml={4} />
         </Link>
         <Link to="/cart" >
-          <BsCartFill color="white" size={30} m={4} />
+          <BsCartFill color="white" size={30} mr={4} />
         </Link>
         <Box>
           <Button colorScheme="whiteAlpha" ml={5}>Log Out</Button>

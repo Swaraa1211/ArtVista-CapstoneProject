@@ -13,11 +13,15 @@ import {
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Login } from '../../API/users';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from './authProvider';
 import TypewriterEffect from '../../utils/typeWritter';
+//import Profile from '../profile';
 
 export default function LoginPage() {
+  const [userId, setUserId] = useState(null);
+  const [username, setUsername] = useState('');
+
   const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -32,6 +36,11 @@ export default function LoginPage() {
     const response = await Login(formData);
 
     // setIsAuthenticated(true);
+    // console.log('in login')
+
+    console.log("userid" + response.data.userId)
+    setUserId(response.data.userId);
+    setUsername(response.data.username);
 
     if (response && response.status) {
       console.log('Successful Login', response.data);
@@ -43,7 +52,12 @@ export default function LoginPage() {
       console.log('Login failed in handle submit', response);
     }
 
+    
+
   }
+
+  //console.log(userId, username);
+
   return (
     <>
       <Flex
@@ -88,6 +102,9 @@ export default function LoginPage() {
               <Button mt={4} type="submit" width="full" colorScheme="blue">
                 Log In
               </Button>
+              
+              {/* {userId && <Profile userId={userId} username={username} />} */}
+
             </form>
             <Text mt={4} textAlign="center" >
               Don't have an account?

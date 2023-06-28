@@ -34,7 +34,8 @@ const ShowcaseShowdown = () => {
 
           <WrapItem key={item.art_id}>
             <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-              <Image src={item.picture} alt={item.art_name} />
+              <Image src={item.picture} alt={item.art_name} width="200px"
+                                    height="200px" />
               <Box p={4}>
                 <Heading as="h2" size="md" mb={2}>
                   {item.art_name}

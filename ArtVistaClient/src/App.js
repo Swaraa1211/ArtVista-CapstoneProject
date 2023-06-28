@@ -6,11 +6,11 @@ import LoginPage from './pages/Auth/logIn';
 import SignupPage from './pages/Auth/signUp';
 import HomePage from './pages/homePage';
 import PrivateRoute from './routes/privateRoute';
-import ArtistPortfolio from './pages/artistPortfolio';
-import MarketMingle from './pages/marketMingle';
-import ShowcaseShowdown from './pages/showcaseShowdown';
+import ArtistPortfolioPage from './pages/artistPortfolioPage';
+import ShowcaseShowdownPage from './pages/showcaseShowdownPage';
 import Cart from './pages/cart';
-import Search from './pages/search';
+import Profile from './pages/profile';
+import ArtAnnouncement from './pages/artAnnouncement';
 
 function App() {
   return (
@@ -22,10 +22,10 @@ function App() {
           {/* <Route path="/homePage" element={<HomePage />} /> */}
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/homePage" element={<HomePage />} />
-            <Route path="/artistPortfolio" element={<ArtistPortfolio />} />
-            <Route path="/marketMingle" element={<MarketMingle />} />
-            <Route path="/showcaseShowdown" element={<ShowcaseShowdown />} />
-            <Route path="/search" element={<Search />} />
+            <Route path="/artistPortfolio" element={<ArtistPortfolioPage />} />
+            <Route path="/artAnnouncement" element={<ArtAnnouncement />} />
+            <Route path="/showcaseShowdown" element={<ShowcaseShowdownPage />} />
+            <Route path="/profile" element={<Profile />} />
             <Route path="/cart" element={<Cart />} />
 
           </Route>

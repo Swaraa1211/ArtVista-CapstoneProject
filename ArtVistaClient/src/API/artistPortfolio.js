@@ -3,7 +3,7 @@ import { BASE_URL } from '../constant/endPoint';
 
 export const getArtist = async data => {
     try{
-        const response = axios.get(`${BASE_URL}/ArtistPortfolio`, data);
+        const response = await axios.get(`${BASE_URL}/ArtistPortfolio`, data);
 
         if(response.status === 201 || response.status === 200){
             console.log("Success in get ArtistPortfolio")
