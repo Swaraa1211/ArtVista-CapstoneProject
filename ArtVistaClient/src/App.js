@@ -13,6 +13,7 @@ import Profile from './pages/profile';
 import ArtAnnouncement from './pages/artAnnouncement';
 import CreateArt from './pages/profile/createArt';
 import UpdateAndDeleteArt from './pages/profile/updateAndDeleteArt';
+import PortfolioPage from './pages/profile/portfolioPage';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route path="/profile" element={<Profile />}>
               <Route path="createArt" element={<CreateArt />} /> 
               <Route path="updateAndDeleteArt" element={<UpdateAndDeleteArt />} /> 
+              <Route path="portfolio" element={<PortfolioPage />} /> 
             </Route>
             <Route path="/cart" element={<Cart />} />
           </Route>

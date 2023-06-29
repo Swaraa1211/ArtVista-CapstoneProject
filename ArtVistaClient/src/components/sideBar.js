@@ -36,6 +36,11 @@ const SideBar = () => {
                         Update / Delete Art
                     </Link>
                 </Text>
+                <Text color="black" mr={4}>
+                    <Link to="portfolio">
+                        Portfolio
+                    </Link>
+                </Text>
 
                 {/* <Text color="white" mr={4}>
                     <Link to="/artistPortfolio" >
