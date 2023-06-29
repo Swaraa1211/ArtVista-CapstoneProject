@@ -65,6 +65,7 @@ const CreateArt = () => {
     return (
         <>
             
+            <Heading>CreateArt</Heading>
             <Box p={4}>
                 <Heading>Create Art</Heading>
                 <form ref={formRef} onSubmit={handleArtSubmit}>

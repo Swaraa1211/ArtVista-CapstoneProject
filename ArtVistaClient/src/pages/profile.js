@@ -28,9 +28,12 @@ import { getArt, postArt, getArtById, putArt, deleteArt } from '../API/art';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../constant/atomRecoil';
 import { Outlet } from 'react-router-dom';
+import { useOutlet } from 'react-router-dom';
+
 import SideBar from '../components/sideBar';
 
 const Profile = () => {
+    const outlet = useOutlet();
     const { userId, username } = useRecoilValue(userAtom);
     const formRef = useRef(null);
     const [art, setArt] = useState([]);
@@ -194,7 +197,7 @@ const Profile = () => {
             <Heading>
                 Profile
             </Heading>
-            {/* <Grid
+            <Grid
                 h="100vh"
                 overflowY="hidden"
                 templateRows="repeat(2, 1fr)"
@@ -206,11 +209,12 @@ const Profile = () => {
                 </GridItem>
                 <GridItem colSpan={5}>
                     <Box>
-                        <Outlet />
+                    {outlet}
+                        {/* <Outlet /> */}
                     </Box>
                 </GridItem>
-            </Grid> */}
-            <Box p={4}>
+            </Grid>
+            {/* <Box p={4}>
                 <Heading>Create Art</Heading>
                 <form ref={formRef} onSubmit={handleArtSubmit}>
                     <FormControl isRequired>
@@ -357,7 +361,7 @@ const Profile = () => {
                     </ModalContent>
                 </Modal>
 
-            </Box>
+            </Box> */}
         </>
 
     );

@@ -20,17 +20,17 @@ import {
 import React from 'react';
 
 import { AuthContext } from '../pages/Auth/authProvider';
-import {useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useContext, useState } from 'react';
 
 const SideBar = () => {
 
-  const navigate = useNavigate();
-   
+    const navigate = useNavigate();
+
 
     const handleLogoutFunction = () => {
-        
-    navigate('/login'); 
+
+        navigate('/login');
     };
     return (
         <VStack spacing={6} align="stretch" h="100%">
@@ -38,11 +38,12 @@ const SideBar = () => {
 
             </Flex>
             <VStack spacing={4} align="stretch">
-                <Text color="white" mr={4}>
-                    <Link to="/createArt" >
+                <Text color="black" mr={4}>
+                    <Link to="createArt">
                         Create Art
                     </Link>
                 </Text>
+
                 {/* <Text color="white" mr={4}>
                     <Link to="/artistPortfolio" >
                         Portfolio
@@ -55,9 +56,9 @@ const SideBar = () => {
                 </Text> */}
             </VStack>
             <>
-            <Box>
-          <Button colorScheme="whiteAlpha" ml={5} onClick={handleLogoutFunction}>Log Out</Button>
-        </Box>
+                <Box>
+                    <Button colorScheme="whiteAlpha" ml={5} onClick={handleLogoutFunction}>Log Out</Button>
+                </Box>
                 {/* <Button onClick={onOpen}>Logout</Button>
                 <Modal isOpen={isOpen} onClose={onClose}>
                     <ModalOverlay />

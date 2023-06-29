@@ -20,20 +20,38 @@ function App() {
         <Routes>
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/login" element={<LoginPage />} />
-          {/* <Route path="/homePage" element={<HomePage />} /> */}
+          <Route path="/" element={<PrivateRoute />}>
+            <Route path="/homePage" element={<HomePage />} />
+            <Route path="/artistPortfolio" element={<ArtistPortfolioPage />} />
+            <Route path="/artAnnouncement" element={<ArtAnnouncement />} />
+            <Route path="/showcaseShowdown" element={<ShowcaseShowdownPage />} />
+            <Route path="/profile" element={<Profile />}>
+              <Route path="createArt" element={<CreateArt />} /> 
+            </Route>
+            <Route path="/cart" element={<Cart />} />
+          </Route>
+        </Routes>
+      </Router>
+
+
+      {/* <Router>
+        <Routes>
+          <Route path="/signup" element={<SignupPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/homePage" element={<HomePage />} />
             <Route path="/artistPortfolio" element={<ArtistPortfolioPage />} />
             <Route path="/artAnnouncement" element={<ArtAnnouncement />} />
             <Route path="/showcaseShowdown" element={<ShowcaseShowdownPage />} />
             <Route path="/profile" element={<Profile />} />
-              {/* <Route path="/createArt" element={<CreateArt />} />
-            </Route> */}
+            <Route path="/createArt" element={<CreateArt />} />
+              
             <Route path="/cart" element={<Cart />} />
 
           </Route>
         </Routes>
-      </Router>
+      </Router> */}
 
 
     </>
