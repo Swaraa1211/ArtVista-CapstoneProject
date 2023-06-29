@@ -6,16 +6,19 @@ const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const userToken = localStorage.getItem('userToken');
+    const userToken = JSON.parse(localStorage.getItem('userToken'));
 
     if (userToken) {
+      
       setIsAuthenticated(true);
     } else {
       setIsAuthenticated(false);
     }
   }, []);
   const handleLogin = (userToken) => {
-    localStorage.setItem('userToken', userToken);
+    console.log(userToken);
+    localStorage.setItem('userToken',JSON.stringify(userToken) );
+    
     setIsAuthenticated(true);
   };
 

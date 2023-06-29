@@ -17,12 +17,18 @@ import {
     ModalBody,
     ModalFooter,
     ModalCloseButton,
+  Grid,
+  GridItem,
+  InputGroup,
+  InputLeftElement,
 } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/navBar';
 import { getArt, postArt, getArtById, putArt, deleteArt } from '../API/art';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../constant/atomRecoil';
+import { Outlet } from 'react-router-dom';
+import SideBar from '../components/sideBar';
 
 const Profile = () => {
     const { userId, username } = useRecoilValue(userAtom);
@@ -46,18 +52,18 @@ const Profile = () => {
 
     const fetchArt = async () => {
         try {
-          const response = await getArt();
-          const artData = Array.isArray(response.data) ? response.data : [];
-          setArt(artData);
+            const response = await getArt();
+            const artData = Array.isArray(response.data) ? response.data : [];
+            setArt(artData);
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
-      
-      useEffect(() => {
+    };
+
+    useEffect(() => {
         fetchArt();
-      }, []);
-      
+    }, []);
+
 
     // useEffect(() => {
     //     const fetchArt = async () => {
@@ -143,18 +149,18 @@ const Profile = () => {
     const handleUpdate = async (artId) => {
         try {
             const response = await putArt(artId, updatedArtData);
-            
+
             console.log('Response:', response);
             if (response && response.status === true) {
-                
+
                 console.log('Art updated successfully');
                 setArt(prevArt =>
                     prevArt.map(item => (item.art_id === artId ? updatedArtData : item))
-                  );
-                  
+                );
+
                 closeModal();
                 fetchArt();
-                
+
             } else {
                 console.log('Failed to update art');
             }
@@ -192,6 +198,22 @@ const Profile = () => {
             <Heading>
                 Profile
             </Heading>
+            {/* <Grid
+                h="100vh"
+                overflowY="hidden"
+                templateRows="repeat(2, 1fr)"
+                templateColumns="repeat(6, 1fr)"
+                bg="gray.100"
+            >
+                <GridItem rowSpan={2} colSpan={1} p={5} bg="#fff">
+                    <SideBar />
+                </GridItem>
+                <GridItem colSpan={5}>
+                    <Box>
+                        <Outlet />
+                    </Box>
+                </GridItem>
+            </Grid> */}
             <Box p={4}>
                 <Heading>Create Art</Heading>
                 <form ref={formRef} onSubmit={handleArtSubmit}>

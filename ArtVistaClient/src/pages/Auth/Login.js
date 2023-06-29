@@ -46,7 +46,10 @@ export default function LoginPage() {
     if (response && response.status) {
       console.log('Successful Login', response.data);
       const userToken = await Login(formData);
-      handleLogin(userToken);
+      //handleLogin(userToken);
+      localStorage.setItem('userToken',JSON.stringify(userToken) );
+    
+    //setIsAuthenticated(true);
       navigate('/homePage');
     } else {
       console.log('Login failed in handle submit', response);

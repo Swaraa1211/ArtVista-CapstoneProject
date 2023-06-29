@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import './App.css';
 import LoginPage from './pages/Auth/logIn';
@@ -11,6 +11,7 @@ import ShowcaseShowdownPage from './pages/showcaseShowdownPage';
 import Cart from './pages/cart';
 import Profile from './pages/profile';
 import ArtAnnouncement from './pages/artAnnouncement';
+import CreateArt from './pages/profile/createArt';
 
 function App() {
   return (
@@ -26,6 +27,8 @@ function App() {
             <Route path="/artAnnouncement" element={<ArtAnnouncement />} />
             <Route path="/showcaseShowdown" element={<ShowcaseShowdownPage />} />
             <Route path="/profile" element={<Profile />} />
+              {/* <Route path="/createArt" element={<CreateArt />} />
+            </Route> */}
             <Route path="/cart" element={<Cart />} />
 
           </Route>
