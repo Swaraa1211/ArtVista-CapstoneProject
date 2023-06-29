@@ -18,40 +18,18 @@ import {
     Flex,
 } from '@chakra-ui/react';
 import React from 'react';
-import {
-    TbSettings2,
-    TbHome2,
-    TbInfoSquareRounded,
-    TbDashboard,
-} from 'react-icons/tb'; // Import Chakra UI Icons
-import { MdOutlineAnalytics } from 'react-icons/md';
-import { CgProfile } from 'react-icons/cg';
-import { TbFileUpload } from 'react-icons/tb';
-import { RiApps2Line } from 'react-icons/ri';
-import { BiGitPullRequest } from 'react-icons/bi';
+
 import { AuthContext } from '../pages/Auth/authProvider';
 import {useNavigate, Link } from "react-router-dom";
 import { useContext, useState } from 'react';
 
 const SideBar = () => {
-    const { handleLogout } = useContext(AuthContext);
 
-  //const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
-    const links = [
-        { name: 'Home', path: '/', icon: TbHome2 },
-        { name: 'Explore', path: '/explore', icon: RiApps2Line },
-        { name: 'Dashboard', path: '/dashboard', icon: MdOutlineAnalytics },
-        { name: 'Upload', path: '/upload', icon: TbFileUpload },
-        { name: 'Profile', path: '/profile', icon: CgProfile },
-        { name: 'Requests', path: '/request', icon: BiGitPullRequest },
-    ];
+   
 
     const handleLogoutFunction = () => {
-        // onClose(); // Close the logout confirmation modal
-        // localStorage.clear('profile');
-        // window.location.reload();
-        handleLogout();
+        
     navigate('/login'); 
     };
     return (

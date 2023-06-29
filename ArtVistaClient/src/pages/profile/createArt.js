@@ -18,8 +18,7 @@ const CreateArt = () => {
     const formRef = useRef(null);
     const [art, setArt] = useState([]);
 
-    console.log(userId + " " + username + " from profile and userAtom")
-    //console.log(userId + " " + username);
+    console.log(userId + " " + username + " from profile and userAtom");
 
     const fetchArt = async () => {
         try {
@@ -94,10 +93,7 @@ const CreateArt = () => {
                 </form>
 
             </Box>
-            {/* <Box>
 
-            </Box> */}
-            {/* </Flex> */}
         </>
 
     );

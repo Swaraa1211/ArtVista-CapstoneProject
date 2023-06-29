@@ -106,8 +106,8 @@ const Profile = () => {
 
     const openModal = async (artId) => {
         try {
-            const response = await getArtById(artId); // Assuming getArtById is an API fetch function
-            const artData = response.data; // Assuming the API response contains the art data
+            const response = await getArtById(artId); 
+            const artData = response.data; 
 
             setUpdatedArtData({
                 art_id: artData.art_id,
@@ -174,11 +174,8 @@ const Profile = () => {
     const handleDelete = async (artId) => {
         if (window.confirm('Are you sure you want to delete this item?')) {
             try {
-                // Call deleteArt API function to delete the item from the database
                 const response = await deleteArt(artId);
                 if (response && response.status) {
-                    // Delete the item from the art array in the state or refetch the art data
-                    // based on your implementation
                     setArt((prevArt) => prevArt.filter((item) => item.art_id !== artId));
                     console.log('Item deleted successfully');
                 } else {
@@ -194,7 +191,6 @@ const Profile = () => {
     return (
         <>
             <Navbar />
-            {/* <Flex> */}
             <Heading>
                 Profile
             </Heading>
@@ -248,7 +244,7 @@ const Profile = () => {
                 <Wrap spacing={4} mt={4}>
                     {art &&
                         art
-                            .filter((item) => item.user_id === userId) // Filter the art array based on userId
+                            .filter((item) => item.user_id === userId) 
                             .map((item) => (
                                 <WrapItem key={item.art_id}>
                                     <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -362,7 +358,6 @@ const Profile = () => {
                 </Modal>
 
             </Box>
-            {/* </Flex> */}
         </>
 
     );
