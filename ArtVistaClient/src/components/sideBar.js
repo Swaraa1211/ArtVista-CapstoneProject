@@ -1,20 +1,8 @@
 import {
     VStack,
     Text,
-    Icon,
     Box,
-    HStack,
-    Heading,
     Button,
-    useDisclosure,
-    Modal,
-    ModalBody,
-    ModalCloseButton,
-    ModalContent,
-    ModalFooter,
-    ModalHeader,
-    ModalOverlay,
-    Avatar,
     Flex,
 } from '@chakra-ui/react';
 import React from 'react';
@@ -41,6 +29,11 @@ const SideBar = () => {
                 <Text color="black" mr={4}>
                     <Link to="createArt">
                         Create Art
+                    </Link>
+                </Text>
+                <Text color="black" mr={4}>
+                    <Link to="updateAndDeleteArt">
+                        Update / Delete Art
                     </Link>
                 </Text>
 

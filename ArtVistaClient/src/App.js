@@ -12,6 +12,7 @@ import Cart from './pages/cart';
 import Profile from './pages/profile';
 import ArtAnnouncement from './pages/artAnnouncement';
 import CreateArt from './pages/profile/createArt';
+import UpdateAndDeleteArt from './pages/profile/updateAndDeleteArt';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/showcaseShowdown" element={<ShowcaseShowdownPage />} />
             <Route path="/profile" element={<Profile />}>
               <Route path="createArt" element={<CreateArt />} /> 
+              <Route path="updateAndDeleteArt" element={<UpdateAndDeleteArt />} /> 
             </Route>
             <Route path="/cart" element={<Cart />} />
           </Route>
