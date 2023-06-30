@@ -13,7 +13,7 @@ import {
 import React from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { Login } from '../../API/users';
-import { useContext, useState } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { AuthContext } from './authProvider';
 import TypewriterEffect from '../../utils/typeWritter';
 import { useSetRecoilState } from 'recoil';
@@ -25,6 +25,13 @@ export default function LoginPage() {
   const { handleLogin } = useContext(AuthContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const userData = localStorage.getItem('userToken');
+    if (JSON.parse(userData)) {
+      navigate('/');
+    }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -42,7 +49,8 @@ export default function LoginPage() {
     const username = response.data.username;
   
     setUser({ userId, username });
-  
+
+
     if (response && response.status) {
       console.log('Successful Login', response.data);
       const userToken = await Login(formData);

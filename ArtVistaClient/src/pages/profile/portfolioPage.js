@@ -1,16 +1,85 @@
 import { useState, useEffect } from 'react';
 import { CreatePortfolioForm, UpdatePortfolioForm } from './portfolioForm';
-import { getArtist } from '../../API/artistPortfolio'; // Replace with your API call to fetch portfolio data
+import { getArtist, getArtistById } from '../../API/artistPortfolio';
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../../constant/atomRecoil';
 
 const PortfolioPage = () => {
+
+//   const [portfolio, setPortfolio] = useState(null);
+// const [isLoading, setIsLoading] = useState(true);
+// const { userId, username } = useRecoilValue(userAtom);
+// const user_id = userId;
+
+// const fetchPortfolio = async () => {
+//   try {
+//     const portfolioData = await getArtistById(user_id);
+//     setPortfolio(portfolioData);
+//     setIsLoading(false);
+//   } catch (error) {
+//     console.error('Error fetching portfolio:', error);
+//   }
+// };
+
+// useEffect(() => {
+//   const fetchData = async () => {
+//     fetchPortfolio();
+//   };
+
+//   fetchData();
+// }, []); 
+
+
   const [portfolio, setPortfolio] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const { userId, username } = useRecoilValue(userAtom);
+  const [artist, setArtist] = useState([]);
+  const [selectedArtistId, setSelectedArtistId] = useState(null);
 
+  const fetchArtist = async () => {
+    try {
+        const response = await getArtist();
+        setArtist(response.data);
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+useEffect(() => {
+    const fetchData = async () => {
+        if (userId) {
+            await fetchArtist();
+        }
+    };
+
+    fetchData();
+}, [userId]);
+
+useEffect(() => {
+    const selectedArtist = artist.find(item => item.user_id === userId);
+    if (selectedArtist) {
+        setSelectedArtistId(selectedArtist.artist_id);
+    }
+}, [artist, userId]);
+
+console.log("artistId: " + selectedArtistId);
+  
+  
   useEffect(() => {
-    // Fetch portfolio data from the server
+    // const fetchArtist = async () =>{
+    //   try{
+    //     const artistData = await getArtist();
+    //     console.log("artistData "+artistData.data);
+    //     setArtist(artistData.data);
+    //     //console.log("artistId " + artistID)
+
+    //   }catch(error){
+    //     console.error("error" , error);
+    //   }
+    // }
     const fetchPortfolio = async () => {
       try {
-        const portfolioData = await getArtist(); // Replace with your API call to fetch portfolio data
+        const portfolioData = await getArtistById(selectedArtistId); 
         setPortfolio(portfolioData);
         setIsLoading(false);
       } catch (error) {
@@ -18,8 +87,10 @@ const PortfolioPage = () => {
       }
     };
 
+    // fetchArtist();
     fetchPortfolio();
   }, []);
+  console.log("portfolio after artistID" + portfolio)
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -36,4 +107,4 @@ const PortfolioPage = () => {
   );
 };
 
-export default PortfolioPage;
+export default PortfolioPage; 

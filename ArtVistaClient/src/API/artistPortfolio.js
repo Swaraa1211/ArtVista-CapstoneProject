@@ -19,6 +19,21 @@ export const getArtist = async data => {
     }
 }
 
+export const getArtistById = async id => {
+  console.log("in api" +id);
+  try {
+    const response = await axios.get(`${BASE_URL}/ArtistPortfolio/${id}`);
+    if (response.status === 201 || response.status === 200) {
+      return { status: true, data: response.data };
+    } else if (response.status === 401) {
+      return { status: false, data: response.data };
+    }
+  } catch (error) {
+    console.error('Error occurred ', error);
+    return null;
+  }
+};
+
 export const postArtistPortfolio = async data => {
     try{
         const response = await axios.post(`${BASE_URL}/ArtistPortfolio`, data);

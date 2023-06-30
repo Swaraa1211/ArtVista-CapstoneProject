@@ -136,6 +136,7 @@ const UpdatePortfolioForm = ({ portfolio }) => {
         journey: portfolio.journey
     });
     const [updatedArtData, setUpdatedArtData] = useState({
+        artist_id: '',
         artist_name: '',
         artist_picture: '',
         about: '',
@@ -147,6 +148,10 @@ const UpdatePortfolioForm = ({ portfolio }) => {
         user_name: '',
     });
 
+    const artist_ID = portfolio.data.artist_id;
+
+console.log("portfolioform " + portfolio + " id " + artist_ID  )
+console.log("artistid passed " + portfolio.data.artist_id)
     const fetchArtist = async () => {
         try {
             const response = await getArtist();
@@ -160,19 +165,20 @@ const UpdatePortfolioForm = ({ portfolio }) => {
     useEffect(() => {
         fetchArtist();
     }, []);
-    const openModal = async (artId) => {
+    const openModal = async (artistId) => {
         try {
             // const response = await getArtById(artId);
             // const artData = response.data;
 
             setUpdatedArtData({
-                artist_name: portfolio.artist_name,
-                artist_picture: portfolio.artist_picture,
-                about: portfolio.about,
-                masterpiece: portfolio.masterpiece,
-                masterpiece_picture: portfolio.masterpiece_picture,
-                contact: portfolio.contact,
-                journey: portfolio.journey,
+                artist_id: portfolio.data.artist_id,
+                artist_name: portfolio.data.artist_name,
+                artist_picture: portfolio.data.artist_picture,
+                about: portfolio.data.about,
+                masterpiece: portfolio.data.masterpiece,
+                masterpiece_picture: portfolio.data.masterpiece_picture,
+                contact: portfolio.data.contact,
+                journey: portfolio.data.journey,
                 user_id: userId,
                 user_name: username,
             });
@@ -188,16 +194,17 @@ const UpdatePortfolioForm = ({ portfolio }) => {
         setIsModalOpen(false);
     };
 
-    const handleUpdate = async (artistId) => {
+    const handleUpdate = async () => {
+        console.log(artist_ID + "in handleupdate form")
         try {
-            const response = await putArtistPortfolio(artistId, updatedArtData);
+            const response = await putArtistPortfolio(artist_ID, updatedArtData);
 
             console.log('Response:', response);
             if (response && response.status === true) {
 
                 console.log('Art updated successfully');
                 setArtist(prevArt =>
-                    prevArt.map(item => (item.artist_id === artistId ? updatedArtData : item))
+                    prevArt.map(item => (item.artist_id === artist_ID ? updatedArtData : item))
                 );
 
                 closeModal();
@@ -326,7 +333,7 @@ const UpdatePortfolioForm = ({ portfolio }) => {
                     <FormControl>
                         <FormLabel>Contact</FormLabel>
                         <Input
-                            type="number"
+                            type="text"
                             value={updatedArtData.contact}
                             onChange={(e) =>
                                 setUpdatedArtData((prevData) => ({
