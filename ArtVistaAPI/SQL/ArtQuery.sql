@@ -34,14 +34,20 @@ CREATE TABLE Art (
 
 
 -- Create Favorites table
+--CREATE TABLE Favorites (
+--  fav_id INT PRIMARY KEY identity(1,1),
+--  user_id INT,
+--  art_id INT,
+--  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE NO ACTION,
+--  FOREIGN KEY (art_id) REFERENCES Art(art_id) ON DELETE NO ACTION
+--);
 CREATE TABLE Favorites (
   fav_id INT PRIMARY KEY identity(1,1),
-  user_id INT,
-  art_id INT,
-  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE NO ACTION,
-  FOREIGN KEY (art_id) REFERENCES Art(art_id) ON DELETE NO ACTION
+  Userid INT,
+  Artid INT,
+  FOREIGN KEY (Userid) REFERENCES Users(user_id) ON DELETE NO ACTION,
+  FOREIGN KEY (Artid) REFERENCES Art(art_id) ON DELETE NO ACTION
 );
-
 --drop table Favorites
 
 	

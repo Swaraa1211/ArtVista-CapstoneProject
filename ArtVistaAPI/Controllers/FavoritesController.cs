@@ -25,7 +25,29 @@ namespace ArtVistaAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<FavoritesModel>>> GetFavoritesModel()
         {
-            return await _context.Favorites.ToListAsync();
+            var favorites = await _context.Favorites
+                                    .Include(f => f.Users)
+                                    .Include(f => f.Art)
+                                    .ToListAsync();
+            List<dynamic> favList = new List<dynamic>();
+            foreach (FavoritesModel fav in favorites)
+            {
+                var newFav = new
+                {
+                    favId = fav.fav_id,
+                    userId = fav.Users.user_id,
+                    artId = fav.Art.art_id,
+                    artDescription = fav.Art.art_description,
+                    artName = fav.Art.art_name,
+                    artistName = fav.Art.artist_name,
+                    artPicture = fav.Art.picture,
+                    artPrice = fav.Art.price,
+                };
+                favList.Add(newFav);
+            }
+
+            return Ok(favList);
+            //return await _context.Favorites.ToListAsync();
         }
 
         // GET: api/Favorites/5

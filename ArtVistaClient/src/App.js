@@ -14,6 +14,7 @@ import ArtAnnouncement from './pages/artAnnouncement';
 import CreateArt from './pages/profile/createArt';
 import UpdateAndDeleteArt from './pages/profile/updateAndDeleteArt';
 import PortfolioPage from './pages/profile/portfolioPage';
+import Favorites from './pages/profile/favoritesList';
 
 function App() {
   return (
@@ -31,31 +32,12 @@ function App() {
               <Route path="createArt" element={<CreateArt />} /> 
               <Route path="updateAndDeleteArt" element={<UpdateAndDeleteArt />} /> 
               <Route path="portfolio" element={<PortfolioPage />} /> 
+              <Route path="favorites" element={<Favorites />} /> 
             </Route>
             <Route path="/cart" element={<Cart />} />
           </Route>
         </Routes>
       </Router>
-
-
-      {/* <Router>
-        <Routes>
-          <Route path="/signup" element={<SignupPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          
-          <Route path="/" element={<PrivateRoute />}>
-            <Route path="/homePage" element={<HomePage />} />
-            <Route path="/artistPortfolio" element={<ArtistPortfolioPage />} />
-            <Route path="/artAnnouncement" element={<ArtAnnouncement />} />
-            <Route path="/showcaseShowdown" element={<ShowcaseShowdownPage />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/createArt" element={<CreateArt />} />
-              
-            <Route path="/cart" element={<Cart />} />
-
-          </Route>
-        </Routes>
-      </Router> */}
 
 
     </>

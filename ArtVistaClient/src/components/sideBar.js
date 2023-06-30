@@ -41,17 +41,13 @@ const SideBar = () => {
                         Portfolio
                     </Link>
                 </Text>
-
-                {/* <Text color="white" mr={4}>
-                    <Link to="/artistPortfolio" >
-                        Portfolio
+                <Text color="black" mr={4}>
+                    <Link to="favorites">
+                        Favorites
                     </Link>
                 </Text>
-                <Text color="white" mr={4}>
-                    <Link to="/artAnnouncement" >
-                        ArtAnnouncement
-                    </Link>
-                </Text> */}
+
+               
             </VStack>
             <>
                 <Box>
