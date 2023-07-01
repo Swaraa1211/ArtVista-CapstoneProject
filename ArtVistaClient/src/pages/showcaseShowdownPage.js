@@ -35,6 +35,7 @@ const ShowcaseShowdown = () => {
   const [isFavorite, setIsFavorite] = useState([]);
   //  const [loading, setLoading ] = useState(false);
 
+  //art
   const fetchArt = async () => {
     try {
       const response = await getArt();
@@ -54,10 +55,10 @@ const ShowcaseShowdown = () => {
   }, []);
   console.log(art);
 
+  //favorites
   const handleFavoriteClick = async (userId, artId) => {
     console.log("handle fav " + userId + artId)
     try {
-      // Save as favorite
       const data = {
         user_id: userId,
         art_id: artId
@@ -67,7 +68,6 @@ const ShowcaseShowdown = () => {
       setIsFavorite(true);
     } catch (error) {
       console.error(error);
-      // Handle error if needed
     }
   };
 
@@ -98,8 +98,6 @@ const ShowcaseShowdown = () => {
   const openReviewModal = (artID) => {
     setIsReviewModalOpen(true);
     setSelectedArtId(artID);
-
-    //const artId = item.art_id; // Assuming you have access to the artId
     fetchReviewContent(artID);
   };
 
@@ -124,7 +122,6 @@ const ShowcaseShowdown = () => {
 
     if (response && response.status) {
       console.log('Successful in adding review', response.data);
-      
       //formRef.current.reset();
 
     } else {
@@ -140,8 +137,8 @@ const ShowcaseShowdown = () => {
       const response = await getReview();
       console.log("response in fetch " + response)
       const reviewData = response.data;
-    const filteredReviewData = reviewData.filter(review => review.artId === artID);
-    setReviewContent(filteredReviewData);
+      const filteredReviewData = reviewData.filter(review => review.artId === artID);
+      setReviewContent(filteredReviewData);
       // const reviewData = response.data;
       // setReviewContent(response.data);
 
@@ -224,39 +221,6 @@ const ShowcaseShowdown = () => {
           </ModalContent>
         </Modal>
       </Wrap>
-
-      {/*Working*/}
-      {/* <Wrap spacing={4} mt={4}>
-        {art && art.map((item) => {
-          const isFavorite = fav.some(favorite => favorite.artId === item.art_id);
-
-          return (
-            <WrapItem key={item.art_id}>
-              <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-                <Image src={item.picture} alt={item.art_name} width="200px" height="200px" />
-                <Box p={4}>
-                  <Heading as="h2" size="md" mb={2}>
-                    {item.art_name}
-                  </Heading>
-                  <Text fontSize="sm" mb={2}>
-                    Artist: {item.artist_name}
-                  </Text>
-                  <Text fontSize="sm" mb={2}>
-                    {item.art_description}
-                  </Text>
-                  <Text fontSize="sm">Price: {item.price}</Text>
-                  {!isFavorite && (
-                    <Button onClick={() => handleFavoriteClick(item.user_id, item.art_id)}>
-                      Add to Favorites
-                    </Button>
-                  )}
-                </Box>
-              </Box>
-            </WrapItem>
-          );
-        })}
-      </Wrap> */}
-
 
     </>
   );

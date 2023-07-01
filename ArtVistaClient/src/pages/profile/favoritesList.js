@@ -2,14 +2,19 @@ import { Heading } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react'
 import { deleteFavorites, getFavorites } from '../../API/favorites';
 import { Box, Flex, Text, Image, Badge, Grid, Button } from '@chakra-ui/react';
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../../constant/atomRecoil';
+
 const Favorites = () => {
     const [fav, setFav] = useState([]);
-
+    const { userId, username } = useRecoilValue(userAtom);
 
     const fetchFavorites = async () => {
         try {
             const response = await getFavorites();
-            setFav(response.data);
+            const favData = response.data;
+            const filteredByUserID = favData.filter(favUser => favUser.userId === userId)
+            setFav(filteredByUserID);
         } catch (error) {
             console.error(error);
         }
@@ -20,23 +25,6 @@ const Favorites = () => {
 
         fetchFavorites();
     }, []);
-    // const fetchFav = async () => {
-    //     try {
-    //       const response = await getFavorites();
-    //       const favData = Array.isArray(response.data) ? response.data : [];
-
-    //       // Convert the response to a JSON string
-    //       const favString = JSON.stringify(favData);
-    //       console.log(favString);
-
-    //       setFav(favData);
-    //     } catch (error) {
-    //       console.error(error);
-    //     }
-    //   };
-
-    //   fetchFav();
-
 
     console.log("Fav Fetch" + fav);
 
@@ -60,14 +48,7 @@ const Favorites = () => {
     return (
         <>
             <Heading>Favorites</Heading>
-            {/* <div>
-                {fav.map((item) => (
-                    <div key={item.fav_id}>
-                        <p>User ID: {item.userid}</p>
-                        <p>Art ID: {item.artid}</p>
-                    </div>
-                ))}
-            </div> */}
+  
             <Box p={4}>
                 <Grid templateColumns="repeat(3, 1fr)" gap={4}>
                     {fav.map((item) => (
