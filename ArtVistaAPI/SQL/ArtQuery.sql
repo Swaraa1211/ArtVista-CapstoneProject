@@ -83,12 +83,12 @@ CREATE TABLE BidPrice (
 
 CREATE TABLE Review (
   review_id INT PRIMARY KEY identity(1,1),
-  user_id INT,
-  art_id INT,
+  User_id INT,
+  Art_id INT,
   rating INT,
   reviewcomment VARCHAR(255),
-  FOREIGN KEY (user_id) REFERENCES Users(user_id)  ON DELETE NO ACTION,
-  FOREIGN KEY (art_id) REFERENCES Art(art_id)  ON DELETE NO ACTION
+  FOREIGN KEY (User_id) REFERENCES Users(user_id)  ON DELETE NO ACTION,
+  FOREIGN KEY (Art_id) REFERENCES Art(art_id)  ON DELETE NO ACTION
 );
 
 --drop table Review

@@ -25,11 +25,39 @@ namespace ArtVistaAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReviewModel>>> GetReviewModel()
         {
-            return await _context.Review.ToListAsync();
-        }
+            var review = await _context.Review
+                    .Include(r => r.Users)
+                    .Include(r => r.Art)
+                    .ToListAsync();
 
-        // GET: api/Review/5
-        [HttpGet("{id}")]
+			List<dynamic> reviewList = new List<dynamic>();
+
+			foreach (ReviewModel reviewModel in review)
+			{
+				var newReview = new
+				{
+					reviewId = reviewModel.review_id,
+					ratings = reviewModel.rating,
+					reviewComment = reviewModel.reviewcomment,
+					userId = reviewModel.Users.user_id,
+					artId = reviewModel.Art.art_id,
+					artDescription = reviewModel.Art.art_description,
+					artName = reviewModel.Art.art_name,
+					artistName = reviewModel.Art.artist_name,
+					artPicture = reviewModel.Art.picture,
+					artPrice = reviewModel.Art.price,
+				};
+
+				reviewList.Add(newReview); // Add the newReview object to the reviewList
+			}
+
+			return Ok(reviewList);
+
+			//return await _context.Review.ToListAsync();
+		}
+
+		// GET: api/Review/5
+		[HttpGet("{id}")]
         public async Task<ActionResult<ReviewModel>> GetReviewModel(int id)
         {
             var reviewModel = await _context.Review.FindAsync(id);

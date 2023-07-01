@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ArtVistaAPI.Models
 {
@@ -8,8 +9,13 @@ namespace ArtVistaAPI.Models
 		public int review_id { get; set; }
 		public int rating { get; set; }
 		public string reviewcomment { get; set; }
-		public int user_id { get; set; }
-		public int art_id { get; set; }
+		[ForeignKey("Users")]
+		public int User_id { get; set; }
+		[ForeignKey("Art")]
+		public int Art_id { get; set; }
+
+		public UsersModel Users { get; set; }
+		public ArtModel Art { get; set; }
 
 	}
 }
