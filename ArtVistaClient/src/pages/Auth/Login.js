@@ -32,7 +32,6 @@ export default function LoginPage() {
       navigate('/');
     }
   }, []);
-
   const handleSubmit = async (event) => {
     event.preventDefault();
   
@@ -41,29 +40,26 @@ export default function LoginPage() {
       user_password: event.target.elements.password.value,
     };
   
-    const response = await Login(formData);
+    try {
+      const response = await Login(formData);
   
-    console.log("userid" + response.data.userId);
+      if (response && response.status) {
+        console.log('Successful Login', response.data);
+        const userToken = await Login(formData);
+        localStorage.setItem('userToken', JSON.stringify(userToken));
   
-    const userId = response.data.userId;
-    const username = response.data.username;
-  
-    setUser({ userId, username });
-
-
-    if (response && response.status) {
-      console.log('Successful Login', response.data);
-      const userToken = await Login(formData);
-      //handleLogin(userToken);
-      localStorage.setItem('userToken',JSON.stringify(userToken) );
-    
-    //setIsAuthenticated(true);
-      navigate('/homePage');
-    } else {
-      console.log('Login failed in handle submit', response);
+        navigate('/homePage');
+      } else {
+        console.log('Login failed in handle submit', response);
+        alert('Incorrect password. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error in handle submit', error);
+      alert('An error occurred. Please try again.');
     }
   };
-
+  
+  
   return (
     <>
       <Flex

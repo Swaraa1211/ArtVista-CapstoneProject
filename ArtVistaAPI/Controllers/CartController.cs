@@ -25,8 +25,29 @@ namespace ArtVistaAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CartModel>>> GetCartModel()
         {
-            return await _context.Cart.ToListAsync();
-        }
+			var carts = await _context.Cart
+									.Include(c => c.Art)
+									.ToListAsync();
+			List<dynamic> cartList = new List<dynamic>();
+			foreach (CartModel cart in carts)
+			{
+				var newCart = new
+				{
+					cartId = cart.cart_id,		
+                    artId = cart.art_id,
+                    artName = cart.art_name,
+                    quantity = cart.quantity,
+					artDescription = cart.Art.art_description,
+					artistName = cart.Art.artist_name,
+					artPicture = cart.Art.picture,
+					artPrice = cart.Art.price,
+				};
+				cartList.Add(newCart);
+			}
+
+			return Ok(cartList);
+			//return await _context.Cart.ToListAsync();
+		}
 
         // GET: api/Cart/5
         [HttpGet("{id}")]

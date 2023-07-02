@@ -26,6 +26,7 @@ import { deleteFavorites, getFavorites, postFavorites } from '../API/favorites';
 import { getReview, getReviewById, postReview } from '../API/review';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../constant/atomRecoil';
+import { getCart, postCart } from '../API/cart';
 
 const ShowcaseShowdown = () => {
   const { userId, username } = useRecoilValue(userAtom);
@@ -76,6 +77,7 @@ const ShowcaseShowdown = () => {
       try {
         const response = await getFavorites();
         const favorites = response.data;
+        console.log("in fav fetch " + favorites);
         setFav(favorites);
       } catch (error) {
         console.error(error);
@@ -147,7 +149,44 @@ const ShowcaseShowdown = () => {
     }
   };
 
+  //cart
+  const [addedToCart, setAddedToCart] = useState([]);
 
+  const addToCart = async (artId, artName) => {
+    const cartData = {
+      art_id: artId,
+      art_name: artName,
+      quantity: 1
+    };
+
+    try {
+      const response = await postCart(cartData);
+      console.log('Item added to cart:', response.data);
+      if (response && response.status) {
+        console.log('Successful in adding cart', response.data);
+        fetchCart();
+      } else {
+        console.log('Adding cart failed in handle submit', response);
+      }
+    } catch (error) {
+      console.error('Failed to add item to cart:', error);
+    }
+  };
+
+  const fetchCart = async () => {
+    try {
+      const response = await getCart();
+      const carts = response.data;
+      console.log("In cart fetch", carts);
+      setAddedToCart(carts);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchCart();
+  }, []);
 
 
 
@@ -159,7 +198,7 @@ const ShowcaseShowdown = () => {
       <Wrap spacing={4} mt={4}>
         {art && art.map((item) => {
           const isFavorite = fav.some(favorite => favorite.artId === item.art_id);
-
+          const isAddedToCart = addedToCart.some(cart => cart.art_id === item.art_id);
           return (
             <WrapItem key={item.art_id}>
               <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -183,6 +222,11 @@ const ShowcaseShowdown = () => {
                   <Button onClick={() => openReviewModal(item.art_id)} mt={4}>
                     Review
                   </Button>
+                  {!isAddedToCart && (
+                    <Button onClick={() => addToCart(item.art_id, item.art_name)} mt={4}>
+                      Add to cart
+                    </Button>
+                  )}
                 </Box>
               </Box>
             </WrapItem>

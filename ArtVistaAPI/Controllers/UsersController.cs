@@ -80,9 +80,13 @@ namespace ArtVistaAPI.Controllers
 		public async Task<ActionResult<UsersModel>> PostUsersModel(UsersModel usersModel)
 		{
             Console.WriteLine(usersModel.user_email);
+			//var temp = _context.Users
+			//	.FirstOrDefault(x => x.user_name == usersModel.user_name
+			//		&& x.user_email == usersModel.user_email);
 			var temp = _context.Users
-				.FirstOrDefault(x => x.user_name == usersModel.user_name
-					&& x.user_email == usersModel.user_email);
+						  .Where(x => x.user_name == usersModel.user_name
+						  && x.user_email == usersModel.user_email)
+						  .FirstOrDefault();
 
 			if (temp == null)
 			{

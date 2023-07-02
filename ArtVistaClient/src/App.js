@@ -8,7 +8,7 @@ import HomePage from './pages/homePage';
 import PrivateRoute from './routes/privateRoute';
 import ArtistPortfolioPage from './pages/artistPortfolioPage';
 import ShowcaseShowdownPage from './pages/showcaseShowdownPage';
-import Cart from './pages/cart';
+import Cart from './pages/cartPage';
 import Profile from './pages/profile';
 import ArtAnnouncement from './pages/artAnnouncement';
 import CreateArt from './pages/profile/createArt';
