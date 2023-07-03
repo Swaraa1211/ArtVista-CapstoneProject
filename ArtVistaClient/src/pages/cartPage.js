@@ -251,7 +251,8 @@ const Cart = () => {
                                 ))}
                             </Tbody>
                         </Table>
-                        <Button onClick={handleCheckout}>Checkout</Button>
+                        {cart.length > 0 && <Button onClick={handleCheckout}>Checkout</Button>}
+                        {/* <Button onClick={handleCheckout}>Checkout</Button> */}
                     </TabPanel>
                     <TabPanel>
                         <Table variant="striped" colorScheme="gray">
@@ -273,7 +274,8 @@ const Cart = () => {
                                 ))}
                             </Tbody>
                         </Table>
-                        <Button onClick={openPaymentPage}>Payment</Button>
+                        {selectedItems.length > 0 && <Button onClick={openPaymentPage}>Payment</Button>}
+                        {/* <Button onClick={openPaymentPage}>Payment</Button> */}
 
                     </TabPanel>
                 </TabPanels>

@@ -34,24 +34,25 @@ export default function LoginPage() {
   }, []);
   const handleSubmit = async (event) => {
     event.preventDefault();
-  
+
     const formData = {
       user_email: event.target.elements.email.value,
       user_password: event.target.elements.password.value,
     };
-  
+
     try {
       const response = await Login(formData);
-  
+
       if (response && response.status) {
         console.log('Successful Login', response.data);
         const userToken = await Login(formData);
         localStorage.setItem('userToken', JSON.stringify(userToken));
-  
+
         const userId = response.data.userId;
         const username = response.data.username;
 
         setUser({ userId, username });
+        
         navigate('/homePage');
       } else {
         console.log('Login failed in handle submit', response);
@@ -62,8 +63,10 @@ export default function LoginPage() {
       alert('An error occurred. Please try again.');
     }
   };
+
   
-  
+
+
   return (
     <>
       <Flex
@@ -102,13 +105,13 @@ export default function LoginPage() {
                   type="password"
                   name="password"
                   placeholder="******"
-                  // focusBorderColor="yellow"
+                // focusBorderColor="yellow"
                 />
               </FormControl>
               <Button mt={4} type="submit" width="full" colorScheme="blue">
                 Log In
               </Button>
-              
+
               {/* {userId && <Profile userId={userId} username={username} />} */}
 
             </form>
@@ -130,7 +133,7 @@ export default function LoginPage() {
           justifyContent="center"
         >
           <Text fontSize="3xl" fontWeight="bold">ᗯEᒪᑕOᗰE TO ᗩᖇT ᐯIᔕTᗩ!!! </Text>
-          
+
           <Image src='https://cdn-icons-png.flaticon.com/128/10835/10835987.png' alt='Artist' />
 
           <TypewriterEffect text="⬅️ᒪOGIᑎ ᕼEᖇE" />

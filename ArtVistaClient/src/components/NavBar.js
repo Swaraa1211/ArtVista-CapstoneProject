@@ -21,11 +21,11 @@ const Navbar = () => {
   return (
     <Box
       bg="#249EA0"
-      py={4}
-      rounded="full"
-      mx={4}
+      py={5}
+      // rounded="full"
+      // mx={4}
       mb={4}
-      mt={2}
+      // mt={2}
       boxShadow="md"
     >
       <Flex maxW="container.lg" mx="auto" align="center" >

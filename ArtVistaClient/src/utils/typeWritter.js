@@ -16,7 +16,7 @@ const TypewriterEffect = ({ text }) => {
     return () => clearTimeout(timer);
   }, [currentIndex, text]);
 
-  return <Box as="span" fontSize="2xl" fontWeight="bold">{displayText}</Box>;
+  return <Box as="span" fontSize="2xl" fontWeight="bold" color="#F78104">{displayText}</Box>;
 };
 
 export default TypewriterEffect;

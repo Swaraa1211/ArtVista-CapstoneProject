@@ -31,8 +31,7 @@ const ShowcaseShowdown = () => {
   const { userId, username } = useRecoilValue(userAtom);
   const formRef = useRef(null);
   const [art, setArt] = useState([]);
-  const [fav, setFav] = useState([]);
-  const [isFavorite, setIsFavorite] = useState([]);
+
   //  const [loading, setLoading ] = useState(false);
 
   //art
@@ -56,6 +55,8 @@ const ShowcaseShowdown = () => {
   console.log(art);
 
   //favorites
+  const [fav, setFav] = useState([]);
+  const [isFavorite, setIsFavorite] = useState([]);
   const handleFavoriteClick = async (userId, artId) => {
     console.log("handle fav " + userId + artId)
     try {
@@ -150,47 +151,48 @@ const ShowcaseShowdown = () => {
 
   //cart
   const [addedToCart, setAddedToCart] = useState([]);
+  const [isAddedToCart, setIsAddedToCart] = useState([])
 
   const addToCart = async (artId, artName) => {
-    const cartData = {
-      art_id: artId,
-      art_name: artName,
-      quantity: 1
-    };
-
     try {
+      const cartData = {
+        art_id: artId,
+        art_name: artName,
+        quantity: 1
+      };
+
       const response = await postCart(cartData);
       console.log('Item added to cart:', response.data);
-      if (response && response.status) {
-        console.log('Successful in adding cart', response.data);
-        fetchCart(); // Fetch cart data after adding an item
-        fetchArt();
-      } else {
-        console.log('Adding cart failed in handle submit', response);
-      }
+      fetchArt();
+      setIsAddedToCart(true);
+      // if (response && response.status) {
+      //   console.log('Successful in adding cart', response.data);
+      //   //fetchCart(); // Fetch cart data after adding an item
+
+      // } else {
+      //   console.log('Adding cart failed in handle submit', response);
+      // }
     } catch (error) {
       console.error('Failed to add item to cart:', error);
     }
   };
 
-  const fetchCart = async () => {
+  
+
+  useEffect(() => {
+    const fetchCart = async () => {
     try {
       const response = await getCart();
       const carts = response.data;
       console.log("In cart fetch", carts);
       setAddedToCart(carts);
+      //setIsAddedToCart(carts);
     } catch (error) {
       console.error(error);
     }
   };
-
-  useEffect(() => {
     fetchCart();
   }, []);
-
-  const isAddedToCart = (artId) => {
-    return addedToCart.some(cart => cart.art_id === artId);
-  };
 
 
 
@@ -201,8 +203,9 @@ const ShowcaseShowdown = () => {
 
       <Wrap spacing={4} mt={4}>
         {art && art.map((item) => {
+          //console.log('addedtocart: ' + addToCart);
           const isFavorite = fav.some(favorite => favorite.artId === item.art_id);
-          //const isAddedToCart = addedToCart.some(cart => cart.art_id === item.art_id);
+          const isAddedToCart = addedToCart.some(cart => cart.artId === item.art_id);
           return (
             <WrapItem key={item.art_id}>
               <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -226,11 +229,18 @@ const ShowcaseShowdown = () => {
                   <Button onClick={() => openReviewModal(item.art_id)} mt={4}>
                     Review
                   </Button>
-                  {!isAddedToCart(item.art_id) && (
+                  {!isAddedToCart && (
                     <Button onClick={() => addToCart(item.art_id, item.art_name)} mt={4}>
                       Add to cart
                     </Button>
                   )}
+
+
+                  {/* {!isAddedToCart(item.art_id) && (
+                    <Button onClick={() => addToCart(item.art_id, item.art_name)} mt={4}>
+                      Add to cart
+                    </Button>
+                  )} */}
                 </Box>
               </Box>
             </WrapItem>
