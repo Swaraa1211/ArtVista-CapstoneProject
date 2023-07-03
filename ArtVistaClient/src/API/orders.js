@@ -24,8 +24,19 @@ export const getOrders = async data => {
 }
 
 export const postOrders = async data => {
+    console.log("in postOrder " + data);
     try{
-        const response = await axios.post(`${BASE_URL}/Orders`, data);
+        const response = await axios.post(`${BASE_URL}/Orders`, {
+            user_id: data.user_id,
+            total_amount: data.total_amount,
+            payment: data.payment,
+            order_date: data.order_date,
+            art_id: data.art_id,
+            art_name: data.art_name,
+            picture: data.picture,
+            quantity: data.quantity,
+            price: data.price,
+        });
         if(response.status === 201 || response.status ===200){
             //console.log('POST Orders data success', response.data);
             return {status: true, data: response.data};

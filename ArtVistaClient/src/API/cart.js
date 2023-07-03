@@ -39,3 +39,18 @@ export const postCart = async data => {
         return null;
     }
 }
+
+
+export const deleteCart = async id => {
+    try {
+      const response = await axios.delete(`${BASE_URL}/Cart/${id}`);
+      if (response.status === 204 || response.status === 200) {
+        return { status: true };
+      } else if (response.status === 401) {
+        return { status: false };
+      }
+    } catch (error) {
+      console.error('Error occurred while deleting CART:', error);
+      return null;
+    }
+  };

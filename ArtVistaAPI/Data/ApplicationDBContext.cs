@@ -19,7 +19,6 @@ namespace ArtVistaAPI.Data
 		public DbSet<ReviewModel> Review { get; set; }
 		public DbSet<CartModel> Cart { get; set; }
 		public DbSet<OrdersModel> Orders { get; set; }
-		public DbSet<OrderItemModel> OrderItem { get; set; }
-		public DbSet<PaymentModel> Payment { get; set; }
+		
 	}
 }

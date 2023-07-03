@@ -48,6 +48,10 @@ export default function LoginPage() {
         const userToken = await Login(formData);
         localStorage.setItem('userToken', JSON.stringify(userToken));
   
+        const userId = response.data.userId;
+        const username = response.data.username;
+
+        setUser({ userId, username });
         navigate('/homePage');
       } else {
         console.log('Login failed in handle submit', response);

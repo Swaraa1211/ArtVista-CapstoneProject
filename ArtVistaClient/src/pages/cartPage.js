@@ -13,17 +13,15 @@ import {
     Tbody,
     Td,
     Button,
-    Modal,
-    ModalOverlay,
-    ModalContent,
-    ModalHeader,
-    ModalBody,
-    Box,
-    Text
+    
 } from '@chakra-ui/react'
 import Navbar from '../components/navBar';
-import { getCart } from '../API/cart';
+import { deleteCart, getCart } from '../API/cart';
 import React, { useEffect, useRef, useState } from 'react';
+
+import { useRecoilValue } from 'recoil';
+import { userAtom } from '../constant/atomRecoil';
+import { postOrders } from '../API/orders';
 // import Razorpay from 'razorpay';
 
 
@@ -31,6 +29,7 @@ const Cart = () => {
     const [cart, setCart] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [currentTab, setCurrentTab] = useState(0);
+    const { userId, username } = useRecoilValue(userAtom);
 
     const fetchCart = async () => {
         try {
@@ -80,6 +79,18 @@ const Cart = () => {
         setCart(updatedCart);
     };
 
+    const handleRemoveFromCart = async (cartId) => {
+        const response = await deleteCart(cartId);
+
+        if (response && response.status) {
+            console.log(`Cart item with ID ${cartId} deleted successfully`);
+            fetchCart();
+        } else {
+            console.error(`Failed to delete cart item with ID ${cartId}`);
+        }
+
+    }
+
     const handleCheckout = () => {
         // Store the selected items for checkout
         setSelectedItems(cart);
@@ -88,74 +99,28 @@ const Cart = () => {
     };
 
     //payment
-    const razorPageUrl = "https://rzp.io/l/PUmNaEj";
-    const [isPaymentModalOpen, setIsPayementModalOpen] = useState(false);
-
-    const openPaymentModal = () => {
-        setIsPayementModalOpen(true);
-    }
-
-    const closePayemtnModal = () => {
-        setIsPayementModalOpen(false);
-    }
-
-    // const handlePayment = () => {
-    //             const totalAmount = selectedItems.reduce((total, item) => total + item.artPrice, 0);
-
-    //     const options = {
-    //         key: 'YOUR_RAZORPAY_KEY',
-    //         amount: totalAmount * 100, // Replace with the total amount
-    //         currency: 'INR', // Replace with the currency code
-    //         name: 'Your Company Name',
-    //         description: 'Payment for Art',
-    //         handler: function (response) {
-    //             // Handle the payment success callback
-    //             console.log('Payment Success:', response);
-
-    //             // Perform the post payment actions or API call
-    //             // ...
-    //         },
-    //         prefill: {
-    //             name: 'John Doe',
-    //             email: 'john.doe@example.com',
-    //             contact: '1234567890'
-    //         },
-    //         theme: {
-    //             color: '#F37254'
-    //         }
-    //     };
-
-    //     //const razorpayInstance = new Razorpay(options);
-    //     //razorpayInstance.open();
-    // };
-
 
     const openPaymentPage = () => {
-        // Calculate the total amount
         const totalAmount = selectedItems.reduce((total, item) => total + item.artPrice, 0);
-
-        // Generate the Razorpay order and obtain the order ID
-        //const razorpayOrderId = generateRazorpayOrder(totalAmount);
-
-        // Create the Razorpay instance and initialize the payment
         const options = {
-            key: 'rzp_test_pierxxGArZAwUJ',
-            amount: totalAmount * 100, // Amount in paise or smallest currency unit
+            key: 'rzp_test_YJLIb2YOLUXfTq',
+            key_secret: 'bMYCFq6w4NkNaTsdpe7Zq5DB',
+            amount: totalAmount * 100,
             currency: 'INR',
-            name: 'Your Store Name',
-            description: 'Payment for selected items',
+            name: 'Art Vista',
+            description: 'Pay here securely',
             //order_id: razorpayOrderId,
             handler: function (response) {
                 // Payment success callback
                 handlePaymentSuccess(response);
             },
             prefill: {
-                name: 'Customer Name',
-                email: 'customer@example.com',
+                name: 'Your Name',
+                email: 'example@gmail.com',
                 contact: '1234567890',
             },
             notes: {
-                // Additional notes, if any
+
             },
             theme: {
                 color: '#528FF0',
@@ -166,16 +131,67 @@ const Cart = () => {
         razorpayInstance.open();
     };
 
-    const handlePaymentSuccess = (response) => {
+    const handlePaymentSuccess = async (response) => {
+        console.log(selectedItems);
         // Handle the payment success response
         console.log('Payment successful:', response);
 
-        // Perform the post method or any other actions here
+        for (const item of selectedItems) {
+            const { cartId } = item;
+            const response = await deleteCart(cartId);
+
+            if (response && response.status) {
+                console.log(`Cart item with ID ${cartId} deleted successfully`);
+            } else {
+                console.error(`Failed to delete cart item with ID ${cartId}`);
+            }
+        }
+
+        const artIds = selectedItems.map(item => item.artId);
+        const artIdString = artIds.join(', ');
+
+        const artNames = selectedItems.map(item => item.artName);
+        const artNamesString = artNames.join(', ');
+
+        const artPictures = selectedItems.map(item => item.artPicture);
+        const artPicturesString = artPictures.join(', ');
+
+        const artQuantitys = selectedItems.map(item => item.quantity);
+        const artQuantitysString = artQuantitys.join(', ');
+
+        const artPrices = selectedItems.map(item => item.artPrice);
+        const artPricesString = artPrices.join(', ');
+
+        const totalAmount = selectedItems.reduce((total, item) => total + item.artPrice, 0);
+
+        const current = new Date();
+        const date = `${current.getDate()}/${current.getMonth() + 1}/${current.getFullYear()}`;
+
+        const postData = {
+            user_id: userId,
+            total_amount: totalAmount,
+            payment: 'paid',
+            order_date: date,
+            art_id: artIdString,
+            art_name: artNamesString,
+            picture: artPicturesString,
+            quantity: artQuantitysString,
+            price: artPricesString,
+
+        }
+
+        const postResponse = await postOrders(postData);
+        if (postResponse && postResponse.status) {
+            console.log('Successful in adding order', postResponse.data);
+            setSelectedItems([]);
+
+        } else {
+            console.log('adding order failed in handle submit', postResponse);
+        }
+
         console.log('Perform post method');
 
-        // Redirect to the order success page or display a success message
-        // You can update this part as per your application's flow
-        window.location.href = '/order-success';
+        // window.location.href = '/order-success';
     };
 
     return (
@@ -199,6 +215,7 @@ const Cart = () => {
                                     <Th>Art Name</Th>
                                     <Th>Quantity</Th>
                                     <Th>Price</Th>
+                                    <Th>Action</Th>
                                 </Tr>
                             </Thead>
                             <Tbody>
@@ -222,6 +239,14 @@ const Cart = () => {
                                             </Button>
                                         </Td>
                                         <Td>{item.artPrice}</Td>
+                                        <Td>
+                                            <Button
+                                                size="sm"
+                                                onClick={() => handleRemoveFromCart(item.cartId)}
+                                            >
+                                                Remove from Cart
+                                            </Button>
+                                        </Td>
                                     </Tr>
                                 ))}
                             </Tbody>
@@ -248,27 +273,11 @@ const Cart = () => {
                                 ))}
                             </Tbody>
                         </Table>
-
-                        {/* <Button onClick={handlePayment}>Payment</Button> */}
+                        <Button onClick={openPaymentPage}>Payment</Button>
 
                     </TabPanel>
                 </TabPanels>
             </Tabs>
-
-            {/* <Modal isOpen={isPaymentModalOpen} onClose={closePayemtnModal}>
-                <ModalOverlay />
-                <ModalContent>
-                    <ModalHeader>Payment</ModalHeader>
-                    <ModalBody>
-                        
-                        <Box h="600px">
-                            <iframe title="Razor Page" src={razorPageUrl} width="100%" height="100%" frameBorder="0"></iframe>
-                        </Box>
-
-                    </ModalBody>
-                </ModalContent>
-            </Modal>
- */}
 
         </>
 

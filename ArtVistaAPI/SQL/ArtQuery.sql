@@ -110,7 +110,12 @@ CREATE TABLE Orders (
   user_id INT,
   total_amount INT,
   payment VARCHAR(255),
-  order_date DATETIME,
+  order_date VARCHAR(255),
+  art_id VARCHAR(255),
+  art_name VARCHAR(255),
+  picture VARCHAR(255),
+  quantity VARCHAR(255),
+  price VARCHAR(255),
   FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE NO ACTION
 );
 
@@ -152,7 +157,7 @@ select * from BidPrice
 select * from Review
 select * from Cart
 select * from Orders
-select * from OrderItem
-select * from Payment
+--select * from OrderItem
+--select * from Payment
 
 

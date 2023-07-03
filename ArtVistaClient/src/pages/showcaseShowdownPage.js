@@ -1,5 +1,4 @@
 
-
 import Navbar from '../components/navBar';
 import { getArt } from '../API/art';
 import React, { useEffect, useRef, useState } from 'react';
@@ -164,7 +163,8 @@ const ShowcaseShowdown = () => {
       console.log('Item added to cart:', response.data);
       if (response && response.status) {
         console.log('Successful in adding cart', response.data);
-        fetchCart();
+        fetchCart(); // Fetch cart data after adding an item
+        fetchArt();
       } else {
         console.log('Adding cart failed in handle submit', response);
       }
@@ -188,6 +188,10 @@ const ShowcaseShowdown = () => {
     fetchCart();
   }, []);
 
+  const isAddedToCart = (artId) => {
+    return addedToCart.some(cart => cart.art_id === artId);
+  };
+
 
 
   return (
@@ -198,7 +202,7 @@ const ShowcaseShowdown = () => {
       <Wrap spacing={4} mt={4}>
         {art && art.map((item) => {
           const isFavorite = fav.some(favorite => favorite.artId === item.art_id);
-          const isAddedToCart = addedToCart.some(cart => cart.art_id === item.art_id);
+          //const isAddedToCart = addedToCart.some(cart => cart.art_id === item.art_id);
           return (
             <WrapItem key={item.art_id}>
               <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
@@ -222,7 +226,7 @@ const ShowcaseShowdown = () => {
                   <Button onClick={() => openReviewModal(item.art_id)} mt={4}>
                     Review
                   </Button>
-                  {!isAddedToCart && (
+                  {!isAddedToCart(item.art_id) && (
                     <Button onClick={() => addToCart(item.art_id, item.art_name)} mt={4}>
                       Add to cart
                     </Button>
