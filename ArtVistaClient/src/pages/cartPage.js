@@ -13,7 +13,8 @@ import {
     Tbody,
     Td,
     Button,
-    
+    Text,
+
 } from '@chakra-ui/react'
 import Navbar from '../components/navBar';
 import { deleteCart, getCart } from '../API/cart';
@@ -197,8 +198,13 @@ const Cart = () => {
     return (
         <>
             <Navbar />
-            <Heading>
-                Cart Page
+            <Heading align="center" justify="center">
+                <Text as="span" color="#040B61" fontSize="6xl">
+                    Treasure
+                </Text>{" "}
+                <Text as="span" color=" #F78104" fontSize="6xl">
+                    Trolley
+                </Text>
             </Heading>
             <Tabs isLazy index={currentTab} onChange={setCurrentTab}>
                 <TabList>

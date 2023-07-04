@@ -26,33 +26,33 @@ const SideBar = () => {
 
             </Flex>
             <VStack spacing={4} align="stretch">
-                <Text color="black" mr={4}>
+                <Button bg="#249EA0" color="#040B61" mr={4}>
                     <Link to="createArt">
                         Create Art
                     </Link>
-                </Text>
-                <Text color="black" mr={4}>
+                </Button>
+                <Button bg="#249EA0" color="#040B61" mr={4}>
                     <Link to="updateAndDeleteArt">
                         Update / Delete Art
                     </Link>
-                </Text>
-                <Text color="black" mr={4}>
+                </Button>
+                <Button bg="#249EA0" color="#040B61" mr={4}>
                     <Link to="portfolio">
                         Portfolio
                     </Link>
-                </Text>
-                <Text color="black" mr={4}>
+                </Button>
+                <Button bg="#249EA0" color="#040B61" mr={4}>
                     <Link to="favorites">
                         Favorites
                     </Link>
-                </Text>
+                </Button>
 
                
             </VStack>
             <>
-                <Box>
-                    <Button colorScheme="whiteAlpha" ml={5} onClick={handleLogoutFunction}>Log Out</Button>
-                </Box>
+                {/* <Box>
+                    <Button colorScheme="#040B61" ml={5} onClick={handleLogoutFunction}>Log Out</Button>
+                </Box> */}
                 {/* <Button onClick={onOpen}>Logout</Button>
                 <Modal isOpen={isOpen} onClose={onClose}>
                     <ModalOverlay />

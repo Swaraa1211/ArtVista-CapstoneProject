@@ -91,7 +91,7 @@ export default function LoginPage() {
           borderRadius="10px"
         >
           <Box textAlign="center">
-            <Heading color="black">ᒪOGIᑎ</Heading>
+            <Heading color="#040B61">LOGIN</Heading>
           </Box>
           <Box p={4}>
             <form onSubmit={handleSubmit}>
@@ -108,7 +108,7 @@ export default function LoginPage() {
                 // focusBorderColor="yellow"
                 />
               </FormControl>
-              <Button mt={4} type="submit" width="full" colorScheme="blue">
+              <Button mt={4} type="submit" width="full" bg="#249EA0">
                 Log In
               </Button>
 
@@ -118,7 +118,7 @@ export default function LoginPage() {
             <Text mt={4} textAlign="center" >
               Don't have an account?
               <Link to='/signup'>
-                <Button mt='1px' type='submit' width="full" colorScheme="blue">Sign Up</Button>
+                <Button mt='1px' type='submit' width="full" bg="#249EA0">Sign Up</Button>
 
               </Link>
             </Text>
@@ -132,7 +132,7 @@ export default function LoginPage() {
           align="center"
           justifyContent="center"
         >
-          <Text fontSize="3xl" fontWeight="bold">ᗯEᒪᑕOᗰE TO ᗩᖇT ᐯIᔕTᗩ!!! </Text>
+          <Heading fontSize="4xl" fontWeight="bold" color="#040B61">WELCOME TO <br></br>ᗩᖇT ᐯIᔕTᗩ!!! </Heading>
 
           <Image src='https://cdn-icons-png.flaticon.com/128/10835/10835987.png' alt='Artist' />
 

@@ -44,15 +44,20 @@ const Profile = () => {
     return (
         <>
             <Navbar />
-            <Heading>
-                Profile
+            <Heading align="center" justify="center">
+                <Text as="span" color="#040B61" fontSize="6xl">
+                    Pro
+                </Text>
+                <Text as="span" color=" #F78104" fontSize="6xl">
+                    file
+                </Text>
             </Heading>
             <Grid
                 // h="100vh"
                 overflowY="hidden"
                 templateRows="repeat(2, 1fr)"
                 templateColumns="repeat(6, 1fr)"
-                bg="gray.100"
+                // bg="gray.100"
             >
                 <GridItem rowSpan={2} colSpan={1} p={5} bg="#fff">
                     <SideBar />

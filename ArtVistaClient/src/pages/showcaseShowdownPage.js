@@ -19,7 +19,10 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Textarea
+  Textarea,
+  Flex,
+  InputGroup,
+  InputRightElement
 } from "@chakra-ui/react";
 import { deleteFavorites, getFavorites, postFavorites } from '../API/favorites';
 import { getReview, getReviewById, postReview } from '../API/review';
@@ -151,7 +154,9 @@ const ShowcaseShowdown = () => {
 
   //cart
   const [addedToCart, setAddedToCart] = useState([]);
-  const [isAddedToCart, setIsAddedToCart] = useState([])
+  //const [isAddedToCart, setIsAddedToCart] = useState([])
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+
 
   const addToCart = async (artId, artName) => {
     try {
@@ -163,8 +168,12 @@ const ShowcaseShowdown = () => {
 
       const response = await postCart(cartData);
       console.log('Item added to cart:', response.data);
+      
+      //setIsAddedToCart(true);
+      setIsAddedToCart(prevState => !prevState);
+      //window.location.reload();
       fetchArt();
-      setIsAddedToCart(true);
+      
       // if (response && response.status) {
       //   console.log('Successful in adding cart', response.data);
       //   //fetchCart(); // Fetch cart data after adding an item
@@ -177,40 +186,94 @@ const ShowcaseShowdown = () => {
     }
   };
 
-  
+
 
   useEffect(() => {
     const fetchCart = async () => {
-    try {
-      const response = await getCart();
-      const carts = response.data;
-      console.log("In cart fetch", carts);
-      setAddedToCart(carts);
-      //setIsAddedToCart(carts);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+      try {
+        const response = await getCart();
+        const carts = response.data;
+        console.log("In cart fetch", carts);
+        setAddedToCart(carts);
+        //setIsAddedToCart(carts);
+      } catch (error) {
+        console.error(error);
+      }
+    };
     fetchCart();
   }, []);
 
+  //search
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredArt, setFilteredArt] = useState([]);
+
+  useEffect(() => {
+    // Fetch art data
+    const fetchArt = async () => {
+      try {
+        const response = await getArt();
+        const artData = Array.isArray(response.data) ? response.data : [];
+        setArt(artData);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchArt();
+  }, []);
+
+  useEffect(() => {
+    // Filter art based on search query
+    const filtered = art.filter(item =>
+      item.art_name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredArt(filtered);
+  }, [searchQuery, art]);
+
+  const handleSearch = event => {
+    setSearchQuery(event.target.value);
+  };
 
 
   return (
     <>
       <Navbar />
-      <Heading>ShowcaseShowdown</Heading>
+      <Heading align="center" justify="center">
+        <Text as="span" color="#040B61" fontSize="6xl">
+          Showcase
+        </Text>{" "}
+        <Text as="span" color=" #F78104" fontSize="6xl">
+          Showdown
+        </Text>
+      </Heading>
 
-      <Wrap spacing={4} mt={4}>
-        {art && art.map((item) => {
-          //console.log('addedtocart: ' + addToCart);
+      <Box align="center" mt={4}>
+        <input
+          type="text"
+          placeholder="Search Art"
+          value={searchQuery}
+          onChange={handleSearch}
+          style={{ 
+            //backgroundColor: 'lightblue', 
+            fontSize: '16px',
+            border: "2px solid #249EA0",
+            borderRadius: "5px",
+            padding: "8px",
+            width: "82vw" }}
+        />
+      </Box>
+
+      <Wrap spacing={4} mt={4} justify="center" align="center">
+        {filteredArt && filteredArt.map((item) => {
           const isFavorite = fav.some(favorite => favorite.artId === item.art_id);
           const isAddedToCart = addedToCart.some(cart => cart.artId === item.art_id);
           return (
             <WrapItem key={item.art_id}>
-              <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-                <Image src={item.picture} alt={item.art_name} width="200px" height="200px" />
-                <Box p={4}>
+              <Flex width='550px' height="250px" borderWidth="1px" borderRadius="10px" >
+                <Box display="flex" justifyContent="center" alignItems="center" m="10px">
+                  <Image src={item.picture} alt={item.art_name} width="200px" height="200px" borderRadius="10px" />
+                </Box>
+                <Box p={4} flex={1}>
                   <Heading as="h2" size="md" mb={2}>
                     {item.art_name}
                   </Heading>
@@ -234,18 +297,12 @@ const ShowcaseShowdown = () => {
                       Add to cart
                     </Button>
                   )}
-
-
-                  {/* {!isAddedToCart(item.art_id) && (
-                    <Button onClick={() => addToCart(item.art_id, item.art_name)} mt={4}>
-                      Add to cart
-                    </Button>
-                  )} */}
                 </Box>
-              </Box>
+              </Flex>
             </WrapItem>
           );
         })}
+
         <Modal isOpen={isReviewModalOpen} onClose={closeReviewModal}>
           <ModalOverlay />
           <ModalContent>
