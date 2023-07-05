@@ -47,7 +47,7 @@ namespace ArtVistaAPI.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutBidPriceModel(int id, BidPriceModel bidPriceModel)
         {
-            if (id != bidPriceModel.bidprice_id)
+            if (id != bidPriceModel.Bidprice_id)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace ArtVistaAPI.Controllers
             _context.BidPrice.Add(bidPriceModel);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetBidPriceModel", new { id = bidPriceModel.bidprice_id }, bidPriceModel);
+            return CreatedAtAction("GetBidPriceModel", new { id = bidPriceModel.Bidprice_id }, bidPriceModel);
         }
 
         // DELETE: api/BidPrice/5
@@ -102,7 +102,28 @@ namespace ArtVistaAPI.Controllers
 
         private bool BidPriceModelExists(int id)
         {
-            return _context.BidPrice.Any(e => e.bidprice_id == id);
+            return _context.BidPrice.Any(e => e.Bidprice_id == id);
         }
-    }
+
+		[HttpPost("/bidding/bidPrice")]
+		public async Task<IActionResult> IdentifyUserWithHighestBid([FromBody] BidPriceModel bidPrice)
+		{
+			var highestBidUser = _context.BidPrice
+				.OrderByDescending(b => b.Bidprice)
+				.FirstOrDefault();
+
+			if (highestBidUser != null)
+			{
+				if (bidPrice.Bidprice > highestBidUser.Bidprice)
+				{
+					highestBidUser.Bidprice = bidPrice.Bidprice;
+					highestBidUser.Status = "Sold";
+					await _context.SaveChangesAsync();
+				}
+			}
+
+			return Ok();
+		}
+
+	}
 }

@@ -7,7 +7,11 @@ import { userAtom } from '../../constant/atomRecoil';
 const PortfolioPage = () => {
   const [portfolio, setPortfolio] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { userId } = useRecoilValue(userAtom);
+  //const { userId } = useRecoilValue(userAtom);
+  const userToken = localStorage.getItem('userToken');
+    const parsedToken = JSON.parse(userToken);
+    const userId = parsedToken.data.userId;
+    const username = parsedToken.data.username;
   const [artist, setArtist] = useState([]);
   const [selectedArtistId, setSelectedArtistId] = useState(null);
 

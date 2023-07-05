@@ -31,7 +31,11 @@ import { userAtom } from '../constant/atomRecoil';
 import { getCart, postCart } from '../API/cart';
 
 const ShowcaseShowdown = () => {
-  const { userId, username } = useRecoilValue(userAtom);
+  //const { userId, username } = useRecoilValue(userAtom);
+  const userToken = localStorage.getItem('userToken');
+    const parsedToken = JSON.parse(userToken);
+    const userId = parsedToken.data.userId;
+    const username = parsedToken.data.username;
   const formRef = useRef(null);
   const [art, setArt] = useState([]);
 
@@ -70,6 +74,7 @@ const ShowcaseShowdown = () => {
       await postFavorites(data);
       fetchArt();
       setIsFavorite(true);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
@@ -171,7 +176,7 @@ const ShowcaseShowdown = () => {
       
       //setIsAddedToCart(true);
       setIsAddedToCart(prevState => !prevState);
-      //window.location.reload();
+      window.location.reload();
       fetchArt();
       
       // if (response && response.status) {

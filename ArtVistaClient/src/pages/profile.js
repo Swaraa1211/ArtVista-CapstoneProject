@@ -34,7 +34,11 @@ import SideBar from '../components/sideBar';
 
 const Profile = () => {
     const outlet = useOutlet();
-    const { userId, username } = useRecoilValue(userAtom);
+    //const { userId, username } = useRecoilValue(userAtom);
+    const userToken = localStorage.getItem('userToken');
+    const parsedToken = JSON.parse(userToken);
+    const userId = parsedToken.data.userId;
+    const username = parsedToken.data.username;
     
 
     console.log(userId + " " + username + " from profile and userAtom")

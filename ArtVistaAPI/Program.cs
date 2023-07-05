@@ -1,8 +1,12 @@
 using ArtVistaAPI.Data;
 using Microsoft.EntityFrameworkCore;
+using Hangfire;
+using Hangfire.SqlServer;
+using ArtVistaAPI.Controllers;
 
 internal class Program
 {
+	
 	private static void Main(string[] args)
 	{
 		var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +35,12 @@ internal class Program
 		app.UseHttpsRedirection();
 
 		app.UseAuthorization();
+
+		//app.UseHangfireServer();
+		app.UseHangfireServer();
+
+		RecurringJob.AddOrUpdate<BidPriceController>(x => x.IdentifyUserWithHighestBid(null), "0 0 * * *");
+
 
 		app.MapControllers();
 

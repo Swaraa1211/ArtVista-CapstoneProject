@@ -5,10 +5,12 @@ namespace ArtVistaAPI.Models
 	public class BidPriceModel
 	{
 		[Key]
-		public int bidprice_id { get; set; }
-		public int bidprice { get; set; }
-		public int art_id { get; set; }
-		public int user_id { get; set; }
+		public int Bidprice_id { get; set; }
+		public int Bidprice { get; set; }
+		public int Bidart_id { get; set; }
+		public string Status { get; set; }
+		public string Art_name { get; set; }
+		public int User_id { get; set; }
 	}
 }
 

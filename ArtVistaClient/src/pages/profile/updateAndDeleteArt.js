@@ -28,7 +28,11 @@ import { useRecoilValue } from 'recoil';
 import { userAtom } from '../../constant/atomRecoil';
 
 const UpdateAndDeleteArt = () => {
-    const { userId, username } = useRecoilValue(userAtom);
+    //const { userId, username } = useRecoilValue(userAtom);
+    const userToken = localStorage.getItem('userToken');
+    const parsedToken = JSON.parse(userToken);
+    const userId = parsedToken.data.userId;
+    const username = parsedToken.data.username;
     const formRef = useRef(null);
     const [art, setArt] = useState([]);
     const [isModalOpen, setIsModalOpen] = useState(false);

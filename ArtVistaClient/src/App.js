@@ -10,11 +10,12 @@ import ArtistPortfolioPage from './pages/artistPortfolioPage';
 import ShowcaseShowdownPage from './pages/showcaseShowdownPage';
 import Cart from './pages/cartPage';
 import Profile from './pages/profile';
-import ArtAnnouncement from './pages/artAnnouncement';
 import CreateArt from './pages/profile/createArt';
 import UpdateAndDeleteArt from './pages/profile/updateAndDeleteArt';
 import PortfolioPage from './pages/profile/portfolioPage';
 import Favorites from './pages/profile/favoritesList';
+import Bidding from './pages/Bidding';
+import BidPrice from './pages/bidding/bidPrice';
 
 function App() {
   return (
@@ -26,13 +27,16 @@ function App() {
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/homePage" element={<HomePage />} />
             <Route path="/artistPortfolio" element={<ArtistPortfolioPage />} />
-            <Route path="/artAnnouncement" element={<ArtAnnouncement />} />
+            <Route path="/bidding" element={<Bidding />} >
+              <Route path="biddingPrice" element={<BidPrice />} />
+
+            </Route>
             <Route path="/showcaseShowdown" element={<ShowcaseShowdownPage />} />
             <Route path="/profile" element={<Profile />}>
-              <Route path="createArt" element={<CreateArt />} /> 
-              <Route path="updateAndDeleteArt" element={<UpdateAndDeleteArt />} /> 
-              <Route path="portfolio" element={<PortfolioPage />} /> 
-              <Route path="favorites" element={<Favorites />} /> 
+              <Route path="createArt" element={<CreateArt />} />
+              <Route path="updateAndDeleteArt" element={<UpdateAndDeleteArt />} />
+              <Route path="portfolio" element={<PortfolioPage />} />
+              <Route path="favorites" element={<Favorites />} />
             </Route>
             <Route path="/cart" element={<Cart />} />
           </Route>

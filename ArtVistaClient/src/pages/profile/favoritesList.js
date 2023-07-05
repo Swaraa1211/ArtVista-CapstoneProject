@@ -7,7 +7,11 @@ import { userAtom } from '../../constant/atomRecoil';
 
 const Favorites = () => {
     const [fav, setFav] = useState([]);
-    const { userId, username } = useRecoilValue(userAtom);
+    //const { userId, username } = useRecoilValue(userAtom);
+    const userToken = localStorage.getItem('userToken');
+    const parsedToken = JSON.parse(userToken);
+    const userId = parsedToken.data.userId;
+    const username = parsedToken.data.username;
 
     const fetchFavorites = async () => {
         try {

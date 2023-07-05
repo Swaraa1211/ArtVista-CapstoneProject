@@ -30,7 +30,11 @@ const Cart = () => {
     const [cart, setCart] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [currentTab, setCurrentTab] = useState(0);
-    const { userId, username } = useRecoilValue(userAtom);
+    //const { userId, username } = useRecoilValue(userAtom);
+    const userToken = localStorage.getItem('userToken');
+    const parsedToken = JSON.parse(userToken);
+    const userId = parsedToken.data.userId;
+    const username = parsedToken.data.username;
 
     const fetchCart = async () => {
         try {

@@ -28,7 +28,11 @@ import {
 } from '@chakra-ui/react'
 
 const CreatePortfolioForm = () => {
-    const { userId, username } = useRecoilValue(userAtom);
+    //const { userId, username } = useRecoilValue(userAtom);
+    const userToken = localStorage.getItem('userToken');
+    const parsedToken = JSON.parse(userToken);
+    const userId = parsedToken.data.userId;
+    const username = parsedToken.data.username;
     const formRef = useRef(null);
     const [artist, setArtist] = useState([]);
 

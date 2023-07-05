@@ -50,8 +50,8 @@ const Navbar = () => {
               </Link>
             </Text>
             <Text color="white" mr={4}>
-              <Link to="/artAnnouncement" >
-              ArtAnnouncement
+              <Link to="/bidding" >
+              Bidding
               </Link>
             </Text>
           </Flex>

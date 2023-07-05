@@ -68,15 +68,32 @@ CREATE TABLE ArtistPortfolio (
 
 --drop table ArtistPortfolio
 
+CREATE TABLE BidArt (
+  BidArt_id INT PRIMARY KEY identity(1,1),
+  BidArt_description VARCHAR(255),
+  BidArtist_name VARCHAR(255),
+  BidArt_name VARCHAR(255),
+  BidPrice INT,
+  picture VARCHAR(255),
+  User_id INT,
+  User_name  varchar(100),
+  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
+);
+
+
 ---- Create BidPrice table
 CREATE TABLE BidPrice (
-  bidprice_id INT PRIMARY KEY identity(1,1),
-  bidprice INT,
-  art_id INT,
-  user_id INT,
-  FOREIGN KEY (art_id) REFERENCES Art(art_id) ON DELETE NO ACTION,
-  FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE NO ACTION
+  Bidprice_id INT PRIMARY KEY identity(1,1),
+  Bidprice INT,
+  BidArt_id INT,
+  Status VARCHAR(10),
+  Art_name VARCHAR(255),
+  User_id INT,
+  FOREIGN KEY (BidArt_id) REFERENCES BidArt(BidArt_id) ON DELETE NO ACTION,
+  FOREIGN KEY (User_id) REFERENCES Users(user_id) ON DELETE NO ACTION
 );
+
+--drop table BidPrice
 
 
 -- Create Review table
@@ -153,11 +170,12 @@ select * from Users
 select * from Art
 select * from Favorites
 select * from ArtistPortfolio
-select * from BidPrice
 select * from Review
 select * from Cart
 select * from Orders
 --select * from OrderItem
 --select * from Payment
 
+select * from BidPrice
+select * from BidArt
 
