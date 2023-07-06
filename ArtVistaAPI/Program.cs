@@ -6,20 +6,31 @@ using ArtVistaAPI.Controllers;
 
 internal class Program
 {
-	
 	private static void Main(string[] args)
 	{
 		var builder = WebApplication.CreateBuilder(args);
 
 		// Add services to the container.
-
 		builder.Services.AddControllers();
-		// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 		builder.Services.AddEndpointsApiExplorer();
 		builder.Services.AddSwaggerGen();
 
 		builder.Services.AddDbContext<ApplicationDBContext>(options =>
-		   options.UseSqlServer(builder.Configuration.GetConnectionString("Db")));
+			options.UseSqlServer(builder.Configuration.GetConnectionString("Db")));
+
+		builder.Services.AddHangfire(configuration => configuration
+			.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+			.UseSimpleAssemblyNameTypeSerializer()
+			.UseRecommendedSerializerSettings()
+			.UseSqlServerStorage(builder.Configuration.GetConnectionString("Db"), new SqlServerStorageOptions
+			{
+				CommandBatchMaxTimeout = TimeSpan.FromMinutes(5),
+				SlidingInvisibilityTimeout = TimeSpan.FromMinutes(5),
+				QueuePollInterval = TimeSpan.Zero,
+				UseRecommendedIsolationLevel = true,
+				DisableGlobalLocks = true
+			}));
+		builder.Services.AddHangfireServer();
 
 		var app = builder.Build();
 
@@ -36,11 +47,16 @@ internal class Program
 
 		app.UseAuthorization();
 
-		//app.UseHangfireServer();
-		app.UseHangfireServer();
+		using (var scope = app.Services.CreateScope())
+		{
+			var serviceProvider = scope.ServiceProvider;
+			var recurringJobManager = serviceProvider.GetRequiredService<IRecurringJobManager>();
 
-		RecurringJob.AddOrUpdate<BidPriceController>(x => x.IdentifyUserWithHighestBid(null), "0 0 * * *");
+			// Enqueue the recurring job to trigger IdentifyUserWithHighestBid method
+			recurringJobManager.AddOrUpdate<BidPriceController>("IdentifyUserWithHighestBid", x => x.IdentifyUserWithHighestBid(null), Cron.Daily(0, 0));
+		}
 
+		app.UseHangfireDashboard("/dashboard");
 
 		app.MapControllers();
 

@@ -173,9 +173,10 @@ select * from ArtistPortfolio
 select * from Review
 select * from Cart
 select * from Orders
---select * from OrderItem
---select * from Payment
+
 
 select * from BidPrice
 select * from BidArt
 
+--select * from OrderItem
+--select * from Payment

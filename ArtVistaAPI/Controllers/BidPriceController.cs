@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ArtVistaAPI.Data;
 using ArtVistaAPI.Models;
+using Hangfire;
+using ArtVistaAPI.Migrations;
+using Microsoft.IdentityModel.Tokens;
 
 namespace ArtVistaAPI.Controllers
 {
@@ -15,11 +18,18 @@ namespace ArtVistaAPI.Controllers
     public class BidPriceController : ControllerBase
     {
         private readonly ApplicationDBContext _context;
+		private readonly IBackgroundJobClient _backgroundJobs;
 
-        public BidPriceController(ApplicationDBContext context)
+		//public NutrientTrackerController(ApplicationDbContext context, IBackgroundJobClient backgroundJobs)
+		//{
+		//	_context = context;
+		//	_backgroundJobs = backgroundJobs;
+		//}
+		public BidPriceController(ApplicationDBContext context, IBackgroundJobClient backgroundJobs)
         {
             _context = context;
-        }
+			_backgroundJobs = backgroundJobs;
+		}
 
         // GET: api/BidPrice
         [HttpGet]
@@ -105,25 +115,95 @@ namespace ArtVistaAPI.Controllers
             return _context.BidPrice.Any(e => e.Bidprice_id == id);
         }
 
+		//[HttpPost("/bidding/bidPrice")]
+		//public async Task<IActionResult> IdentifyUserWithHighestBid([FromBody] BidPriceModel bidPrice)
+		//{
+		//	try
+		//	{
+		//		var bid = await _context.BidPrice.ToListAsync();
+
+		//		if (bid != null && bid.Count > 0)
+		//		{
+		//			int bidArtId = 0;
+
+		//			// Find the BidArt_id that is not sold
+		//			foreach (var item in bid)
+		//			{
+		//				Console.WriteLine($"Bidprice_id: {item.Bidprice_id}, Bidprice: {item.Bidprice}, BidArt_id: {item.BidArt_id}, Status: {item.Status}");
+		//				if (item.Status != "Sold")
+		//				{
+		//					bidArtId = item.BidArt_id;
+		//					break;
+		//				}
+		//			}
+
+		//			if (bidArtId != 0)
+		//			{
+		//				// Find the highest bid for the specified BidArt_id
+		//				var highestBid = bid
+		//					.Where(b => b.BidArt_id == bidArtId)
+		//					.OrderByDescending(b => b.Bidprice)
+		//					.FirstOrDefault();
+
+		//				if (highestBid != null)
+		//				{
+		//					Console.WriteLine($"Highest Bidprice: {highestBid.Bidprice}, Bidprice_id: {highestBid.Bidprice_id}");
+
+		//					// Assign the status as "Sold" for the highest bid
+		//					highestBid.Status = "Sold";
+		//					await _context.SaveChangesAsync();
+		//				}
+		//			}
+		//		}
+
+		//		return Ok();
+		//	}
+		//	catch (Exception ex)
+		//	{
+		//		Console.WriteLine(ex.ToString());
+		//		return StatusCode(StatusCodes.Status500InternalServerError);
+		//	}
+		//}
 		[HttpPost("/bidding/bidPrice")]
 		public async Task<IActionResult> IdentifyUserWithHighestBid([FromBody] BidPriceModel bidPrice)
 		{
-			var highestBidUser = _context.BidPrice
-				.OrderByDescending(b => b.Bidprice)
-				.FirstOrDefault();
-
-			if (highestBidUser != null)
+			try
 			{
-				if (bidPrice.Bidprice > highestBidUser.Bidprice)
+				var bid = await _context.BidPrice.ToListAsync();
+
+				if (bid != null && bid.Count > 0)
 				{
-					highestBidUser.Bidprice = bidPrice.Bidprice;
-					highestBidUser.Status = "Sold";
+					var bidArtIds = bid.Select(b => b.BidArt_id).Distinct().ToList();
+
+					foreach (var bidArtId in bidArtIds)
+					{
+						var highestBid = bid
+							.Where(b => b.BidArt_id == bidArtId)
+							.OrderByDescending(b => b.Bidprice)
+							.FirstOrDefault();
+
+						if (highestBid != null)
+						{
+							Console.WriteLine($"Highest Bidprice: {highestBid.Bidprice}, Bidprice_id: {highestBid.Bidprice_id}");
+
+							// Assign the status as "Sold" for the highest bid
+							highestBid.Status = "Sold";
+						}
+					}
+
 					await _context.SaveChangesAsync();
 				}
-			}
 
-			return Ok();
+				return Ok();
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.ToString());
+				return StatusCode(StatusCodes.Status500InternalServerError);
+			}
 		}
+
+
 
 	}
 }

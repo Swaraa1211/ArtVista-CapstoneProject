@@ -270,7 +270,9 @@ const ShowcaseShowdown = () => {
 
       <Wrap spacing={4} mt={4} justify="center" align="center">
         {filteredArt && filteredArt.map((item) => {
-          const isFavorite = fav.some(favorite => favorite.artId === item.art_id);
+          // const isFavorite = fav.some(favorite => favorite.artId === item.art_id);
+          const isFavorite = fav.some(favorite => favorite.artId === item.art_id && favorite.userId === userId);
+
           const isAddedToCart = addedToCart.some(cart => cart.artId === item.art_id);
           return (
             <WrapItem key={item.art_id}>

@@ -85,7 +85,7 @@ const CreatePortfolioForm = () => {
 
             <Heading>ArtistPortfolio</Heading>
             <Box p={4}>
-                <Heading>Create Art</Heading>
+                <Heading>Create Your Portfolio</Heading>
                 <form ref={formRef} onSubmit={handleArtistSubmit}>
                     <FormControl isRequired>
                         <FormLabel color="black">Artist Name</FormLabel>

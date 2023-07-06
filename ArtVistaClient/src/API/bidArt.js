@@ -39,6 +39,27 @@ export const postBidArt = async data => {
     }
 }
 
+export const getBidPrice = async data => {
+    // console.log(data);
+    try{
+        const response = await axios.get(`${BASE_URL}/BidPrice`, data);
+        //console.log(response);
+
+        if(response.status === 201 || response.status ===200){
+            console.log('GET BID PRICE data success', response.data);
+            return {status: true, data: response.data};
+        }
+        else if(response.data === 401){
+            return {status: false, data: response.data};
+
+        }
+
+    } catch(error) {
+        console.error("Axios error in get BID PRICE: ", error);
+        return null;
+    }
+}
+
 export const postBidPrice = async data => {
     try{
         const response = await axios.post(`${BASE_URL}/BidPrice`, data);

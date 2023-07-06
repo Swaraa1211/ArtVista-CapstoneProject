@@ -20,6 +20,11 @@ namespace ArtVistaAPI.Data
 		public DbSet<CartModel> Cart { get; set; }
 		public DbSet<OrdersModel> Orders { get; set; }
 		public DbSet<BidArtModel> BidArt { get; set; }
-		
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+		{
+			optionsBuilder.EnableSensitiveDataLogging();
+		}
+
 	}
 }
