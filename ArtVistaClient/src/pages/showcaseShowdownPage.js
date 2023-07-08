@@ -22,8 +22,16 @@ import {
   Textarea,
   Flex,
   InputGroup,
-  InputRightElement
+  InputRightElement,
+  Spacer,
+  Grid,
+  GridItem
 } from "@chakra-ui/react";
+import { BiDotsHorizontalRounded } from 'react-icons/bi';
+import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
+import { BsCart, BsCartFill } from 'react-icons/bs';
+import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
+import { GoCommentDiscussion } from 'react-icons/go';
 import { deleteFavorites, getFavorites, postFavorites } from '../API/favorites';
 import { getReview, getReviewById, postReview } from '../API/review';
 import { useRecoilValue } from 'recoil';
@@ -33,9 +41,9 @@ import { getCart, postCart } from '../API/cart';
 const ShowcaseShowdown = () => {
   //const { userId, username } = useRecoilValue(userAtom);
   const userToken = localStorage.getItem('userToken');
-    const parsedToken = JSON.parse(userToken);
-    const userId = parsedToken.data.userId;
-    const username = parsedToken.data.username;
+  const parsedToken = JSON.parse(userToken);
+  const userId = parsedToken.data.userId;
+  const username = parsedToken.data.username;
   const formRef = useRef(null);
   const [art, setArt] = useState([]);
 
@@ -100,8 +108,8 @@ const ShowcaseShowdown = () => {
   const [rating, setRating] = useState('');
   const [reviewComment, setReviewComment] = useState('');
   const [reviewContent, setReviewContent] = useState([]);
-
   const [selectedArtId, setSelectedArtId] = useState(null);
+  var starRating = 0;
 
 
 
@@ -173,12 +181,12 @@ const ShowcaseShowdown = () => {
 
       const response = await postCart(cartData);
       console.log('Item added to cart:', response.data);
-      
+
       //setIsAddedToCart(true);
       setIsAddedToCart(prevState => !prevState);
       window.location.reload();
       fetchArt();
-      
+
       // if (response && response.status) {
       //   console.log('Successful in adding cart', response.data);
       //   //fetchCart(); // Fetch cart data after adding an item
@@ -239,110 +247,204 @@ const ShowcaseShowdown = () => {
     setSearchQuery(event.target.value);
   };
 
+  const [modalData, setModalData] = useState(null);
+
+  const openModal = (item) => {
+    setModalData(item);
+  };
+
+  const closeModal = () => {
+    setModalData(null);
+  };
+
 
   return (
     <>
       <Navbar />
-      <Heading align="center" justify="center">
-        <Text as="span" color="#040B61" fontSize="6xl">
-          Showcase
-        </Text>{" "}
-        <Text as="span" color=" #F78104" fontSize="6xl">
-          Showdown
-        </Text>
-      </Heading>
+      <Box mt={5}>
+        <Heading align="center" justify="center">
+          <Text as="span" color="#040B61" fontSize="6xl">
+            Showcase
+          </Text>{" "}
+          <Text as="span" color=" #F78104" fontSize="6xl">
+            Showdown
+          </Text>
+        </Heading>
+        <Box align="center" mt={4}>
+          <input
+            type="text"
+            placeholder="Search Art"
+            value={searchQuery}
+            onChange={handleSearch}
+            style={{
+              //backgroundColor: 'lightblue', 
+              fontSize: '16px',
+              boxShadow: "0 2px 4px rgba(4, 11, 97, 0.2)",
+              borderRadius: "5px",
+              padding: "8px",
+              width: "96vw"
+            }}
+          />
+        </Box>
 
-      <Box align="center" mt={4}>
-        <input
-          type="text"
-          placeholder="Search Art"
-          value={searchQuery}
-          onChange={handleSearch}
-          style={{ 
-            //backgroundColor: 'lightblue', 
-            fontSize: '16px',
-            border: "2px solid #249EA0",
-            borderRadius: "5px",
-            padding: "8px",
-            width: "82vw" }}
-        />
+        <Wrap spacing={4} mt={4} justify="center" align="center">
+          {filteredArt && filteredArt.map((item) => {
+            const isFavorite = fav.some(favorite => favorite.artId === item.art_id && favorite.userId === userId);
+            const isAddedToCart = addedToCart.some(cart => cart.artId === item.art_id);
+
+            return (
+              <WrapItem key={item.art_id}>
+                <Flex width='250px' height="350px" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center">
+                  <Box m="10px">
+                    <Box display="flex" justifyContent="space-between" alignItems="center">
+                      <Heading as="h2" color="#040B61" size="md" mb={2}>
+                        {item.art_name}
+                      </Heading>
+                      <BiDotsHorizontalRounded onClick={() => openModal(item)} />
+                    </Box>
+
+                    {modalData && (
+                      <Modal isOpen={true} onClose={closeModal}>
+                        <ModalOverlay />
+                        <ModalContent>
+                          <ModalHeader color="#040B61" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <Heading as="h2" fontSize="5xl">
+                              {modalData.art_name}
+                            </Heading>
+                            <Box ml={5} style={{ marginLeft: 'auto' }}>
+                              <Heading as="h3" fontSize="lg" color="#249EA0" textAlign="right">
+                                - {modalData.artist_name}
+                              </Heading>
+                            </Box>
+                          </ModalHeader>
+
+
+                          <ModalBody>
+                            <Box flex={1}>
+                              <Box display="flex" justifyContent="center" alignItems="center" height="200px" >
+                                <Image src={modalData.picture} alt={modalData.art_name} width="200px" height="200px" borderRadius="10px" />
+
+                              </Box>
+
+                              <Box flex={1} textAlign="center">
+                                <Heading fontWeight="bold" color="#040B61" fontSize="2xl" mt={2} mb={2}>
+                                  ₹ {modalData.price}
+                                </Heading>
+                                <Text fontSize="xl" mb={2}>
+                                  {modalData.art_description}
+                                </Text>
+
+                              </Box>
+
+
+                            </Box>
+                          </ModalBody>
+                          <ModalFooter>
+                            <Button bg="#F78104" onClick={closeModal} ml={2}>
+                              Close
+                            </Button>
+                          </ModalFooter>
+                        </ModalContent>
+                      </Modal>
+                    )}
+
+                    <Box display="flex" justifyContent="center" alignItems="center" height="200px" m={3}>
+                      <Image src={item.picture} alt={item.art_name} width="200px" height="200px" borderRadius="10px" />
+                    </Box>
+                    <Box flex={1} textAlign="center">
+                      <Heading fontWeight="bold" color="#040B61" fontSize="2xl" mt={2} mb={2}>
+                        ₹ {item.price}
+                      </Heading>
+                    </Box>
+
+                    <Box display="flex" justifyContent="space-between" alignItems="center" m={3}>
+                      <Box display="flex" alignItems="center">
+                        {!isFavorite ? (
+                          <AiOutlineHeart onClick={() => handleFavoriteClick(item.user_id, item.art_id)} size={24} />
+                        ) : (
+                          <AiFillHeart size={24} color="#F78104" />
+                        )}
+
+                        <Box mr={4} />
+
+                        <GoCommentDiscussion onClick={() => openReviewModal(item.art_id)} size={24} />
+                      </Box>
+
+                      {!isAddedToCart ? (
+                        <BsCart onClick={() => addToCart(item.art_id, item.art_name)} size={24} />
+                      ) : (
+                        <BsCartFill size={24} color="#249EA0" />
+                      )}
+                    </Box>
+                  </Box>
+                </Flex>
+              </WrapItem>
+            );
+          })}
+
+          <Modal isOpen={isReviewModalOpen} onClose={closeReviewModal}>
+            <ModalOverlay />
+            <ModalContent>
+              <ModalHeader color="#040B61" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <Heading as="h2" fontSize="5xl">
+                  Review & Rate !
+                </Heading>
+
+              </ModalHeader>
+              <ModalBody>
+                {reviewContent.map((review) => (
+                  <Box key={review.reviewId} p={4} borderWidth="1px" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="md" mb={4}>
+                    <Box display="flex" alignItems="center" >
+                      <Text fontWeight="bold" fontSize="lg" mr={2}>
+                        Rating:
+                      </Text>
+                      {starRating = Math.round(review.ratings)}
+                      {Array.from({ length: starRating }, (_, index) => (
+                        <AiFillStar key={index} color="#F78104" />
+                      ))}
+                      {Array.from({ length: 5 - starRating }, (_, index) => (
+                        <AiOutlineStar key={index + starRating} />
+                      ))}
+                    </Box>
+                    <Box display="flex" alignItems="center" >
+                      <Text fontWeight="bold" fontSize="lg" mr={2}>
+                        Review Comment:
+                      </Text>
+                      <Text>{review.reviewComment}</Text>
+                    </Box>
+                  </Box>
+                ))}
+              </ModalBody>
+              <ModalFooter>
+                <Box w="full">
+                  <form onSubmit={handleSubmitReview}>
+                    <FormControl isRequired>
+                      <FormLabel>Rating</FormLabel>
+                      <Input type="number" min={1} max={10} name="art_rating" placeholder="Rate 1 - 10" />
+                    </FormControl>
+                    <FormControl mt={4} isRequired>
+                      <FormLabel>Review Comment</FormLabel>
+                      <Textarea type="text" name="review_comment" placeholder="Your Review" />
+                    </FormControl>
+                    <Box mt={5} style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'right' }}>
+                      <Button bg="#F78104" type="submit">
+                        Submit
+                      </Button>
+                      <Button colorScheme="red" onClick={closeReviewModal} ml={2}>
+                        Cancel
+                      </Button>
+                    </Box>
+
+
+                  </form>
+                </Box>
+
+
+              </ModalFooter>
+            </ModalContent>
+          </Modal>
+        </Wrap>
       </Box>
-
-      <Wrap spacing={4} mt={4} justify="center" align="center">
-        {filteredArt && filteredArt.map((item) => {
-          // const isFavorite = fav.some(favorite => favorite.artId === item.art_id);
-          const isFavorite = fav.some(favorite => favorite.artId === item.art_id && favorite.userId === userId);
-
-          const isAddedToCart = addedToCart.some(cart => cart.artId === item.art_id);
-          return (
-            <WrapItem key={item.art_id}>
-              <Flex width='550px' height="250px" borderWidth="1px" borderRadius="10px" >
-                <Box display="flex" justifyContent="center" alignItems="center" m="10px">
-                  <Image src={item.picture} alt={item.art_name} width="200px" height="200px" borderRadius="10px" />
-                </Box>
-                <Box p={4} flex={1}>
-                  <Heading as="h2" size="md" mb={2}>
-                    {item.art_name}
-                  </Heading>
-                  <Text fontSize="sm" mb={2}>
-                    Artist: {item.artist_name}
-                  </Text>
-                  <Text fontSize="sm" mb={2}>
-                    {item.art_description}
-                  </Text>
-                  <Text fontSize="sm">Price: {item.price}</Text>
-                  {!isFavorite && (
-                    <Button onClick={() => handleFavoriteClick(item.user_id, item.art_id)}>
-                      Add to Favorites
-                    </Button>
-                  )}
-                  <Button onClick={() => openReviewModal(item.art_id)} mt={4}>
-                    Review
-                  </Button>
-                  {!isAddedToCart && (
-                    <Button onClick={() => addToCart(item.art_id, item.art_name)} mt={4}>
-                      Add to cart
-                    </Button>
-                  )}
-                </Box>
-              </Flex>
-            </WrapItem>
-          );
-        })}
-
-        <Modal isOpen={isReviewModalOpen} onClose={closeReviewModal}>
-          <ModalOverlay />
-          <ModalContent>
-            <ModalHeader>Review</ModalHeader>
-            <ModalBody>
-              {reviewContent.map((review) => (
-                <Box key={review.reviewId} p={4} borderWidth="1px" borderRadius="md" mb={4}>
-                  <Text mb={2}>Rating: {review.ratings}</Text>
-                  <Text mb={2}>Review Comment: {review.reviewComment}</Text>
-                </Box>
-              ))}
-            </ModalBody>
-            <ModalFooter>
-              <form onSubmit={handleSubmitReview}>
-                <FormControl isRequired>
-                  <FormLabel>Rating</FormLabel>
-                  <Input type="number" min={1} max={10} name="art_rating" placeholder="Rate 1 - 10" />
-                </FormControl>
-                <FormControl mt={4} isRequired>
-                  <FormLabel>Review Comment</FormLabel>
-                  <Textarea type="text" name="review_comment" placeholder="Your Review" />
-                </FormControl>
-                <Button colorScheme="blue" type="submit">
-                  Submit
-                </Button>
-              </form>
-              <Button colorScheme="gray" onClick={closeReviewModal} ml={2}>
-                Cancel
-              </Button>
-            </ModalFooter>
-          </ModalContent>
-        </Modal>
-      </Wrap>
 
     </>
   );

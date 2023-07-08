@@ -81,7 +81,7 @@ const Navbar = () => {
         py={5}
         // rounded="full"
         // mx={4}
-        mb={4}
+        // mb={4}
         // mt={2}
         boxShadow="md"
       >
