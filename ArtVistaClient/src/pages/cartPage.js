@@ -14,7 +14,8 @@ import {
     Td,
     Button,
     Text,
-
+    Flex,
+Box
 } from '@chakra-ui/react'
 import Navbar from '../components/navBar';
 import { deleteCart, getCart } from '../API/cart';
@@ -209,82 +210,103 @@ const Cart = () => {
                 </Text>
             </Heading>
             <Tabs isLazy index={currentTab} onChange={setCurrentTab}>
-                <TabList>
-                    <Tab>Cart</Tab>
-                    <Tab>Order Details</Tab>
-                </TabList>
+                <Flex justifyContent="center" alignItems="center" flexDirection="column">
+                    <TabList>
+                        <Tab>
+                            <Heading as="h2" color="#040B61" size="md">
+                                Cart
+                            </Heading>
+                        </Tab>
+                        <Tab>
+                            <Heading as="h2" color=" #F78104" size="md">
+                                Order Details
+                            </Heading>
+                        </Tab>
+                    </TabList>
 
-                <TabPanels>
-                    <TabPanel>
-                        <Table variant="striped" colorScheme="gray">
-                            <TableCaption>Cart</TableCaption>
-                            <Thead>
-                                <Tr>
-                                    <Th>Art Name</Th>
-                                    <Th>Quantity</Th>
-                                    <Th>Price</Th>
-                                    <Th>Action</Th>
-                                </Tr>
-                            </Thead>
-                            <Tbody>
-                                {cart.map((item) => (
-                                    <Tr key={item.cartId}>
-                                        <Td>{item.artName}</Td>
-                                        <Td>
-                                            <Button
-                                                size="sm"
-                                                onClick={() => handleDecreaseQuantity(item.cartId)}
-                                                disabled={item.quantity === 1}
-                                            >
-                                                -
-                                            </Button>
-                                            {item.quantity}
-                                            <Button
-                                                size="sm"
-                                                onClick={() => handleIncreaseQuantity(item.cartId)}
-                                            >
-                                                +
-                                            </Button>
-                                        </Td>
-                                        <Td>{item.artPrice}</Td>
-                                        <Td>
-                                            <Button
-                                                size="sm"
-                                                onClick={() => handleRemoveFromCart(item.cartId)}
-                                            >
-                                                Remove from Cart
-                                            </Button>
-                                        </Td>
-                                    </Tr>
-                                ))}
-                            </Tbody>
-                        </Table>
-                        {cart.length > 0 && <Button onClick={handleCheckout}>Checkout</Button>}
-                    </TabPanel>
-                    <TabPanel>
-                        <Table variant="striped" colorScheme="gray">
-                            <TableCaption>Checkout</TableCaption>
-                            <Thead>
-                                <Tr>
-                                    <Th>Art Name</Th>
-                                    <Th>Quantity</Th>
-                                    <Th>Price</Th>
-                                </Tr>
-                            </Thead>
-                            <Tbody>
-                                {selectedItems.map((item) => (
-                                    <Tr key={item.cartId}>
-                                        <Td>{item.artName}</Td>
-                                        <Td>{item.quantity}</Td>
-                                        <Td>{item.artPrice}</Td>
-                                    </Tr>
-                                ))}
-                            </Tbody>
-                        </Table>
-                        {selectedItems.length > 0 && <Button onClick={openPaymentPage}>Payment</Button>}
+                    <TabPanels>
+                        <TabPanel>
+                            <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
+                                <Table variant="striped" colorScheme="white" m="5px">
+                                    <TableCaption>Cart</TableCaption>
+                                    <Thead>
+                                        <Tr>
+                                            <Th>Art Name</Th>
+                                            <Th>Quantity</Th>
+                                            <Th>Price</Th>
+                                            <Th>Action</Th>
+                                        </Tr>
+                                    </Thead>
+                                    <Tbody>
+                                        {cart.map((item) => (
+                                            <Tr key={item.cartId}>
+                                                <Td>{item.artName}</Td>
+                                                <Td>
+                                                    <Button
+                                                        size="sm"
+                                                        bg="#F78104"
+                                                        mr="5px"
+                                                        onClick={() => handleDecreaseQuantity(item.cartId)}
+                                                        disabled={item.quantity === 1}
+                                                    >
+                                                        -
+                                                    </Button>
+                                                    {item.quantity}
+                                                    <Button
+                                                        size="sm"
+                                                        bg="#F78104"
+                                                        ml="5px"
+                                                        onClick={() => handleIncreaseQuantity(item.cartId)}
+                                                    >
+                                                        +
+                                                    </Button>
+                                                </Td>
+                                                <Td>{item.artPrice}</Td>
+                                                <Td>
+                                                    <Button
+                                                        size="sm"
+                                                        bg="red"
+                                                        onClick={() => handleRemoveFromCart(item.cartId)}
+                                                    >
+                                                        ✕
+                                                    </Button>
+                                                </Td>
+                                            </Tr>
+                                        ))}
+                                    </Tbody>
+                                </Table>
+                                {cart.length > 0 && <Button bg="#040B61" color="white" onClick={handleCheckout}>Checkout</Button>}
+                            </Box>
 
-                    </TabPanel>
-                </TabPanels>
+
+                            
+                        </TabPanel>
+                        <TabPanel>
+                        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
+                            <Table variant="striped" m="5px" colorScheme="white">
+                                <TableCaption>Checkout</TableCaption>
+                                <Thead>
+                                    <Tr>
+                                        <Th>Art Name</Th>
+                                        <Th>Quantity</Th>
+                                        <Th>Price</Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody>
+                                    {selectedItems.map((item) => (
+                                        <Tr key={item.cartId}>
+                                            <Td>{item.artName}</Td>
+                                            <Td>{item.quantity}</Td>
+                                            <Td>{item.artPrice}</Td>
+                                        </Tr>
+                                    ))}
+                                </Tbody>
+                            </Table>
+                            {selectedItems.length > 0 && <Button bg="#040B61" color="white" onClick={openPaymentPage}>Payment</Button>}
+</Box>
+                        </TabPanel>
+                    </TabPanels>
+                </Flex>
             </Tabs>
 
         </>

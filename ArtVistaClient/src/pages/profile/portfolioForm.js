@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { getArtist, postArtistPortfolio,putArtistPortfolio } from '../../API/artistPortfolio';
+import { getArtist, postArtistPortfolio, putArtistPortfolio } from '../../API/artistPortfolio';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../../constant/atomRecoil';
 import {
@@ -21,10 +21,10 @@ import {
     ModalBody,
     ModalFooter,
     ModalCloseButton,
-  Grid,
-  GridItem,
-  InputGroup,
-  InputLeftElement,
+    Grid,
+    GridItem,
+    InputGroup,
+    InputLeftElement,
 } from '@chakra-ui/react'
 
 const CreatePortfolioForm = () => {
@@ -82,45 +82,48 @@ const CreatePortfolioForm = () => {
 
     return (
         <>
+            <Flex
+                alignItems="center"
+                justifyContent="center"
+            >
+                <Box p={4}>
+                    <Heading align="center" justifyContent="center" color="#F78104">Create Your Portfolio</Heading>
 
-            <Heading>ArtistPortfolio</Heading>
-            <Box p={4}>
-                <Heading>Create Your Portfolio</Heading>
-                <form ref={formRef} onSubmit={handleArtistSubmit}>
-                    <FormControl isRequired>
-                        <FormLabel color="black">Artist Name</FormLabel>
-                        <Input type="text" name="artistname" placeholder="Description" />
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel color="black">Artist Picture</FormLabel>
-                        <Input type="text" name="artistpicture" placeholder="Enter URL" />
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel color="black">About</FormLabel>
-                        <Input type="text" name="about" placeholder="About" />
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel color="black">Masterpiece</FormLabel>
-                        <Input type="text" name="masterpiece" placeholder="masterpiece" />
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel color="black">Masterpiecepicture</FormLabel>
-                        <Input type="text" name="masterpiecepicture" placeholder="Enter URL" />
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel color="black">contact</FormLabel>
-                        <Input type="number" name="contact" placeholder="Contact" />
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel color="black">journey</FormLabel>
-                        <Input type="text" name="journey" placeholder="Your Jounery" />
-                    </FormControl>
-                    <Button type="submit" width="full" colorScheme="blue">Submit</Button>
+                    <form ref={formRef} onSubmit={handleArtistSubmit}>
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">Artist Name</FormLabel>
+                            <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="artistname" placeholder="Description" />
+                        </FormControl>
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">Artist Picture</FormLabel>
+                            <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="artistpicture" placeholder="Enter URL" />
+                        </FormControl>
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">About</FormLabel>
+                            <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="about" placeholder="About" />
+                        </FormControl>
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">Masterpiece</FormLabel>
+                            <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="masterpiece" placeholder="masterpiece" />
+                        </FormControl>
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">Masterpiecepicture</FormLabel>
+                            <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="masterpiecepicture" placeholder="Enter URL" />
+                        </FormControl>
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">contact</FormLabel>
+                            <Input type="number" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="contact" placeholder="Contact" />
+                        </FormControl>
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">journey</FormLabel>
+                            <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="journey" placeholder="Your Jounery" />
+                        </FormControl>
+                        <Button type="submit" width="full" bg="#040B61" mt="10px" color="white">Submit</Button>
 
-                </form>
+                    </form>
 
-            </Box>
-
+                </Box>
+            </Flex>
         </>
     );
 };
@@ -147,15 +150,15 @@ const UpdatePortfolioForm = ({ portfolio }) => {
         masterpiece: '',
         masterpiece_picture: '',
         contact: '',
-        journey:'',
+        journey: '',
         user_id: '',
         user_name: '',
     });
 
     const artist_ID = portfolio.data.artist_id;
 
-console.log("portfolioform " + portfolio + " id " + artist_ID  )
-console.log("artistid passed " + portfolio.data.artist_id)
+    console.log("portfolioform " + portfolio + " id " + artist_ID)
+    console.log("artistid passed " + portfolio.data.artist_id)
     const fetchArtist = async () => {
         try {
             const response = await getArtist();
@@ -224,158 +227,203 @@ console.log("artistid passed " + portfolio.data.artist_id)
 
 
     return (
-        <Box>
-        <Wrap spacing={4} mt={4}>
-            {artist &&
-                artist
-                    .filter((item) => item.user_id === userId) 
-                    .map((item) => (
-                        <WrapItem key={item.artist_id}>
-                        <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-                            <Image src={item.artist_picture} alt={item.artist_name} width="200px"
-                                    height="200px"/>
-                            <Box p={4}>
-                                <Heading as="h2" size="md" mb={2}>
-                                    {item.artist_name}
-                                </Heading>
-                                <Text fontSize="sm" mb={2}>
-                                    {item.about}
-                                </Text>
+        <Box display="flex" justifyContent="center" alignItems="center">
+            <Wrap spacing={4} mt={4} >
+                {artist &&
+                    artist
+                        .filter((item) => item.user_id === userId)
+                        .map((item) => (
 
-                            </Box>
-                            <Box p={4}>
-                                <Image src={item.masterpiece_picture} alt={item.masterpiece} width="200px"
-                                    height="200px"/>
-                                <Heading as="h2" size="md" mb={2}>
-                                    {item.masterpiece}
-                                </Heading>
-                                <Text>
-                                    {item.journey}
-                                </Text>
-                            </Box>
-                            <Button onClick={() => openModal(item.artist_id)}>Update</Button>
+                            <WrapItem key={item.artist_id} >
+                                <Grid templateColumns="repeat(2, 1fr)" gap={4}>
+                                    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)">
+                                        <Heading as="h2" fontSize="5xl" textAlign="center">
+                                            {item.artist_name}
+                                        </Heading>
+                                        <Box display="flex" justifyContent="center" alignItems="center" height="200px">
+                                            <Image src={item.artist_picture} alt={item.artist_name} width="200px" height="200px" borderRadius="10px" />
+                                        </Box>
+                                        <Box textAlign="center" mt={4} mb={3}>
+                                            <Text fontWeight="bold" fontSize="lg" mr={2}>
+                                                About:
+                                            </Text>
+                                            <Text>{item.about}</Text>
+
+                                        </Box>
+                                    </Box>
+                                    <Box borderWidth="1px" borderRadius="lg" overflow="hidden" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)">
+                                        <Text fontWeight="bold" fontSize="lg" mr={2} textAlign="center">
+                                            Journey:
+                                        </Text>
+                                        <Text>{item.journey}</Text>
+                                        <Text fontSize="xl" mb={2} textAlign="center" mt={4}>
+                                            Masterpiece 🡪 {item.masterpiece}
+                                        </Text>
+                                        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
+                                            <Image src={item.masterpiece_picture} alt={item.masterpiece} width="200px" height="200px" borderRadius="10px" />
+                                            <Button onClick={() => openModal(item.artist_id)} bg="#F78104" mt="10px">Update</Button>
+                                        </Box>
 
 
-                        </Box>
-                    </WrapItem>
-                    ))}
-        </Wrap>
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
-            <ModalOverlay />
-            <ModalContent>
-                <ModalHeader>Update Artist</ModalHeader>
-                <ModalCloseButton />
-                <ModalBody>
-                    <FormControl>
-                        <FormLabel>Artist Name</FormLabel>
-                        <Input
-                            type="text"
-                            value={updatedArtData.artist_name}
-                            onChange={(e) =>
-                                setUpdatedArtData((prevData) => ({
-                                    ...prevData,
-                                    artist_name: e.target.value,
-                                }))
-                            }
-                        />
-                    </FormControl>
+                                    </Box>
+                                </Grid>
 
-                    <FormControl>
-                        <FormLabel>Artist Picture</FormLabel>
-                        <Input
-                            type="text"
-                            value={updatedArtData.artist_picture}
-                            onChange={(e) =>
-                                setUpdatedArtData((prevData) => ({
-                                    ...prevData,
-                                    artist_picture: e.target.value,
-                                }))
-                            }
-                        />
-                    </FormControl>
 
-                    <FormControl>
-                        <FormLabel>About</FormLabel>
-                        <Input
-                            type="text"
-                            value={updatedArtData.about}
-                            onChange={(e) =>
-                                setUpdatedArtData((prevData) => ({
-                                    ...prevData,
-                                    about: e.target.value,
-                                }))
-                            }
-                        />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Masterpiece</FormLabel>
-                        <Input
-                            type="text"
-                            value={updatedArtData.masterpiece}
-                            onChange={(e) =>
-                                setUpdatedArtData((prevData) => ({
-                                    ...prevData,
-                                    masterpiece: e.target.value,
-                                }))
-                            }
-                        />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Masterpiece Picture</FormLabel>
-                        <Input
-                            type="text"
-                            value={updatedArtData.masterpiece_picture}
-                            onChange={(e) =>
-                                setUpdatedArtData((prevData) => ({
-                                    ...prevData,
-                                    masterpiece_picture: e.target.value,
-                                }))
-                            }
-                        />
-                    </FormControl>
+                                {/* <Box maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" >
 
-                    <FormControl>
-                        <FormLabel>Contact</FormLabel>
-                        <Input
-                            type="text"
-                            value={updatedArtData.contact}
-                            onChange={(e) =>
-                                setUpdatedArtData((prevData) => ({
-                                    ...prevData,
-                                    contact: e.target.value,
-                                }))
-                            }
-                        />
-                    </FormControl>
-                    <FormControl>
-                        <FormLabel>Jounery</FormLabel>
-                        <Input
-                            type="text"
-                            value={updatedArtData.journey}
-                            onChange={(e) =>
-                                setUpdatedArtData((prevData) => ({
-                                    ...prevData,
-                                    journey: e.target.value,
-                                }))
-                            }
-                        />
-                    </FormControl>
+                                    <Box flex={1}>
+                                        <Heading as="h2" fontSize="5xl" textAlign="center">
+                                            {item.artist_name}
+                                        </Heading>
 
-                    
-                </ModalBody>
+                                        <Box display="flex" justifyContent="center" alignItems="center" height="200px" >
+                                            <Image src={item.artist_picture} alt={item.artist_name} width="200px" height="200px" borderRadius="10px" />
 
-                <ModalFooter>
-                    <Button colorScheme="blue" onClick={handleUpdate}>
-                        Update
-                    </Button>
-                    <Button colorScheme="gray" ml={3} onClick={closeModal}>
-                        Cancel
-                    </Button>
-                </ModalFooter>
-            </ModalContent>
-        </Modal>
+                                        </Box>
 
-    </Box>
+                                        <Box textAlign="center" mt={4} mb={3}>
+                                            <Text fontWeight="bold" fontSize="lg" mr={2}>
+                                                About:
+                                            </Text>
+                                            <Text>{item.about}</Text>
+                                            <Text fontWeight="bold" fontSize="lg" mr={2}>
+                                                Journey:
+                                            </Text>
+                                            <Text>{item.journey}</Text>
+                                        </Box>
+
+                                        <Box display="flex" justifyContent="center" alignItems="center" >
+                                            <Image src={item.masterpiece_picture} alt={item.masterpiece} width="200px" height="200px" borderRadius="10px" />
+
+                                        </Box>
+                                        <Text fontSize="xl" mb={2} textAlign="center" mt={4}>
+                                            Masterpiece 🡪 {item.masterpiece}
+                                        </Text>
+
+                                    </Box>
+                                    <Button onClick={() => openModal(item.artist_id)}>Update</Button>
+
+
+                                </Box> */}
+                            </WrapItem>
+                        ))}
+            </Wrap>
+            <Modal isOpen={isModalOpen} onClose={closeModal}>
+                <ModalOverlay />
+                <ModalContent>
+                    <ModalHeader>Update Artist</ModalHeader>
+                    <ModalCloseButton />
+                    <ModalBody>
+                        <FormControl>
+                            <FormLabel>Artist Name</FormLabel>
+                            <Input
+                                type="text"
+                                value={updatedArtData.artist_name}
+                                onChange={(e) =>
+                                    setUpdatedArtData((prevData) => ({
+                                        ...prevData,
+                                        artist_name: e.target.value,
+                                    }))
+                                }
+                            />
+                        </FormControl>
+
+                        <FormControl>
+                            <FormLabel>Artist Picture</FormLabel>
+                            <Input
+                                type="text"
+                                value={updatedArtData.artist_picture}
+                                onChange={(e) =>
+                                    setUpdatedArtData((prevData) => ({
+                                        ...prevData,
+                                        artist_picture: e.target.value,
+                                    }))
+                                }
+                            />
+                        </FormControl>
+
+                        <FormControl>
+                            <FormLabel>About</FormLabel>
+                            <Input
+                                type="text"
+                                value={updatedArtData.about}
+                                onChange={(e) =>
+                                    setUpdatedArtData((prevData) => ({
+                                        ...prevData,
+                                        about: e.target.value,
+                                    }))
+                                }
+                            />
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Masterpiece</FormLabel>
+                            <Input
+                                type="text"
+                                value={updatedArtData.masterpiece}
+                                onChange={(e) =>
+                                    setUpdatedArtData((prevData) => ({
+                                        ...prevData,
+                                        masterpiece: e.target.value,
+                                    }))
+                                }
+                            />
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Masterpiece Picture</FormLabel>
+                            <Input
+                                type="text"
+                                value={updatedArtData.masterpiece_picture}
+                                onChange={(e) =>
+                                    setUpdatedArtData((prevData) => ({
+                                        ...prevData,
+                                        masterpiece_picture: e.target.value,
+                                    }))
+                                }
+                            />
+                        </FormControl>
+
+                        <FormControl>
+                            <FormLabel>Contact</FormLabel>
+                            <Input
+                                type="text"
+                                value={updatedArtData.contact}
+                                onChange={(e) =>
+                                    setUpdatedArtData((prevData) => ({
+                                        ...prevData,
+                                        contact: e.target.value,
+                                    }))
+                                }
+                            />
+                        </FormControl>
+                        <FormControl>
+                            <FormLabel>Jounery</FormLabel>
+                            <Input
+                                type="text"
+                                value={updatedArtData.journey}
+                                onChange={(e) =>
+                                    setUpdatedArtData((prevData) => ({
+                                        ...prevData,
+                                        journey: e.target.value,
+                                    }))
+                                }
+                            />
+                        </FormControl>
+
+
+                    </ModalBody>
+
+                    <ModalFooter>
+                        <Button colorScheme="blue" onClick={handleUpdate}>
+                            Update
+                        </Button>
+                        <Button colorScheme="gray" ml={3} onClick={closeModal}>
+                            Cancel
+                        </Button>
+                    </ModalFooter>
+                </ModalContent>
+            </Modal>
+
+        </Box>
     );
 };
 

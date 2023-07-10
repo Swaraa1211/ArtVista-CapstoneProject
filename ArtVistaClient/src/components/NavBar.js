@@ -9,7 +9,8 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalBody
+  ModalBody,
+  ModalFooter
 } from "@chakra-ui/react";
 //import { SearchIcon } from '@chakra-ui/icons'
 import { BsCartFill, } from 'react-icons/bs';
@@ -136,14 +137,17 @@ const Navbar = () => {
           <ModalBody>
             <Text> Are you sure you want to LogOut ?</Text>
 
-            <Button colorScheme="blue" onClick={handleSubmitLogout}>
+            
+          </ModalBody>
+          <ModalFooter>
+            <Button colorScheme="blue" onClick={handleSubmitLogout} bg="#040B61" color="white">
               LogOut
             </Button>
 
-            <Button colorScheme="gray" onClick={closeLogoutModal} ml={2}>
+            <Button colorScheme="gray" onClick={closeLogoutModal} ml={2} bg="red" color="white">
               Cancel
             </Button>
-          </ModalBody>
+          </ModalFooter>
         </ModalContent>
       </Modal>
     </>

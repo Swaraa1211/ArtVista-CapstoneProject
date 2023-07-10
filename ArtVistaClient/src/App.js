@@ -15,7 +15,7 @@ import UpdateArt from './pages/profile/updateArt';
 import PortfolioPage from './pages/profile/portfolioPage';
 import Favorites from './pages/profile/favoritesList';
 import Bidding from './pages/Bidding';
-//import BidPrice from './pages/bidding/bidPrice';
+import Orders from './pages/profile/orders';
 
 function App() {
   return (
@@ -27,16 +27,14 @@ function App() {
           <Route path="/" element={<PrivateRoute />}>
             <Route path="/homePage" element={<HomePage />} />
             <Route path="/artistPortfolio" element={<ArtistPortfolioPage />} />
-            <Route path="/bidding" element={<Bidding />} >
-              {/* <Route path="biddingPrice" element={<BidPrice />} /> */}
-
-            </Route>
+            <Route path="/bidding" element={<Bidding />} />
             <Route path="/showcaseShowdown" element={<ShowcaseShowdownPage />} />
             <Route path="/profile" element={<Profile />}>
               <Route path="createArt" element={<CreateArt />} />
               <Route path="updateArt" element={<UpdateArt />} />
               <Route path="portfolio" element={<PortfolioPage />} />
               <Route path="favorites" element={<Favorites />} />
+              <Route path="orders" element={<Orders />} />
             </Route>
             <Route path="/cart" element={<Cart />} />
           </Route>

@@ -33,7 +33,7 @@ const SideBar = () => {
                 </Button>
                 <Button bg="#249EA0" color="white" mr={4}>
                     <Link to="updateArt">
-                        Update / Delete Art
+                        Update Art
                     </Link>
                 </Button>
                 <Button bg="#249EA0" color="white" mr={4}>
@@ -44,6 +44,11 @@ const SideBar = () => {
                 <Button bg="#249EA0" color="white" mr={4}>
                     <Link to="favorites">
                         Favorites
+                    </Link>
+                </Button>
+                <Button bg="#249EA0" color="white" mr={4}>
+                    <Link to="orders">
+                        Orders
                     </Link>
                 </Button>
 
