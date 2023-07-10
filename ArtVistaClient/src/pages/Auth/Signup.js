@@ -140,12 +140,12 @@ export default function SignupPage() {
                 <FormLabel color="black">Password</FormLabel>
                 <Input type='password' name='password' placeholder='******' />
               </FormControl>
-              <Button mt={4} type="submit" width="full" bg="#249EA0">Sign Up</Button>
+              <Button mt={4} type="submit" width="full" color="white" bg="#249EA0">Sign Up</Button>
             </form>
             <Text mt={4} textAlign="center" >
               Already have an account?
               <Link to='/login'>
-                <Button mt='1px' type='submit' width="full" bg="#249EA0">Login</Button>
+                <Button mt='1px' type='submit' width="full" color="white" bg="#249EA0">Login</Button>
 
               </Link>
             </Text>
@@ -162,7 +162,7 @@ export default function SignupPage() {
           <Heading fontSize="4xl" fontWeight="bold" color="#040B61">WELCOME TO <br></br>ᗩᖇT ᐯIᔕTᗩ!!! </Heading>
           <Image src='https://cdn-icons-png.flaticon.com/128/10835/10835987.png' alt='Artist' />
 
-          <TypewriterEffect text="⬅️ᔕIGᑎᑌᑭ ᕼEᖇE" />
+          <TypewriterEffect text="🡰 ᔕIGᑎᑌᑭ ᕼEᖇE" />
           <Text fontSize="30px">​🇹​​🇴​ ​🇻​​🇮​​🇸​​🇮​​🇹​ ​🇹​​🇭​​🇪​ ​🇬​​🇴​-​🇹​​🇴​ ​🇩​​🇪​​🇸​​🇹​​🇮​​🇳​​🇦​​🇹​​🇮​​🇴​​🇳​ ​🇫​​🇴​​🇷​ ​🇦​​🇷​​🇹​ ​🇪​​🇳​​🇹​​🇭​​🇺​​🇸​​🇮​​🇦​​🇸​​🇹​​🇸​ ​🇸​​🇪​​🇪​​🇰​​🇮​​🇳​​🇬​ <br></br>​🇮​​🇳​​🇸​​🇵​​🇮​​🇷​​🇦​​🇹​​🇮​​🇴​​🇳​</Text>
         </Box>
       </Flex>

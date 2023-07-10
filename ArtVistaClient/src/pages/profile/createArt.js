@@ -26,18 +26,18 @@ const CreateArt = () => {
 
     const fetchArt = async () => {
         try {
-          const response = await getArt();
-          const artData = Array.isArray(response.data) ? response.data : [];
-          setArt(artData);
+            const response = await getArt();
+            const artData = Array.isArray(response.data) ? response.data : [];
+            setArt(artData);
         } catch (error) {
-          console.error(error);
+            console.error(error);
         }
-      };
-      
-      useEffect(() => {
+    };
+
+    useEffect(() => {
         fetchArt();
-      }, []);
-      
+    }, []);
+
 
 
     const handleArtSubmit = async (event) => {
@@ -68,37 +68,43 @@ const CreateArt = () => {
 
     return (
         <>
-            
-            <Heading>CreateArt</Heading>
-            <Box p={4}>
-                <Heading>Create Art</Heading>
-                <form ref={formRef} onSubmit={handleArtSubmit}>
-                    <FormControl isRequired>
-                        <FormLabel color="black">Art Description</FormLabel>
-                        <Input type="text" name="artdescription" placeholder="Description" />
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel color="black">Artist Name</FormLabel>
-                        <Input type="text" name="artistname" placeholder="Name" />
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel color="black">Art Name</FormLabel>
-                        <Input type="text" name="artname" placeholder="Art Name" />
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel color="black">Price</FormLabel>
-                        <Text>₹</Text><Input type="number" name="price" placeholder="Price" />
-                    </FormControl>
-                    <FormControl isRequired>
-                        <FormLabel color="black">Picture</FormLabel>
-                        <Input type="text" name="picture" placeholder="Enter URL" />
-                    </FormControl>
-                    <Button type="submit" width="full" colorScheme="blue">Submit</Button>
+            <Flex
+                alignItems="center"
+                justifyContent="center"
+            >
 
-                </form>
 
-            </Box>
+                <Box p={4} width="500px">
+                    <Heading align="center" justifyContent="center" color="#F78104">Create Art</Heading>
+                    <form ref={formRef} onSubmit={handleArtSubmit} bg="white">
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">Art Description</FormLabel>
+                            <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="artdescription" placeholder="Description" />
+                        </FormControl>
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">Artist Name</FormLabel>
+                            <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="artistname" placeholder="Name" />
+                        </FormControl>
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">Art Name</FormLabel>
+                            <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="artname" placeholder="Art Name" />
+                        </FormControl>
+                        <FormLabel color="black" fontWeight="bold" mr={2}>Price</FormLabel>
+                        <Flex align="center">
+                            <Text mr="10px">₹</Text>
+                            <Input type="number" boxShadow="0 4px 12px rgba(4, 11, 97, 0.4)" name="price" placeholder="Price" />
+                        </Flex>
 
+                        <FormControl isRequired>
+                            <FormLabel color="black" fontWeight="bold">Picture</FormLabel>
+                            <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="picture" placeholder="Enter URL" />
+                        </FormControl>
+                        <Button type="submit" width="full" bg="#040B61" mt="10px" color="white">Submit</Button>
+
+                    </form>
+
+                </Box>
+            </Flex>
         </>
 
     );

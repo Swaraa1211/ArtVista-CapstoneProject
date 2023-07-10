@@ -294,7 +294,7 @@ const ShowcaseShowdown = () => {
 
             return (
               <WrapItem key={item.art_id}>
-                <Flex width='250px' height="350px" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center">
+                <Flex width='250px' height="400px" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center" m={2}>
                   <Box m="10px">
                     <Box display="flex" justifyContent="space-between" alignItems="center">
                       <Heading as="h2" color="#040B61" size="md" mb={2}>

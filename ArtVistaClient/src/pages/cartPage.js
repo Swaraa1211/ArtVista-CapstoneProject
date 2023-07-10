@@ -23,7 +23,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../constant/atomRecoil';
 import { postOrders } from '../API/orders';
-// import Razorpay from 'razorpay';
+
 
 
 const Cart = () => {
@@ -97,9 +97,7 @@ const Cart = () => {
     }
 
     const handleCheckout = () => {
-        // Store the selected items for checkout
         setSelectedItems(cart);
-        // Switch to the Order tab
         setCurrentTab(1);
     };
 
@@ -116,7 +114,7 @@ const Cart = () => {
             description: 'Pay here securely',
             //order_id: razorpayOrderId,
             handler: function (response) {
-                // Payment success callback
+                //console.log(response + "razor")
                 handlePaymentSuccess(response);
             },
             prefill: {
@@ -138,7 +136,6 @@ const Cart = () => {
 
     const handlePaymentSuccess = async (response) => {
         console.log(selectedItems);
-        // Handle the payment success response
         console.log('Payment successful:', response);
 
         for (const item of selectedItems) {
@@ -188,6 +185,7 @@ const Cart = () => {
         const postResponse = await postOrders(postData);
         if (postResponse && postResponse.status) {
             console.log('Successful in adding order', postResponse.data);
+            alert('Your order has been placed!');
             setSelectedItems([]);
 
         } else {
@@ -262,7 +260,6 @@ const Cart = () => {
                             </Tbody>
                         </Table>
                         {cart.length > 0 && <Button onClick={handleCheckout}>Checkout</Button>}
-                        {/* <Button onClick={handleCheckout}>Checkout</Button> */}
                     </TabPanel>
                     <TabPanel>
                         <Table variant="striped" colorScheme="gray">
@@ -285,7 +282,6 @@ const Cart = () => {
                             </Tbody>
                         </Table>
                         {selectedItems.length > 0 && <Button onClick={openPaymentPage}>Payment</Button>}
-                        {/* <Button onClick={openPaymentPage}>Payment</Button> */}
 
                     </TabPanel>
                 </TabPanels>

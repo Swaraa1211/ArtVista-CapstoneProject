@@ -26,22 +26,22 @@ const SideBar = () => {
 
             </Flex>
             <VStack spacing={4} align="stretch">
-                <Button bg="#249EA0" color="#040B61" mr={4}>
+                <Button bg="#249EA0" color="white" mr={4}>
                     <Link to="createArt">
                         Create Art
                     </Link>
                 </Button>
-                <Button bg="#249EA0" color="#040B61" mr={4}>
-                    <Link to="updateAndDeleteArt">
+                <Button bg="#249EA0" color="white" mr={4}>
+                    <Link to="updateArt">
                         Update / Delete Art
                     </Link>
                 </Button>
-                <Button bg="#249EA0" color="#040B61" mr={4}>
+                <Button bg="#249EA0" color="white" mr={4}>
                     <Link to="portfolio">
                         Portfolio
                     </Link>
                 </Button>
-                <Button bg="#249EA0" color="#040B61" mr={4}>
+                <Button bg="#249EA0" color="white" mr={4}>
                     <Link to="favorites">
                         Favorites
                     </Link>
@@ -49,28 +49,6 @@ const SideBar = () => {
 
                
             </VStack>
-            <>
-                {/* <Box>
-                    <Button colorScheme="#040B61" ml={5} onClick={handleLogoutFunction}>Log Out</Button>
-                </Box> */}
-                {/* <Button onClick={onOpen}>Logout</Button>
-                <Modal isOpen={isOpen} onClose={onClose}>
-                    <ModalOverlay />
-                    <ModalContent>
-                        <ModalHeader>Logout Confirmation</ModalHeader>
-                        <ModalCloseButton />
-                        <ModalBody>
-                            <Text>Are you sure you want to logout?</Text>
-                        </ModalBody>
-                        <ModalFooter>
-                            <Button colorScheme="brand" mr={3} onClick={handleLogout}>
-                                Logout
-                            </Button>
-                            <Button onClick={onClose}>Cancel</Button>
-                        </ModalFooter>
-                    </ModalContent>
-                </Modal> */}
-            </>
         </VStack>
     );
 };

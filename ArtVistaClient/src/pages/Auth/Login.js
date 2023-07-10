@@ -108,7 +108,7 @@ export default function LoginPage() {
                 // focusBorderColor="yellow"
                 />
               </FormControl>
-              <Button mt={4} type="submit" width="full" bg="#249EA0">
+              <Button mt={4} type="submit" color="white" width="full" bg="#249EA0">
                 Log In
               </Button>
 
@@ -118,7 +118,7 @@ export default function LoginPage() {
             <Text mt={4} textAlign="center" >
               Don't have an account?
               <Link to='/signup'>
-                <Button mt='1px' type='submit' width="full" bg="#249EA0">Sign Up</Button>
+                <Button mt='1px' type='submit' color="white" width="full" bg="#249EA0">Sign Up</Button>
 
               </Link>
             </Text>
@@ -136,7 +136,7 @@ export default function LoginPage() {
 
           <Image src='https://cdn-icons-png.flaticon.com/128/10835/10835987.png' alt='Artist' />
 
-          <TypewriterEffect text="⬅️ᒪOGIᑎ ᕼEᖇE" />
+          <TypewriterEffect text="🡰 ᒪOGIᑎ ᕼEᖇE" />
           <Text fontSize="30px">​🇹​​🇴​ ​🇻​​🇮​​🇸​​🇮​​🇹​ ​🇹​​🇭​​🇪​ ​🇬​​🇴​-​🇹​​🇴​ ​🇩​​🇪​​🇸​​🇹​​🇮​​🇳​​🇦​​🇹​​🇮​​🇴​​🇳​ ​🇫​​🇴​​🇷​ ​🇦​​🇷​​🇹​ ​🇪​​🇳​​🇹​​🇭​​🇺​​🇸​​🇮​​🇦​​🇸​​🇹​​🇸​ ​🇸​​🇪​​🇪​​🇰​​🇮​​🇳​​🇬​ <br></br>​🇮​​🇳​​🇸​​🇵​​🇮​​🇷​​🇦​​🇹​​🇮​​🇴​​🇳​</Text>
         </Box>
       </Flex>

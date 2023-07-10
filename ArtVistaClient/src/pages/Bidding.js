@@ -18,7 +18,8 @@ import {
     Wrap,
 
     Grid, GridItem
-} from '@chakra-ui/react'
+} from '@chakra-ui/react';
+import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/navBar';
 import { getBidArt, getBidPrice, postBidArt, postBidPrice } from '../API/bidArt';
@@ -127,28 +128,28 @@ const Bidding = () => {
     // Function to fetch the sold BidArt_ids from the API
     const fetchSoldArtIds = async () => {
         try {
-          const response = await getBidPrice();
-          if (response.status) {
-            console.log("response", response);
-      
-            const bidPriceData = Array.isArray(response.data) ? response.data : [];
-            const soldIds = bidPriceData
-              .filter(item => item.status === 'Sold')
-              .map(item => item.bidArt_id);
-            console.log("soldids", soldIds);
-      
-            setSoldArtIds(soldIds);
-          }
+            const response = await getBidPrice();
+            if (response.status) {
+                console.log("response", response);
+
+                const bidPriceData = Array.isArray(response.data) ? response.data : [];
+                const soldIds = bidPriceData
+                    .filter(item => item.status === 'Sold')
+                    .map(item => item.bidArt_id);
+                console.log("soldids", soldIds);
+
+                setSoldArtIds(soldIds);
+            }
         } catch (error) {
-          console.error('Error fetching sold Art ids:', error);
+            console.error('Error fetching sold Art ids:', error);
         }
-      };
-      
-      useEffect(() => {
+    };
+
+    useEffect(() => {
         fetchSoldArtIds();
-      }, []);
-      
-      
+    }, []);
+
+
 
     // Function to check if a BidArt_id is sold
     const isSold = bidArtId => {
@@ -159,14 +160,35 @@ const Bidding = () => {
     // Render the button or "Sold" text based on the BidArt_id status
     const renderButtonOrSoldText = (bidArtId, bidArtName) => {
         if (isSold(bidArtId)) {
-            return <Text>Sold</Text>;
+            return <Box
+                px={3}
+                py={1}
+                borderRadius="md"
+                boxShadow="md"
+                backgroundColor="#F78104"
+                display="inline-block"
+            >
+                <Text color="black" fontSize="18px" fontWeight="bold">
+                    Sold
+                </Text>
+            </Box>;
         }
 
         return (
-            <Button onClick={() => openPriceModal(bidArtId, bidArtName)} mt={4}>
+            <Button onClick={() => openPriceModal(bidArtId, bidArtName)} mt={4} bgColor="#040B61">
                 BidPrice
             </Button>
         );
+    };
+
+    const [modalData, setModalData] = useState(null);
+
+    const openModal = (item) => {
+        setModalData(item);
+    };
+
+    const closeModal = () => {
+        setModalData(null);
     };
 
     return (
@@ -181,15 +203,11 @@ const Bidding = () => {
                     ing
                 </Text>
             </Heading>
-            <Heading>Add art for bidding</Heading>
+            {/* <Heading>Add art for bidding</Heading>
             <Button onClick={() => openBidModal()} mt={4}>
                 Add Art
-            </Button>
-            {/* <Button bg="#249EA0" color="#040B61" mr={4}>
-                <Link to="biddingPrice">
-                    Show
-                </Link>
             </Button> */}
+
             <Modal isOpen={isBidModalOpen} onClose={closeBidModal}>
                 <ModalOverlay />
                 <ModalContent>
@@ -231,55 +249,118 @@ const Bidding = () => {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-            {/* <Grid
-                // h="100vh"
-                overflowY="hidden"
-                templateRows="repeat(2, 1fr)"
-                templateColumns="repeat(6, 1fr)"
-            // bg="gray.100"
-            >
-                <GridItem colSpan={5} > */}
-            <Wrap spacing={4} mt={4} justify="center" align="center">
-                {bidart && bidart.map((item) => {
-                    return (
-                        <WrapItem key={item.bidArt_id}>
-                            <Flex width='550px' height="250px" borderWidth="1px" borderRadius="10px" >
-                                <Box display="flex" justifyContent="center" alignItems="center" m="10px">
-                                    <Image src={item.picture} alt={item.bidArt_name} width="200px" height="200px" borderRadius="10px" />
-                                </Box>
-                                <Box p={4} flex={1}>
-                                    <Heading as="h2" size="md" mb={2}>
-                                        {item.bidArt_name}
-                                    </Heading>
-                                    <Text fontSize="sm" mb={2}>
-                                        Artist: {item.bidArtist_name}
-                                    </Text>
-                                    <Text fontSize="sm" mb={2}>
-                                        {item.bidArt_description}
-                                    </Text>
-                                    <Text fontSize="sm">Price: {item.bidPrice}</Text>
+            <Flex>
 
-                                    <div key={item.bidArt_id}>
-                                        {/* Render the button or "Sold" text based on the BidArt_id status */}
-                                        {renderButtonOrSoldText(item.bidArt_id, item.bidArt_name)}
-                                    </div>
-                                    {/* <Button onClick={() => openPriceModal(item.bidArt_id, item.bidArt_name)} mt={4}>
-                                        BidPrice
-                                    </Button> */}
-                                </Box>
-                            </Flex>
-                        </WrapItem>
-                    );
-                })}
-            </Wrap>
-            {/* </GridItem>
-                <GridItem rowSpan={2} colSpan={1} p={5} bg="#fff">
 
-                    <Box>
-                        {outlet}
+                <Flex  width='250px' height="400px" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center" m={5}>
+
+                    <Box m="10px">
+
+                        <Box display="flex" justifyContent="space-between" alignItems="center">
+                            <Heading as="h2" color="#040B61" size="md" mb={2}>
+                                Add your BID ART
+                            </Heading>
+                        </Box>
+
+                        <Box display="flex" justifyContent="center" alignItems="center" width="200px" height="200px" m={3}>
+                            <Image src='https://cdn.dribbble.com/users/142926/screenshots/3204075/media/87252be8231802780b3c565aac1e040f.gif' alt='add' width="200px" height="200px" borderRadius="10px" />
+                        </Box>
+                        <Box flex={1} textAlign="center">
+                            <Heading fontWeight="bold" color="#040B61" fontSize="2xl" mt={2} mb={2}>
+                                <Button onClick={() => openBidModal()} mt={4} bgColor="#249EA0">
+                                    Add Art
+                                </Button>
+                            </Heading>
+
+                        </Box>
                     </Box>
-                </GridItem>
-            </Grid> */}
+                </Flex>
+                <Wrap spacing={4}  justify="center" align="center">
+                    {bidart && bidart.map((item) => {
+
+                        return (
+                            <Box>
+
+                                <WrapItem key={item.art_id}>
+                                    <Flex width='250px' height="400px" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center" m={5}>
+
+                                        <Box m="10px">
+                                            <Box display="flex" justifyContent="space-between" alignItems="center">
+                                                <Heading as="h2" color="#040B61" size="md" mb={2}>
+                                                    {item.bidArt_name}
+                                                </Heading>
+                                                <BiDotsHorizontalRounded onClick={() => openModal(item)} />
+                                            </Box>
+
+                                            {modalData && (
+                                                <Modal isOpen={true} onClose={closeModal}>
+                                                    <ModalOverlay />
+                                                    <ModalContent>
+                                                        <ModalHeader color="#040B61" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                                            <Heading as="h2" fontSize="5xl">
+                                                                {modalData.bidArt_name}
+                                                            </Heading>
+                                                            <Box ml={5} style={{ marginLeft: 'auto' }}>
+                                                                <Heading as="h3" fontSize="lg" color="#249EA0" textAlign="right">
+                                                                    - {modalData.bidArtist_name}
+                                                                </Heading>
+                                                            </Box>
+                                                        </ModalHeader>
+
+
+                                                        <ModalBody>
+                                                            <Box flex={1}>
+                                                                <Box display="flex" justifyContent="center" alignItems="center" height="200px" >
+                                                                    <Image src={modalData.picture} alt={modalData.bidArt_name} width="200px" height="200px" borderRadius="10px" />
+
+                                                                </Box>
+
+                                                                <Box flex={1} textAlign="center">
+                                                                    <Heading fontWeight="bold" color="#040B61" fontSize="2xl" mt={2} mb={2}>
+                                                                        ₹ {modalData.bidPrice}
+                                                                    </Heading>
+                                                                    <Text fontSize="xl" mb={2}>
+                                                                        {modalData.bidArt_description}
+                                                                    </Text>
+
+                                                                </Box>
+
+
+                                                            </Box>
+                                                        </ModalBody>
+                                                        <ModalFooter>
+                                                            <Button bg="#F78104" onClick={closeModal} ml={2}>
+                                                                Close
+                                                            </Button>
+                                                        </ModalFooter>
+                                                    </ModalContent>
+                                                </Modal>
+                                            )}
+
+                                            <Box display="flex" justifyContent="center" alignItems="center" height="200px" m={3}>
+                                                <Image src={item.picture} alt={item.bidArt_name} width="200px" height="200px" borderRadius="10px" />
+                                            </Box>
+                                            <Box flex={1} textAlign="center">
+                                                <Heading fontWeight="bold" color="#040B61" fontSize="2xl" mt={2} mb={2}>
+                                                    ₹ {item.bidPrice}
+                                                </Heading>
+                                            </Box>
+
+                                            <Box display="flex" justifyContent="center" alignItems="center" m={3}>
+                                                <div key={item.bidArt_id}>
+                                                    {renderButtonOrSoldText(item.bidArt_id, item.bidArt_name)}
+                                                </div>
+                                            </Box>
+                                        </Box>
+                                    </Flex>
+                                </WrapItem>
+                            </Box>
+                        );
+                    })}
+                </Wrap>
+            </Flex>
+
+
             <Modal isOpen={isPriceModalOpen} onClose={closePriceModal}>
                 <ModalOverlay />
                 <ModalContent>
@@ -304,38 +385,7 @@ const Bidding = () => {
                     </ModalFooter>
                 </ModalContent>
             </Modal>
-            {/* <Wrap spacing={4} mt={4} justify="center" align="center">
-                {bidart && bidart.map((item) => {
-                    return (
-                        <WrapItem key={item.bidArt_id}>
-                            <Flex width='550px' height="250px" borderWidth="1px" borderRadius="10px" >
-                                <Box display="flex" justifyContent="center" alignItems="center" m="10px">
-                                    <Image src={item.picture} alt={item.bidArt_name} width="200px" height="200px" borderRadius="10px" />
-                                </Box>
-                                <Box p={4} flex={1}>
-                                    <Heading as="h2" size="md" mb={2}>
-                                        {item.bidArt_name}
-                                    </Heading>
-                                    <Text fontSize="sm" mb={2}>
-                                        Artist: {item.bidArtist_name}
-                                    </Text>
-                                    <Text fontSize="sm" mb={2}>
-                                        {item.bidArt_description}
-                                    </Text>
-                                    <Text fontSize="sm">Price: {item.bidPrice}</Text>
-                                    
-                                    
-                                    
-                                </Box>
-                            </Flex>
-                        </WrapItem>
-                    );
-                })}
-            </Wrap> */}
-
-
         </>
-
     );
 
 };
