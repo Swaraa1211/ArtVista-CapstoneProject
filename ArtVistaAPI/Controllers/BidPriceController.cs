@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ArtVistaAPI.Data;
 using ArtVistaAPI.Models;
 using Hangfire;
-using ArtVistaAPI.Migrations;
+//sing ArtVistaAPI.Migrations;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ArtVistaAPI.Controllers

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ArtVistaAPI.Data;
 using ArtVistaAPI.Models;
-using ArtVistaAPI.Migrations;
+//using ArtVistaAPI.Migrations;
 
 namespace ArtVistaAPI.Controllers
 {
