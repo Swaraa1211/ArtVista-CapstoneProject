@@ -15,7 +15,7 @@ import UpdateArt from './pages/profile/updateArt';
 import PortfolioPage from './pages/profile/portfolioPage';
 import Favorites from './pages/profile/favoritesList';
 import Bidding from './pages/Bidding';
-import Orders from './pages/profile/orders';
+import Orders from './pages/profile/ordersPage';
 
 function App() {
   return (

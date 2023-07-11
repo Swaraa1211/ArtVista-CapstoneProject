@@ -56,7 +56,7 @@ const CreatePortfolioForm = () => {
         event.preventDefault();
 
         const formData = {
-            artist_name: event.target.elements.artistname.value,
+            artist_name: username,
             artist_picture: event.target.elements.artistpicture.value,
             about: event.target.elements.about.value,
             masterpiece: event.target.elements.masterpiece.value,
@@ -90,10 +90,10 @@ const CreatePortfolioForm = () => {
                     <Heading align="center" justifyContent="center" color="#F78104">Create Your Portfolio</Heading>
 
                     <form ref={formRef} onSubmit={handleArtistSubmit}>
-                        <FormControl isRequired>
+                        {/* <FormControl isRequired>
                             <FormLabel color="black" fontWeight="bold">Artist Name</FormLabel>
                             <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="artistname" placeholder="Description" />
-                        </FormControl>
+                        </FormControl> */}
                         <FormControl isRequired>
                             <FormLabel color="black" fontWeight="bold">Artist Picture</FormLabel>
                             <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="artistpicture" placeholder="Enter URL" />
@@ -314,7 +314,7 @@ const UpdatePortfolioForm = ({ portfolio }) => {
                     <ModalHeader>Update Artist</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <FormControl>
+                        {/* <FormControl>
                             <FormLabel>Artist Name</FormLabel>
                             <Input
                                 type="text"
@@ -326,7 +326,7 @@ const UpdatePortfolioForm = ({ portfolio }) => {
                                     }))
                                 }
                             />
-                        </FormControl>
+                        </FormControl> */}
 
                         <FormControl>
                             <FormLabel>Artist Picture</FormLabel>

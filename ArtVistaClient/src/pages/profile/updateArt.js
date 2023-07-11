@@ -254,7 +254,7 @@ const UpdateAndDeleteArt = () => {
                                 />
                             </FormControl>
 
-                            <FormControl>
+                            {/* <FormControl>
                                 <FormLabel fontWeight="bold">Artist Name</FormLabel>
                                 <Input
                                     type="text"
@@ -268,7 +268,7 @@ const UpdateAndDeleteArt = () => {
                                     }
                                     
                                 />
-                            </FormControl>
+                            </FormControl> */}
 
                             <FormControl>
                                 <FormLabel fontWeight="bold">Art Name</FormLabel>

@@ -20,6 +20,7 @@ import {
     Grid, GridItem
 } from '@chakra-ui/react';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
+import { AiOutlinePlusCircle } from 'react-icons/ai';
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/navBar';
 import { getBidArt, getBidPrice, postBidArt, postBidPrice } from '../API/bidArt';
@@ -50,7 +51,7 @@ const Bidding = () => {
         const formData = {
             bidArt_description: event.target.elements.art_description.value,
             bidArt_name: event.target.elements.bid_art.value,
-            bidArtist_name: event.target.elements.bid_artist.value,
+            bidArtist_name: username,
             bidPrice: event.target.elements.bid_price.value,
             picture: event.target.elements.picture.value,
             user_id: userId,
@@ -203,10 +204,6 @@ const Bidding = () => {
                     ing
                 </Text>
             </Heading>
-            {/* <Heading>Add art for bidding</Heading>
-            <Button onClick={() => openBidModal()} mt={4}>
-                Add Art
-            </Button> */}
 
             <Modal isOpen={isBidModalOpen} onClose={closeBidModal}>
                 <ModalOverlay />
@@ -218,10 +215,10 @@ const Bidding = () => {
                                 <FormLabel>Art</FormLabel>
                                 <Input type="text" name="bid_art" placeholder="Art Name" />
                             </FormControl>
-                            <FormControl isRequired>
+                            {/* <FormControl isRequired>
                                 <FormLabel>Artist Name</FormLabel>
                                 <Input type="text" name="bid_artist" placeholder="Artist Name" />
-                            </FormControl>
+                            </FormControl> */}
                             <FormControl isRequired>
                                 <FormLabel>Art Description</FormLabel>
                                 <Input type="text" name="art_description" placeholder="Descrition" />
@@ -252,7 +249,7 @@ const Bidding = () => {
             <Flex>
 
 
-                <Flex  width='250px' height="400px" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center" m={5}>
+                <Flex width='250px' height="400px" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center" m={5}>
 
                     <Box m="10px">
 
@@ -262,20 +259,30 @@ const Bidding = () => {
                             </Heading>
                         </Box>
 
-                        <Box display="flex" justifyContent="center" alignItems="center" width="200px" height="200px" m={3}>
-                            <Image src='https://cdn.dribbble.com/users/142926/screenshots/3204075/media/87252be8231802780b3c565aac1e040f.gif' alt='add' width="200px" height="200px" borderRadius="10px" />
+                        <Box
+                            display="flex"
+                            justifyContent="center"
+                            alignItems="center"
+                            width="200px"
+                            height="200px"
+                            m={3}
+                            border="2px dotted #040B61"
+                            borderRadius="10%"
+                        >
+                            <AiOutlinePlusCircle size={40} color="#F78104" />
                         </Box>
+
                         <Box flex={1} textAlign="center">
-                            <Heading fontWeight="bold" color="#040B61" fontSize="2xl" mt={2} mb={2}>
-                                <Button onClick={() => openBidModal()} mt={4} bgColor="#249EA0">
+                            <Text fontWeight="bold" color="white" fontSize="2xl" mt={2} mb={2}>
+                                <Button onClick={() => openBidModal()} mt={4} color="white" bgColor="#040B61">
                                     Add Art
                                 </Button>
-                            </Heading>
+                            </Text>
 
                         </Box>
                     </Box>
                 </Flex>
-                <Wrap spacing={4}  justify="center" align="center">
+                <Wrap spacing={4} justify="center" align="center">
                     {bidart && bidart.map((item) => {
 
                         return (

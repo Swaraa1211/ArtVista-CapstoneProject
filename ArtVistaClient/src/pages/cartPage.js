@@ -173,7 +173,7 @@ const Cart = () => {
         const postData = {
             user_id: userId,
             total_amount: totalAmount,
-            payment: 'paid',
+            payment: 'Paid',
             order_date: date,
             art_id: artIdString,
             art_name: artNamesString,

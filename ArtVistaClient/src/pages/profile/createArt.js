@@ -45,7 +45,7 @@ const CreateArt = () => {
 
         const formData = {
             art_description: event.target.elements.artdescription.value,
-            artist_name: event.target.elements.artistname.value,
+            artist_name: username,
             art_name: event.target.elements.artname.value,
             price: event.target.elements.price.value,
             picture: event.target.elements.picture.value,
@@ -81,10 +81,10 @@ const CreateArt = () => {
                             <FormLabel color="black" fontWeight="bold">Art Description</FormLabel>
                             <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="artdescription" placeholder="Description" />
                         </FormControl>
-                        <FormControl isRequired>
+                        {/* <FormControl isRequired>
                             <FormLabel color="black" fontWeight="bold">Artist Name</FormLabel>
                             <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="artistname" placeholder="Name" />
-                        </FormControl>
+                        </FormControl> */}
                         <FormControl isRequired>
                             <FormLabel color="black" fontWeight="bold">Art Name</FormLabel>
                             <Input type="text" boxShadow="0 4px 12px rgba(4, 11, 97, 0.2)" name="artname" placeholder="Art Name" />
