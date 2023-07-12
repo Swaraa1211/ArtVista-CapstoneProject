@@ -288,99 +288,102 @@ const ShowcaseShowdown = () => {
         </Box>
 
         <Wrap spacing={4} mt={4} justify="center" align="center">
-          {filteredArt && filteredArt.map((item) => {
-            const isFavorite = fav.some(favorite => favorite.artId === item.art_id && favorite.userId === userId);
-            const isAddedToCart = addedToCart.some(cart => cart.artId === item.art_id);
+          {filteredArt &&
+            filteredArt
+              .filter((item) => item.user_id !== userId)
+              .map((item) => {
+                const isFavorite = fav.some(favorite => favorite.artId === item.art_id && favorite.userId === userId);
+                const isAddedToCart = addedToCart.some(cart => cart.artId === item.art_id);
 
-            return (
-              <WrapItem key={item.art_id}>
-                <Flex width='250px' height="400px" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center" m={2}>
-                  <Box m="10px">
-                    <Box display="flex" justifyContent="space-between" alignItems="center">
-                      <Heading as="h2" color="#040B61" size="md" mb={2}>
-                        {item.art_name}
-                      </Heading>
-                      <BiDotsHorizontalRounded onClick={() => openModal(item)} />
-                    </Box>
+                return (
+                  <WrapItem key={item.art_id}>
+                    <Flex width='250px' height="400px" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center" m={2}>
+                      <Box m="10px">
+                        <Box display="flex" justifyContent="space-between" alignItems="center">
+                          <Heading as="h2" color="#040B61" size="md" mb={2}>
+                            {item.art_name}
+                          </Heading>
+                          <BiDotsHorizontalRounded onClick={() => openModal(item)} />
+                        </Box>
 
-                    {modalData && (
-                      <Modal isOpen={true} onClose={closeModal}>
-                        <ModalOverlay />
-                        <ModalContent>
-                          <ModalHeader color="#040B61" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <Heading as="h2" fontSize="5xl">
-                              {modalData.art_name}
-                            </Heading>
-                            <Box ml={5} style={{ marginLeft: 'auto' }}>
-                              <Heading as="h3" fontSize="lg" color="#249EA0" textAlign="right">
-                                - {modalData.artist_name}
-                              </Heading>
-                            </Box>
-                          </ModalHeader>
-
-
-                          <ModalBody>
-                            <Box flex={1}>
-                              <Box display="flex" justifyContent="center" alignItems="center" height="200px" >
-                                <Image src={modalData.picture} alt={modalData.art_name} width="200px" height="200px" borderRadius="10px" />
-
-                              </Box>
-
-                              <Box flex={1} textAlign="center">
-                                <Heading fontWeight="bold" color="#040B61" fontSize="2xl" mt={2} mb={2}>
-                                  ₹ {modalData.price}
+                        {modalData && (
+                          <Modal isOpen={true} onClose={closeModal}>
+                            <ModalOverlay />
+                            <ModalContent>
+                              <ModalHeader color="#040B61" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Heading as="h2" fontSize="5xl">
+                                  {modalData.art_name}
                                 </Heading>
-                                <Text fontSize="xl" mb={2}>
-                                  {modalData.art_description}
-                                </Text>
+                                <Box ml={5} style={{ marginLeft: 'auto' }}>
+                                  <Heading as="h3" fontSize="lg" color="#249EA0" textAlign="right">
+                                    - {modalData.artist_name}
+                                  </Heading>
+                                </Box>
+                              </ModalHeader>
 
-                              </Box>
+
+                              <ModalBody>
+                                <Box flex={1}>
+                                  <Box display="flex" justifyContent="center" alignItems="center" height="200px" >
+                                    <Image src={modalData.picture} alt={modalData.art_name} width="200px" height="200px" borderRadius="10px" />
+
+                                  </Box>
+
+                                  <Box flex={1} textAlign="center">
+                                    <Heading fontWeight="bold" color="#040B61" fontSize="2xl" mt={2} mb={2}>
+                                      ₹ {modalData.price}
+                                    </Heading>
+                                    <Text fontSize="xl" mb={2}>
+                                      {modalData.art_description}
+                                    </Text>
+
+                                  </Box>
 
 
-                            </Box>
-                          </ModalBody>
-                          <ModalFooter>
-                            <Button bg="#F78104" onClick={closeModal} ml={2}>
-                              Close
-                            </Button>
-                          </ModalFooter>
-                        </ModalContent>
-                      </Modal>
-                    )}
-
-                    <Box display="flex" justifyContent="center" alignItems="center" height="200px" m={3}>
-                      <Image src={item.picture} alt={item.art_name} width="200px" height="200px" borderRadius="10px" />
-                    </Box>
-                    <Box flex={1} textAlign="center">
-                      <Heading fontWeight="bold" color="#040B61" fontSize="2xl" mt={2} mb={2}>
-                        ₹ {item.price}
-                      </Heading>
-                    </Box>
-
-                    <Box display="flex" justifyContent="space-between" alignItems="center" m={3}>
-                      <Box display="flex" alignItems="center">
-                        {!isFavorite ? (
-                          <AiOutlineHeart onClick={() => handleFavoriteClick(item.user_id, item.art_id)} size={24} />
-                        ) : (
-                          <AiFillHeart size={24} color="#F78104" />
+                                </Box>
+                              </ModalBody>
+                              <ModalFooter>
+                                <Button bg="#F78104" onClick={closeModal} ml={2}>
+                                  Close
+                                </Button>
+                              </ModalFooter>
+                            </ModalContent>
+                          </Modal>
                         )}
 
-                        <Box mr={4} />
+                        <Box display="flex" justifyContent="center" alignItems="center" height="200px" m={3}>
+                          <Image src={item.picture} alt={item.art_name} width="200px" height="200px" borderRadius="10px" />
+                        </Box>
+                        <Box flex={1} textAlign="center">
+                          <Heading fontWeight="bold" color="#040B61" fontSize="2xl" mt={2} mb={2}>
+                            ₹ {item.price}
+                          </Heading>
+                        </Box>
 
-                        <GoCommentDiscussion onClick={() => openReviewModal(item.art_id)} size={24} />
+                        <Box display="flex" justifyContent="space-between" alignItems="center" m={3}>
+                          <Box display="flex" alignItems="center">
+                            {!isFavorite ? (
+                              <AiOutlineHeart onClick={() => handleFavoriteClick(userId, item.art_id)} size={24} />
+                            ) : (
+                              <AiFillHeart size={24} color="#F78104" />
+                            )}
+
+                            <Box mr={4} />
+
+                            <GoCommentDiscussion onClick={() => openReviewModal(item.art_id)} size={24} />
+                          </Box>
+
+                          {!isAddedToCart ? (
+                            <BsCart onClick={() => addToCart(item.art_id, item.art_name)} size={24} />
+                          ) : (
+                            <BsCartFill size={24} color="#249EA0" />
+                          )}
+                        </Box>
                       </Box>
-
-                      {!isAddedToCart ? (
-                        <BsCart onClick={() => addToCart(item.art_id, item.art_name)} size={24} />
-                      ) : (
-                        <BsCartFill size={24} color="#249EA0" />
-                      )}
-                    </Box>
-                  </Box>
-                </Flex>
-              </WrapItem>
-            );
-          })}
+                    </Flex>
+                  </WrapItem>
+                );
+              })}
 
           <Modal isOpen={isReviewModalOpen} onClose={closeReviewModal}>
             <ModalOverlay />
