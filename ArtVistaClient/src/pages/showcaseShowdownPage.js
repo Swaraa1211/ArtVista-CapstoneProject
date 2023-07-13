@@ -21,11 +21,6 @@ import {
   Input,
   Textarea,
   Flex,
-  InputGroup,
-  InputRightElement,
-  Spacer,
-  Grid,
-  GridItem
 } from "@chakra-ui/react";
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { AiOutlineHeart, AiFillHeart } from 'react-icons/ai';
@@ -37,6 +32,8 @@ import { getReview, getReviewById, postReview } from '../API/review';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../constant/atomRecoil';
 import { getCart, postCart } from '../API/cart';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ShowcaseShowdown = () => {
   //const { userId, username } = useRecoilValue(userAtom);
@@ -140,6 +137,16 @@ const ShowcaseShowdown = () => {
 
     if (response && response.status) {
       console.log('Successful in adding review', response.data);
+      toast('Reviews Successfully !', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       //formRef.current.reset();
 
     } else {
@@ -270,6 +277,7 @@ const ShowcaseShowdown = () => {
             Showdown
           </Text>
         </Heading>
+        <ToastContainer />
         <Box align="center" mt={4}>
           <input
             type="text"

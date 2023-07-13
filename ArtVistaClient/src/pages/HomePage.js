@@ -11,19 +11,17 @@ import {
     Icon,
     Wrap,
     WrapItem,
-    VStack
+    Grid
 } from '@chakra-ui/react';
 import { FaArrowRight } from "react-icons/fa";
 import Navbar from '../components/navBar';
 import AboutUs from '../utils/aboutUs';
 import { useState, useEffect } from 'react';
-import TypewriterEffect from '../utils/typeWritter';
-import { API_URL } from '../constant/endPoint';
 import axios from 'axios';
+import FloatingText from '../utils/floatingText';
 
 
 export default function HomePage() {
-
     const [artworks, setArtworks] = useState([]);
 
     useEffect(() => {
@@ -64,32 +62,36 @@ export default function HomePage() {
             // m="20px"
             >
                 <Flex width="full" align="center" justifyContent="center">
-                    <Box
-                        width="full"
-                        align="center"
-                        justifyContent="center"
-                        bg="#D1F2EB9"
-                        color="white"
-                        py={8}
-                        px={16}
-                    >
-                        <Flex align="center" justify="center" direction={['column', 'column', 'row']}>
-                            <Box mr={[0, 0, 8]}>
-                                <Heading as="h1" size="2xl" color="#040B61">
+                    <Box width="full" align="center" justifyContent="center" color="white" py={8} px={16}>
+                        <Grid templateColumns={["1fr", "1fr", "1fr 1fr"]} gap={8}>
+                            <Box>
+                                <Heading as="h1" size="2xl" color="#040B61" mb={4} mt="30px">
                                     Welcome to
                                 </Heading>
-                                <Text fontSize="6xl" fontWeight="bold" color="#F78104">
-                                    𐌀Ɽ𐌕 Ʋ𐌉𐌔𐌕𐌀
+                                <Text fontSize={["4xl", "6xl"]} fontWeight="bold" color="#F78104" mb={4}>
+                                <FloatingText text="𐌀Ɽ𐌕 Ʋ𐌉𐌔𐌕𐌀" />
+
                                 </Text>
-                                <Text fontSize="xl" fontWeight="bold" color="black" mt={[4, 4, 0]}>
-                                    Art has the power to transcend boundaries and speak to the depths of our souls. At ART VISTA, we believe
-                                    in celebrating art in all its forms. Join us on this journey as we celebrate the transformative power of
-                                    art and its ability to inspire and connect us all.
+                                <Text fontSize={["xl", "xl", "2xl"]} fontWeight="bold" color="black" mb={8}>
+                                    Art has the power to transcend boundaries and speak to the depths of our souls. At ART VISTA, we believe in celebrating art in all its forms. Join us on this journey as we celebrate the transformative power of art and its ability to inspire and connect us all.
                                 </Text>
-                               
                             </Box>
-                            
-                        </Flex>
+                            <Box position="relative" mt="30px">
+                                <Heading fontSize="5xl" fontWeight="bold" lineHeight="1.2" mb={4} color="#040B61">
+                                    Art Is Not
+                                </Heading>
+                                <Heading fontSize="5xl" fontWeight="bold" lineHeight="1.2" mb={4} color="#040B61">
+                                    What You See
+                                </Heading>
+                                <Heading fontSize="4xl" fontWeight="bold" lineHeight="1.2" mb={4} color="#F78104">
+                                <FloatingText text="But," />
+                                    
+                                </Heading>
+                                <Heading fontSize="5xl" fontWeight="bold" lineHeight="1.2" mb={4} color="#040B61">
+                                    What You Make Others See!
+                                </Heading>
+                            </Box>
+                        </Grid>
                     </Box>
                 </Flex>
                 <Box py={12} px={16} bg="#249EA0">

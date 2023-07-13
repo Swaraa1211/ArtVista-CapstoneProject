@@ -10,6 +10,8 @@ import {
 } from '@chakra-ui/react'
 import React, { useEffect, useRef, useState } from 'react';
 import { getArt, postArt } from '../../API/art';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { useRecoilValue } from 'recoil';
 import { userAtom } from '../../constant/atomRecoil';
 
@@ -59,6 +61,16 @@ const CreateArt = () => {
         if (response && response.status) {
             console.log('Successful in adding art', response.data);
             formRef.current.reset();
+            toast('Added Successfully !', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+            });
 
         } else {
             console.log('adding art failed in handle submit', response);
@@ -72,7 +84,7 @@ const CreateArt = () => {
                 alignItems="center"
                 justifyContent="center"
             >
-
+                <ToastContainer />
 
                 <Box p={4} width="500px">
                     <Heading align="center" justifyContent="center" color="#F78104">Create Art</Heading>

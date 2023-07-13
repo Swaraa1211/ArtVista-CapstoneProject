@@ -25,6 +25,9 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/navBar';
 import { getBidArt, getBidPrice, postBidArt, postBidPrice } from '../API/bidArt';
 import { Link, useOutlet } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const Bidding = () => {
     const userToken = localStorage.getItem('userToken');
@@ -62,6 +65,16 @@ const Bidding = () => {
 
         if (response && response.status) {
             console.log('Successful in adding Bid', response.data);
+            toast('Added Successfully !', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                });
         } else {
             console.log('adding Bid failed in handle submit', response);
         }
@@ -86,7 +99,7 @@ const Bidding = () => {
     useEffect(() => {
         fetchBidArt();
     }, []);
-    //console.log(art);
+    console.log(bidart);
 
 
     const [isPriceModalOpen, setIsPriceModalOpen] = useState(false);
@@ -176,7 +189,7 @@ const Bidding = () => {
         }
 
         return (
-            <Button onClick={() => openPriceModal(bidArtId, bidArtName)} mt={4} bgColor="#040B61">
+            <Button onClick={() => openPriceModal(bidArtId, bidArtName)} mt={4} bgColor="#040B61" color="white">
                 BidPrice
             </Button>
         );
@@ -204,6 +217,8 @@ const Bidding = () => {
                     ing
                 </Text>
             </Heading>
+
+            <ToastContainer />
 
             <Modal isOpen={isBidModalOpen} onClose={closeBidModal}>
                 <ModalOverlay />
@@ -285,7 +300,7 @@ const Bidding = () => {
                 <Wrap spacing={4} justify="center" align="center">
                     {bidart &&
                         bidart
-                            .filter((item) => item.userId !== userId)
+                            .filter((item) => item.user_id !== userId)
                             .map((item) => {
 
                                 return (

@@ -120,7 +120,7 @@ const Navbar = () => {
             <CgProfile color="white" size={30} ml={4} />
           </Link>
           <Link to="/cart" >
-            <BsCartFill color="white" size={30} mr={4} />
+            <BsCartFill color="white" size={30} mr={20} />
           </Link>
           <Box>
             {/* <Button colorScheme="whiteAlpha" ml={5} onClick={handleLogoutFunction}>Log Out</Button> */}
