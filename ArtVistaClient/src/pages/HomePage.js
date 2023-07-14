@@ -69,7 +69,7 @@ export default function HomePage() {
                                     Welcome to
                                 </Heading>
                                 <Text fontSize={["4xl", "6xl"]} fontWeight="bold" color="#F78104" mb={4}>
-                                <FloatingText text="𐌀Ɽ𐌕 Ʋ𐌉𐌔𐌕𐌀" />
+                                    <FloatingText text="𐌀Ɽ𐌕 Ʋ𐌉𐌔𐌕𐌀" />
 
                                 </Text>
                                 <Text fontSize={["xl", "xl", "2xl"]} fontWeight="bold" color="black" mb={8}>
@@ -84,8 +84,8 @@ export default function HomePage() {
                                     What You See
                                 </Heading>
                                 <Heading fontSize="4xl" fontWeight="bold" lineHeight="1.2" mb={4} color="#F78104">
-                                <FloatingText text="But," />
-                                    
+                                    <FloatingText text="But," />
+
                                 </Heading>
                                 <Heading fontSize="5xl" fontWeight="bold" lineHeight="1.2" mb={4} color="#040B61">
                                     What You Make Others See!
@@ -99,20 +99,42 @@ export default function HomePage() {
                 </Box>
 
                 <Box py={12} px={16} >
-                    <Heading as="h1">Artworks</Heading>
+                    <Heading as="h1" size="2xl" mb={8} color="#040B61" textAlign="center">Art Institute of Chicago</Heading>
                     <Wrap spacing={4} justify="center" align="center">
 
                         {artworks.map((artwork) => (
                             <WrapItem key={artwork.data.id}>
-                                <Box width="200px" height="400px">
-                                    <Image
-                                        src={`https://www.artic.edu/iiif/2/${artwork.data.image_id}/full/843,1000/0/default.jpg`}
-                                        alt={artwork.data.title}
-                                        width="200px"
-                                        height="200px"
-                                    />
-                                    <Heading as="h2" size="md">{artwork.data.title}</Heading>
-                                </Box>
+                                <Flex
+                                    // width='250px' 
+                                    // height="400px"
+
+                                    bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center" m={2}>
+
+                                    <Box
+                                        style={{ display: 'flex', flexDirection: 'column', justifyContent: "center", alignItems: 'center' }}
+
+                                        width="250px" height="350px" m="8px">
+
+                                        <Image
+                                            src={`https://www.artic.edu/iiif/2/${artwork.data.image_id}/full/843,1000/0/default.jpg`}
+                                            alt={artwork.data.title}
+                                            width="200px"
+                                            height="200px"
+                                        />
+                                        <Text
+                                            as="h2"
+                                            fontWeight="bold"
+                                            textAlign="center"
+                                            size="md"
+                                            mt="5px"
+                                            >{artwork.data.title}</Text>
+                                        <Text
+                                            as="h2"
+                                            fontWeight="bold"
+                                            textAlign="center"
+                                            size="md">Artist - {artwork.data.artist_display}</Text>
+                                    </Box>
+                                </Flex>
                             </WrapItem>
                         ))}
                     </Wrap>

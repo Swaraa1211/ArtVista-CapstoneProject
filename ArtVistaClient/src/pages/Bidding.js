@@ -74,7 +74,7 @@ const Bidding = () => {
                 draggable: true,
                 progress: undefined,
                 theme: "light",
-                });
+            });
         } else {
             console.log('adding Bid failed in handle submit', response);
         }
@@ -136,6 +136,26 @@ const Bidding = () => {
         }
         closePriceModal();
     };
+
+    const [bidContent, setbidContent] = useState([]);
+    const fetchbidContent = async (artID) => {
+        try {
+            const response = await getBidPrice();
+            const bidData = response.data;
+            console.log("bid " + bidData);
+            const filteredbidData = bidData.filter((bid) => bid.bidArt_id === artID);
+            setbidContent(filteredbidData);
+        } catch (error) {
+            console.error('Failed to fetch bid content:', error);
+        }
+    };
+
+    useEffect(() => {
+        if (bidArtId) {
+            fetchbidContent(bidArtId);
+        }
+    }, [bidArtId]);
+
 
     const [soldArtIds, setSoldArtIds] = useState([]);
 
@@ -203,6 +223,20 @@ const Bidding = () => {
 
     const closeModal = () => {
         setModalData(null);
+    };
+
+    const renderModalBody = () => {
+        if (bidContent.length === 0) {
+            return <p>No bids found.</p>;
+        }
+
+        return (
+            <ul>
+                {bidContent.map((bid) => (
+                    <li key={bid.bidArt_id}>{bid.bidprice}</li>
+                ))}
+            </ul>
+        );
     };
 
     return (
@@ -391,6 +425,10 @@ const Bidding = () => {
                 <ModalContent>
                     <ModalHeader>Bid</ModalHeader>
                     <ModalBody>
+                        {renderModalBody()}
+
+                    </ModalBody>
+                    <ModalFooter>
                         <form onSubmit={handleSubmitPrice}>
                             <FormControl isRequired>
                                 <FormLabel>Price</FormLabel>
@@ -400,9 +438,6 @@ const Bidding = () => {
                                 Submit
                             </Button>
                         </form>
-
-                    </ModalBody>
-                    <ModalFooter>
                         <Button colorScheme="gray" onClick={closePriceModal} ml={2}>
                             Cancel
                         </Button>
