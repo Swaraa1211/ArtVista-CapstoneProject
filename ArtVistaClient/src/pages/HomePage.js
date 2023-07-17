@@ -282,7 +282,9 @@ export default function HomePage() {
                     </Flex>
                 </Box>
 
-                <Box py={12} px={16} bg="#249EA0">
+                <Box 
+                py={12} 
+                px={16} bg="#249EA0">
                     <Text textAlign="center" fontSize="lg" fontWeight="bold">
                         © 2023 Art Vista.
                     </Text>

@@ -261,7 +261,7 @@ const ShowcaseShowdown = () => {
               boxShadow: "0 2px 4px rgba(4, 11, 97, 0.2)",
               borderRadius: "5px",
               padding: "8px",
-              width: "96vw"
+              width: "80vw"
             }}
           />
         </Box>
