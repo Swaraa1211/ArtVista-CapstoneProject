@@ -37,11 +37,11 @@ Art has the power to transcend boundaries and speak to the depths of our souls. 
 - Leave meaningful comments and provide valuable feedback to support and encourage artists on their creative journey.
 
 
-## Glimpse 💬
+## Glimpse ✨
 
-![ArtVistaHomePage](assets/ArtVistaHomePage.png)
-![ArtVistaShowcaseShowdown](assets/ArtVistaShowcase.png)
-![ArtVistaPortfolio](assets/ArtVistaPortfolio.png)
-![ArtVistaBidding](assets/ArtVistaBidding.png)
-![ArtVistaProfile](assets/ArtVistaProfile.png)
+![ArtVistaHomePage](Assets/ArtVistaHomePage.png)
+![ArtVistaShowcaseShowdown](Assets/ArtVistaShowcase.png)
+![ArtVistaPortfolio](Assets/ArtVistaPortfolio.png)
+![ArtVistaBidding](Assets/ArtVistaBidding.png)
+![ArtVistaProfile](Assets/ArtVistaProfile.png)
 
