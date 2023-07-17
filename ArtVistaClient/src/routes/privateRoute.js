@@ -21,31 +21,3 @@ const PrivateRoute = () => {
 };
 
 export default PrivateRoute;
-
-// import { useContext, useState } from 'react';
-// import { Outlet, Navigate } from 'react-router-dom';
-// import { AuthContext } from '../pages/Auth/authProvider';
-
-// const PrivateRoute = ({ component: Component, ...rest }) => {
-//   //const { isAuthenticated } = useContext(AuthContext);
-//   const [isLoggedIn, setIsLoggedIn] = useState()
-
-//   useEffect(() => {
-//     const userToken = JSON.parse(localStorage.getItem('userToken'));
-
-//     if (userToken) {
-      
-//       setIsAuthenticated(true);
-//     } else {
-//       setIsAuthenticated(false);
-//     }
-//   }, []);
-
-//   return isAuthenticated ? (
-//     <Outlet />
-//   ) : (
-//     <Navigate to="/login" replace />
-//   );
-// };
-
-// export default PrivateRoute;

@@ -25,13 +25,8 @@ import {
 import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../components/navBar';
 import { getArt, postArt, getArtById, putArt, deleteArt } from '../API/art';
-import { useRecoilValue } from 'recoil';
-import { userAtom } from '../constant/atomRecoil';
-import { Outlet } from 'react-router-dom';
 import { useOutlet } from 'react-router-dom';
 import { FaHandPeace } from 'react-icons/fa';
-
-
 import SideBar from '../components/sideBar';
 import { getArtist } from '../API/artistPortfolio';
 
@@ -64,8 +59,6 @@ const DefaultProfilePage = () => {
                 if (filteredArtist.length > 0) {
                     setUserAbout(filteredAbout[0]);
                 }
-
-
             } catch (error) {
                 console.error(error);
             }
@@ -107,14 +100,11 @@ const DefaultProfilePage = () => {
                 </Box>
 
                 <Text fontSize="2xl" mt={4}>
-  {userAbout}
-</Text>
+                    {userAbout}
+                </Text>
 
             </Box>
         </Flex>
-
-
-
     );
 };
 
@@ -155,13 +145,8 @@ const Profile = () => {
                     </Box>
                 </GridItem>
             </Grid>
-
-
-
         </>
-
     );
-
 };
 
 export default Profile;

@@ -24,7 +24,7 @@ const SimpleSlider = () => {
                             height="200px"
                             borderRadius='10px'
                             src="https://i.pinimg.com/564x/d1/8b/60/d18b60da1b4177151fb1c19cc6daced9.jpg"
-                            alt="Dan Abramov"
+                            alt="Market Mingle"
                             mb={4}
                         />
                         <Box>
@@ -42,7 +42,7 @@ const SimpleSlider = () => {
                             height="200px"
                             borderRadius='10px'
                             src="https://images.unsplash.com/photo-1559813114-cda845612ae7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80"
-                            alt="Dan Abramov"
+                            alt="Showcase Showdown"
                             mb={4}
                         />
                         <Box>
@@ -60,6 +60,7 @@ const SimpleSlider = () => {
                             height="200px"
                             borderRadius='10px'
                             src="https://images.unsplash.com/photo-1514195037031-83d60ed3b448?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=871&q=80"
+                            alt="Bidding"
                             mb={4}
                         />
                         <Box>
@@ -77,7 +78,7 @@ const SimpleSlider = () => {
                             height="200px"
                             borderRadius='10px'
                             src="https://i.pinimg.com/564x/aa/71/29/aa71292dae0325604352aa189c6227ab.jpg"
-                            alt="Dan Abramov"
+                            alt="Innovation Canvas"
                             mb={4}
                         />
                         <Box>
@@ -95,7 +96,7 @@ const SimpleSlider = () => {
                             height="200px"
                             borderRadius='10px'
                             src="https://i.ytimg.com/vi/ml6j3tBqeaw/maxresdefault.jpg"
-                            alt="Dan Abramov"
+                            alt="Collect and Cherish"
                             mb={4}
                         />
                         <Box>
@@ -113,7 +114,7 @@ const SimpleSlider = () => {
                             height="200px"
                             borderRadius='10px'
                             src="https://cdn.dribbble.com/users/142973/screenshots/9875511/media/9fe204959d18d53462629c682ea89c14.png?compress=1&resize=400x300&vertical=center"
-                            alt="Dan Abramov"
+                            alt="Opinion"
                             mb={4}
                         />
                         <Box>

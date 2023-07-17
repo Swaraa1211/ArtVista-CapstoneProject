@@ -15,23 +15,17 @@ import {
     Button,
     Text,
     Flex,
-Box
+    Box
 } from '@chakra-ui/react'
 import Navbar from '../components/navBar';
 import { deleteCart, getCart } from '../API/cart';
-import React, { useEffect, useRef, useState } from 'react';
-
-import { useRecoilValue } from 'recoil';
-import { userAtom } from '../constant/atomRecoil';
+import React, { useEffect, useState } from 'react';
 import { postOrders } from '../API/orders';
-
-
 
 const Cart = () => {
     const [cart, setCart] = useState([]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [currentTab, setCurrentTab] = useState(0);
-    //const { userId, username } = useRecoilValue(userAtom);
     const userToken = localStorage.getItem('userToken');
     const parsedToken = JSON.parse(userToken);
     const userId = parsedToken.data.userId;
@@ -103,7 +97,6 @@ const Cart = () => {
     };
 
     //payment
-
     const openPaymentPage = () => {
         const totalAmount = selectedItems.reduce((total, item) => total + item.artPrice, 0);
         const options = {
@@ -194,8 +187,6 @@ const Cart = () => {
         }
 
         console.log('Perform post method');
-
-        // window.location.href = '/order-success';
     };
 
     return (
@@ -277,33 +268,30 @@ const Cart = () => {
                                 </Table>
                                 {cart.length > 0 && <Button bg="#040B61" color="white" onClick={handleCheckout}>Checkout</Button>}
                             </Box>
-
-
-                            
                         </TabPanel>
                         <TabPanel>
-                        <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
-                            <Table variant="striped" m="5px" colorScheme="white">
-                                <TableCaption>Checkout</TableCaption>
-                                <Thead>
-                                    <Tr>
-                                        <Th>Art Name</Th>
-                                        <Th>Quantity</Th>
-                                        <Th>Price</Th>
-                                    </Tr>
-                                </Thead>
-                                <Tbody>
-                                    {selectedItems.map((item) => (
-                                        <Tr key={item.cartId}>
-                                            <Td>{item.artName}</Td>
-                                            <Td>{item.quantity}</Td>
-                                            <Td>{item.artPrice}</Td>
+                            <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
+                                <Table variant="striped" m="5px" colorScheme="white">
+                                    <TableCaption>Checkout</TableCaption>
+                                    <Thead>
+                                        <Tr>
+                                            <Th>Art Name</Th>
+                                            <Th>Quantity</Th>
+                                            <Th>Price</Th>
                                         </Tr>
-                                    ))}
-                                </Tbody>
-                            </Table>
-                            {selectedItems.length > 0 && <Button bg="#040B61" color="white" onClick={openPaymentPage}>Payment</Button>}
-</Box>
+                                    </Thead>
+                                    <Tbody>
+                                        {selectedItems.map((item) => (
+                                            <Tr key={item.cartId}>
+                                                <Td>{item.artName}</Td>
+                                                <Td>{item.quantity}</Td>
+                                                <Td>{item.artPrice}</Td>
+                                            </Tr>
+                                        ))}
+                                    </Tbody>
+                                </Table>
+                                {selectedItems.length > 0 && <Button bg="#040B61" color="white" onClick={openPaymentPage}>Payment</Button>}
+                            </Box>
                         </TabPanel>
                     </TabPanels>
                 </Flex>

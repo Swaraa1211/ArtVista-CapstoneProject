@@ -1,4 +1,3 @@
-
 import Navbar from '../components/navBar';
 import { getArt } from '../API/art';
 import React, { useEffect, useRef, useState } from 'react';
@@ -29,8 +28,6 @@ import { AiFillStar, AiOutlineStar } from 'react-icons/ai';
 import { GoCommentDiscussion } from 'react-icons/go';
 import { deleteFavorites, getFavorites, postFavorites } from '../API/favorites';
 import { getReview, getReviewById, postReview } from '../API/review';
-import { useRecoilValue } from 'recoil';
-import { userAtom } from '../constant/atomRecoil';
 import { getCart, postCart } from '../API/cart';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -44,8 +41,6 @@ const ShowcaseShowdown = () => {
   const formRef = useRef(null);
   const [art, setArt] = useState([]);
 
-  //  const [loading, setLoading ] = useState(false);
-
   //art
   const fetchArt = async () => {
     try {
@@ -53,15 +48,12 @@ const ShowcaseShowdown = () => {
       console.log(response);
       const artData = Array.isArray(response.data) ? response.data : [];
       setArt(artData);
-
       //console.log("api fetch in showcasecshowdown");
     } catch (error) {
       console.error(error);
     }
   };
   useEffect(() => {
-
-
     fetchArt();
   }, []);
   console.log(art);
@@ -108,8 +100,6 @@ const ShowcaseShowdown = () => {
   const [selectedArtId, setSelectedArtId] = useState(null);
   var starRating = 0;
 
-
-
   const openReviewModal = (artID) => {
     setIsReviewModalOpen(true);
     setSelectedArtId(artID);
@@ -146,8 +136,7 @@ const ShowcaseShowdown = () => {
         draggable: true,
         progress: undefined,
         theme: "light",
-        });
-      //formRef.current.reset();
+      });
 
     } else {
       console.log('adding review failed in handle submit', response);
@@ -164,8 +153,6 @@ const ShowcaseShowdown = () => {
       const reviewData = response.data;
       const filteredReviewData = reviewData.filter(review => review.artId === artID);
       setReviewContent(filteredReviewData);
-      // const reviewData = response.data;
-      // setReviewContent(response.data);
 
     } catch (error) {
       console.error('Failed to fetch review content:', error);
@@ -174,9 +161,7 @@ const ShowcaseShowdown = () => {
 
   //cart
   const [addedToCart, setAddedToCart] = useState([]);
-  //const [isAddedToCart, setIsAddedToCart] = useState([])
   const [isAddedToCart, setIsAddedToCart] = useState(false);
-
 
   const addToCart = async (artId, artName) => {
     try {
@@ -188,19 +173,9 @@ const ShowcaseShowdown = () => {
 
       const response = await postCart(cartData);
       console.log('Item added to cart:', response.data);
-
-      //setIsAddedToCart(true);
       setIsAddedToCart(prevState => !prevState);
       window.location.reload();
       fetchArt();
-
-      // if (response && response.status) {
-      //   console.log('Successful in adding cart', response.data);
-      //   //fetchCart(); // Fetch cart data after adding an item
-
-      // } else {
-      //   console.log('Adding cart failed in handle submit', response);
-      // }
     } catch (error) {
       console.error('Failed to add item to cart:', error);
     }
@@ -215,7 +190,6 @@ const ShowcaseShowdown = () => {
         const carts = response.data;
         console.log("In cart fetch", carts);
         setAddedToCart(carts);
-        //setIsAddedToCart(carts);
       } catch (error) {
         console.error(error);
       }
@@ -228,7 +202,6 @@ const ShowcaseShowdown = () => {
   const [filteredArt, setFilteredArt] = useState([]);
 
   useEffect(() => {
-    // Fetch art data
     const fetchArt = async () => {
       try {
         const response = await getArt();
@@ -243,7 +216,6 @@ const ShowcaseShowdown = () => {
   }, []);
 
   useEffect(() => {
-    // Filter art based on search query
     const filtered = art.filter(item =>
       item.art_name.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -285,7 +257,6 @@ const ShowcaseShowdown = () => {
             value={searchQuery}
             onChange={handleSearch}
             style={{
-              //backgroundColor: 'lightblue', 
               fontSize: '16px',
               boxShadow: "0 2px 4px rgba(4, 11, 97, 0.2)",
               borderRadius: "5px",
@@ -344,10 +315,7 @@ const ShowcaseShowdown = () => {
                                     <Text fontSize="xl" mb={2}>
                                       {modalData.art_description}
                                     </Text>
-
                                   </Box>
-
-
                                 </Box>
                               </ModalBody>
                               <ModalFooter>
@@ -445,12 +413,8 @@ const ShowcaseShowdown = () => {
                         Cancel
                       </Button>
                     </Box>
-
-
                   </form>
                 </Box>
-
-
               </ModalFooter>
             </ModalContent>
           </Modal>

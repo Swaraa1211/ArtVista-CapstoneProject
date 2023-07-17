@@ -21,9 +21,7 @@ import { userAtom } from '../../constant/atomRecoil';
 
 export default function LoginPage() {
   const setUser = useSetRecoilState(userAtom);
-
   const { handleLogin } = useContext(AuthContext);
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,9 +62,6 @@ export default function LoginPage() {
     }
   };
 
-  
-
-
   return (
     <>
       <Flex
@@ -105,21 +100,16 @@ export default function LoginPage() {
                   type="password"
                   name="password"
                   placeholder="******"
-                // focusBorderColor="yellow"
                 />
               </FormControl>
               <Button mt={4} type="submit" color="white" width="full" bg="#249EA0">
                 Log In
               </Button>
-
-              {/* {userId && <Profile userId={userId} username={username} />} */}
-
             </form>
             <Text mt={4} textAlign="center" >
               Don't have an account?
               <Link to='/signup'>
                 <Button mt='1px' type='submit' color="white" width="full" bg="#249EA0">Sign Up</Button>
-
               </Link>
             </Text>
           </Box>

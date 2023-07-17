@@ -16,8 +16,6 @@ import {
     Box,
     WrapItem,
     Wrap,
-
-    Grid, GridItem
 } from '@chakra-ui/react';
 import { BiDotsHorizontalRounded } from 'react-icons/bi';
 import { AiOutlinePlusCircle } from 'react-icons/ai';
@@ -35,9 +33,7 @@ const Bidding = () => {
     const userId = parsedToken.data.userId;
     const username = parsedToken.data.username;
     console.log(userId)
-
     const outlet = useOutlet();
-
     const [isBidModalOpen, setIsBidModalOpen] = useState(false);
 
     const openBidModal = () => {
@@ -90,8 +86,6 @@ const Bidding = () => {
             console.log(response);
             const artData = Array.isArray(response.data) ? response.data : [];
             setBidArt(artData);
-
-            //console.log("api fetch in showcasecshowdown");
         } catch (error) {
             console.error(error);
         }
@@ -171,7 +165,6 @@ const Bidding = () => {
                     .filter(item => item.status === 'Sold')
                     .map(item => item.bidArt_id);
                 console.log("soldids", soldIds);
-
                 setSoldArtIds(soldIds);
             }
         } catch (error) {
@@ -182,8 +175,6 @@ const Bidding = () => {
     useEffect(() => {
         fetchSoldArtIds();
     }, []);
-
-
 
     // Function to check if a BidArt_id is sold
     const isSold = bidArtId => {
@@ -264,10 +255,6 @@ const Bidding = () => {
                                 <FormLabel>Art</FormLabel>
                                 <Input type="text" name="bid_art" placeholder="Art Name" />
                             </FormControl>
-                            {/* <FormControl isRequired>
-                                <FormLabel>Artist Name</FormLabel>
-                                <Input type="text" name="bid_artist" placeholder="Artist Name" />
-                            </FormControl> */}
                             <FormControl isRequired>
                                 <FormLabel>Art Description</FormLabel>
                                 <Input type="text" name="art_description" placeholder="Descrition" />
@@ -296,8 +283,6 @@ const Bidding = () => {
                 </ModalContent>
             </Modal>
             <Flex>
-
-
                 <Flex width='250px' height="400px" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center" m={5}>
 
                     <Box m="10px">

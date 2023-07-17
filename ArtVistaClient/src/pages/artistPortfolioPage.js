@@ -28,8 +28,6 @@ const ArtistPortfolio = () => {
                 console.log(response);
                 //const artistData = Array.isArray(response.data) ? response.data : [];
                 setArtist(response.data);
-
-                //console.log("api fetch in showcasecshowdown");
             } catch (error) {
                 console.error(error);
             }
@@ -43,23 +41,7 @@ const ArtistPortfolio = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredArtist, setFilteredArtist] = useState([]);
 
-    // useEffect(() => {
-    //     // Fetch art data
-    //     const fetchArt = async () => {
-    //         try {
-    //             const response = await getArt();
-    //             const artData = Array.isArray(response.data) ? response.data : [];
-    //             setArt(artData);
-    //         } catch (error) {
-    //             console.error(error);
-    //         }
-    //     };
-
-    //     fetchArt();
-    // }, []);
-
     useEffect(() => {
-        // Filter artist based on search query
         const filtered = artist.filter(item =>
             item.artist_name.toLowerCase().includes(searchQuery.toLowerCase())
         );
@@ -98,7 +80,6 @@ const ArtistPortfolio = () => {
                     value={searchQuery}
                     onChange={handleSearch}
                     style={{
-                        //backgroundColor: 'lightblue', 
                         fontSize: '16px',
                         boxShadow: "0 2px 4px rgba(4, 11, 97, 0.2)",
                         borderRadius: "5px",
@@ -114,8 +95,6 @@ const ArtistPortfolio = () => {
                             <Flex width='500px' height="" bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center">
 
                                 <Box
-                                    // maxW="sm"
-
                                     borderRadius="lg"
                                     overflow="hidden"
                                     display="flex"
@@ -142,14 +121,7 @@ const ArtistPortfolio = () => {
                                                     <Heading as="h2" fontSize="5xl">
                                                         {modalData.artist_name}
                                                     </Heading>
-                                                    {/* <Box ml={5} style={{ marginLeft: 'auto' }}>
-                                                        <Heading as="h3" fontSize="lg" color="#249EA0" textAlign="right">
-                                                            - {modalData.artist_name}
-                                                        </Heading>
-                                                    </Box> */}
                                                 </ModalHeader>
-
-
                                                 <ModalBody>
                                                     <Box flex={1}>
 

@@ -35,8 +35,6 @@ export default function HomePage() {
                 '129883', '129884', '129885', '129887', '129888', '129889', '129890', '129891',
                 '129892', '129893', '129785'
             ];
-
-
             const artworksData = [];
 
             for (let i = 0; i < artworkIds.length; i++) {
@@ -55,12 +53,8 @@ export default function HomePage() {
 
     return (
         <>
-
             <Navbar />
-
-            <Box
-            // m="20px"
-            >
+            <Box>
                 <Flex width="full" align="center" justifyContent="center">
                     <Box width="full" align="center" justifyContent="center" color="white" py={8} px={16}>
                         <Grid templateColumns={["1fr", "1fr", "1fr 1fr"]} gap={8}>
@@ -70,7 +64,6 @@ export default function HomePage() {
                                 </Heading>
                                 <Text fontSize={["4xl", "6xl"]} fontWeight="bold" color="#F78104" mb={4}>
                                     <FloatingText text="𐌀Ɽ𐌕 Ʋ𐌉𐌔𐌕𐌀" />
-
                                 </Text>
                                 <Text fontSize={["xl", "xl", "2xl"]} fontWeight="bold" color="black" mb={8}>
                                     Art has the power to transcend boundaries and speak to the depths of our souls. At ART VISTA, we believe in celebrating art in all its forms. Join us on this journey as we celebrate the transformative power of art and its ability to inspire and connect us all.
@@ -105,15 +98,17 @@ export default function HomePage() {
                         {artworks.map((artwork) => (
                             <WrapItem key={artwork.data.id}>
                                 <Flex
-                                    // width='250px' 
-                                    // height="400px"
-
-                                    bgColor="white" boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="5px" alignItems="center" m={2}>
+                                    bgColor="white"
+                                    boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)"
+                                    borderRadius="5px"
+                                    alignItems="center"
+                                    m={2}
+                                >
 
                                     <Box
                                         style={{ display: 'flex', flexDirection: 'column', justifyContent: "center", alignItems: 'center' }}
-
-                                        width="250px" height="350px" m="8px">
+                                        width="250px" height="350px" m="8px"
+                                    >
 
                                         <Image
                                             src={`https://www.artic.edu/iiif/2/${artwork.data.image_id}/full/843,1000/0/default.jpg`}
@@ -127,7 +122,7 @@ export default function HomePage() {
                                             textAlign="center"
                                             size="md"
                                             mt="5px"
-                                            >{artwork.data.title}</Text>
+                                        >{artwork.data.title}</Text>
                                         <Text
                                             as="h2"
                                             fontWeight="bold"
@@ -138,12 +133,8 @@ export default function HomePage() {
                             </WrapItem>
                         ))}
                     </Wrap>
-
                 </Box>
                 <Box py={12} px={16} bg="#249EA0" >
-                    {/* <Heading as="h1" size="2xl" color="#040B61" mb={4} textAlign="center">
-                        FEATURES
-                    </Heading> */}
                     <SimpleGrid columns={{ sm: 1, md: 2, lg: 3 }} spacing={8}>
                         <GridItem>
                             <Box
@@ -235,11 +226,7 @@ export default function HomePage() {
                         </GridItem>
                     </SimpleGrid>
                 </Box>
-
-
-
                 <Box
-                    // bg="gray.100"
                     py={5}
                     px={10}
                 >
@@ -248,8 +235,6 @@ export default function HomePage() {
                         alignItems="center"
                         justifyContent="center"
                         minHeight="80vh"
-                    // padding={8}
-                    //bg="gray.200"
                     >
                         <Box maxW="800px" textAlign="center">
                             <Heading as="h1" size="2xl" mb={8} color="#F78104">

@@ -20,8 +20,6 @@ import TypewriterEffect from '../../utils/typeWritter';
 export default function SignupPage() {
 
   const navigate = useNavigate();
-
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -36,17 +34,11 @@ export default function SignupPage() {
       const users = response.data;
       const emailExists = users.some(user => user.user_email === formData.user_email);
       if (emailExists) {
-        // User email already exists
-        alert('The provided email is already registered. Please use a different email');
-        
+        alert('The provided email is already registered. Please use a different email');        
         return;
       }
-
-      // Continue with the signup process
-      // Call the Signup API or perform any other necessary actions
       const user = await Signup(formData);
       if (user.status) {
-        // Signup successful
         navigate('/login');
         alert({
           type: 'success',
@@ -69,37 +61,7 @@ export default function SignupPage() {
         message: 'Failed to fetch users. Please try again later.',
       });
     }
-
-
-    //const response = await Signup(formData);
-
-    // if (response && response.status) {
-    //   console.log('Successful SignUp', response.data);
-    //   navigate('/homePage');
-    // } else {
-    //   console.log('Signup failed in handle submit', response);
-    // }
-    // const user = await Signup(formData);
-    //   if (user.status) {
-    //     //localStorage.setItem('profile', JSON.stringify(user.data));
-    //     navigate('/login');
-    //     alert({
-    //       type: 'success',
-    //       title: 'Signup',
-    //       message: `Successfully signed up as ${formData.user_email}`,
-    //     });
-    //     //onCloseHandler();
-    //   } else {
-    //     alert({
-    //       type: 'error',
-    //       title: 'Check',
-    //     });
-    //   }
-
-
   };
-
-
 
   return (
     <>

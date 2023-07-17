@@ -12,7 +12,6 @@ import {
   ModalBody,
   ModalFooter
 } from "@chakra-ui/react";
-//import { SearchIcon } from '@chakra-ui/icons'
 import { BsCartFill, } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { useNavigate, Link } from "react-router-dom";
@@ -23,13 +22,10 @@ import { deleteCart, getCart } from "../API/cart";
 
 const Navbar = () => {
   const { handleLogout } = useContext(AuthContext);
-
-  //const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogoutFunction = () => {
     localStorage.removeItem('userToken');
-    //handleLogout();
     navigate('/login');
   };
 
@@ -55,7 +51,6 @@ const Navbar = () => {
       }
     }
     localStorage.removeItem('userToken');
-    //handleLogout();
     navigate('/login');
   };
 
@@ -80,10 +75,6 @@ const Navbar = () => {
       <Box
         bg="#249EA0"
         py={5}
-        // rounded="full"
-        // mx={4}
-        // mb={4}
-        // mt={2}
         boxShadow="md"
       >
         <Flex maxW="container.lg" mx="auto" align="center" >
@@ -123,7 +114,6 @@ const Navbar = () => {
             <BsCartFill color="white" size={30} mr={20} />
           </Link>
           <Box>
-            {/* <Button colorScheme="whiteAlpha" ml={5} onClick={handleLogoutFunction}>Log Out</Button> */}
             <Button onClick={() => openLogoutModal()} colorScheme="whiteAlpha" ml={5}>
               LogOut
             </Button>
@@ -135,9 +125,7 @@ const Navbar = () => {
         <ModalContent>
           <ModalHeader>Logout</ModalHeader>
           <ModalBody>
-            <Text> Are you sure you want to LogOut ?</Text>
-
-            
+            <Text> Are you sure you want to LogOut ?</Text>            
           </ModalBody>
           <ModalFooter>
             <Button colorScheme="blue" onClick={handleSubmitLogout} bg="#040B61" color="white">

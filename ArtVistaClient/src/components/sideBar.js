@@ -6,20 +6,12 @@ import {
     Flex,
 } from '@chakra-ui/react';
 import React from 'react';
-
 import { AuthContext } from '../pages/Auth/authProvider';
 import { useNavigate, Link } from "react-router-dom";
 import { useContext, useState } from 'react';
 
 const SideBar = () => {
 
-    const navigate = useNavigate();
-
-
-    const handleLogoutFunction = () => {
-
-        navigate('/login');
-    };
     return (
         <VStack spacing={6} align="stretch" h="100%">
             <Flex alignItems="center">
@@ -51,8 +43,6 @@ const SideBar = () => {
                         Orders
                     </Link>
                 </Button>
-
-               
             </VStack>
         </VStack>
     );
