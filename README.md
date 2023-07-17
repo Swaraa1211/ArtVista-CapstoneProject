@@ -4,6 +4,21 @@
 
 Art has the power to transcend boundaries and speak to the depths of our souls. At ART VISTA, we believe in celebrating art in all its forms. Join us on this journey as we celebrate the transformative power of art and its ability to inspire and connect us all.
 
+## Tech Stack 💬
+
+**Client:** ReactJS
+
+**Styling:** Chakra UI
+
+**Server:** C#
+
+**Database:** MSSQL
+
+**Background Jobs:** Hangfire
+
+**CI / CD Pipeline:** GitHub Actions
+
+
 ## Features 💬
 
 #### ⚡️ Showcase Showdown
