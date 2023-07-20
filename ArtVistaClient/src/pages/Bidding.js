@@ -100,6 +100,12 @@ const Bidding = () => {
     const [bidArtId, setBidArtId] = useState(null);
     const [bidArtName, setBidArtName] = useState(null);
 
+    useEffect(() => {
+        if (isPriceModalOpen && bidArtId) {
+          fetchbidContent(bidArtId);
+        }
+      }, [isPriceModalOpen, bidArtId]);
+
     const openPriceModal = (bidId, bidName) => {
         setBidArtId(bidId);
         setBidArtName(bidName);
@@ -108,6 +114,7 @@ const Bidding = () => {
 
     const closePriceModal = () => {
         setIsPriceModalOpen(false);
+        
     };
     const handleSubmitPrice = async (event) => {
         event.preventDefault();
@@ -218,13 +225,21 @@ const Bidding = () => {
 
     const renderModalBody = () => {
         if (bidContent.length === 0) {
-            return <p>No bids found.</p>;
+            return <Text>No bids found.</Text>;
         }
 
         return (
             <ul>
                 {bidContent.map((bid) => (
-                    <li key={bid.bidArt_id}>{bid.bidprice}</li>
+                    <li key={bid.bidArt_id}>
+                        <Box boxShadow="0 2px 10px rgba(4, 11, 97, 0.2)" borderRadius="2px" m="5px">
+                            <Text m="5px">
+                                {bid.bidprice}
+                            </Text>
+                            
+                        </Box>
+
+                    </li>
                 ))}
             </ul>
         );
@@ -277,7 +292,7 @@ const Bidding = () => {
                         </Button>
                     </ModalBody>
                     <ModalFooter>
-                        <Text>upload your art here</Text>
+                        <Text>Upload your art here</Text>
 
                     </ModalFooter>
                 </ModalContent>
@@ -411,21 +426,25 @@ const Bidding = () => {
                     <ModalHeader>Bid</ModalHeader>
                     <ModalBody>
                         {renderModalBody()}
-
-                    </ModalBody>
-                    <ModalFooter>
-                        <form onSubmit={handleSubmitPrice}>
+                        <Box mt="15px">
+                            <form onSubmit={handleSubmitPrice} >
                             <FormControl isRequired>
                                 <FormLabel>Price</FormLabel>
                                 <Input type="number" name="price_bid" placeholder="Price" />
                             </FormControl>
-                            <Button colorScheme="blue" type="submit">
-                                Submit
-                            </Button>
+                            <Flex alignContent="center" justifyContent="center" mt="5px">
+                                <Button colorScheme="blue" type="submit" bgColor="#040B61">
+                                    Submit
+                                </Button>
+                                <Button colorScheme="gray" onClick={closePriceModal} ml={2} bgColor="red">
+                                    Cancel
+                                </Button>
+                            </Flex>
                         </form>
-                        <Button colorScheme="gray" onClick={closePriceModal} ml={2}>
-                            Cancel
-                        </Button>
+                        </Box>
+                        
+                    </ModalBody>
+                    <ModalFooter>
 
                     </ModalFooter>
                 </ModalContent>

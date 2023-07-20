@@ -67,7 +67,8 @@ const Cart = () => {
         const updatedCart = cart.map((item) => {
             if (item.cartId === cartId && item.quantity > 1) {
                 const updatedQuantity = item.quantity - 1;
-                const updatedPrice = item.artPrice * updatedQuantity;
+                const updatedPrice = item.artPrice * (updatedQuSantity);
+                //console.log("cart" + updatedPrice);
                 return {
                     ...item,
                     quantity: updatedQuantity,
@@ -78,6 +79,7 @@ const Cart = () => {
         });
         setCart(updatedCart);
     };
+
 
     const handleRemoveFromCart = async (cartId) => {
         const response = await deleteCart(cartId);
